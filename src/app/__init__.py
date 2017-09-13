@@ -37,6 +37,8 @@ def create_app(debug=False, config_name='production'):
 
     log_config = app.config.get("LOG", dict())
     app.logger.addHandler(create_logger(log_config))
+    # logger = logging.getLogger('game')
+    # mud_logger = logging.getLogger('mud')
 
     # from execom import models
 
@@ -86,3 +88,7 @@ app.register_blueprint(auth_blueprint)
 
 from app.views import *
 # from blog.views import *
+
+
+from auth.commands import manager as auth_manager
+manager.add_command("user", auth_manager)
