@@ -1,0 +1,42 @@
+{
+  "name": "rpg-helper",
+  "version": "",
+  "description": "Description of rpg-helper",
+  "main": "src/manage.py",
+  "scripts": {
+    "preinstall": "git pull",
+    "install": "node scripts/install.js",
+    "prestart": "gulp",
+    "start": "python src/manage.py runserver",
+    "test": "python src/test.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d2emon/rpg-helper.git"
+  },
+  "keywords": [
+    
+    "flask",
+    
+    "flask"
+  ],
+  "author": "Dmitry Kutsenko <d2emonium@gmail.com>",
+  "license": "GPL-3.0",
+  "private": "True",
+  "bugs": {
+    "url": "https://github.com/d2emon/flask-blog/issues"
+  },
+  "homepage": "https://github.com/d2emon/rpg-helper#readme",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^3.0.0",
+    "gulp-less": "^3.3.0",
+    "gulp-pug": "^3.3.0"
+  },
+  "dependencies": {
+    "gulpfile": "git+https://github.com/d2emon/gulpfile.git",
+    "shelljs": "^0.7.8"
+  }
+}
