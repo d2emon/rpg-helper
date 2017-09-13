@@ -101,5 +101,7 @@ ENV/
 .mypy_cache/
 
 # assets
-assets/bower_components
-gulpfile.js
+bower_components/
+node_modules/
+/gulpfile.js
+/static/
