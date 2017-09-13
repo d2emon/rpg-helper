@@ -73,7 +73,7 @@ migrate = Migrate(app, db)
 # Session(app)
 
 
-# from blog import models
+from auth import models
 
 
 # from .admin import admin as admin_blueprint
