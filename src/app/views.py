@@ -2,6 +2,13 @@ from flask import render_template
 from app import app, cache
 
 
+@app.context_processor
+def template_globals():
+    return {
+        'appname': "RPG-Helper"
+    }
+
+
 @app.errorhandler(403)
 @cache.cached()
 def forbidden(error):

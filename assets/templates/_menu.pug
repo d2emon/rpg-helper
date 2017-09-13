@@ -1,0 +1,54 @@
+ul(class="nav navbar-nav navbar-right")
+  li
+    a(href="{ url_for('list_protocols') }") Протоколы
+  li
+    a(href="{ url_for('list_decisions') }") Решения
+  li
+    a(href="{ url_for('list_resolutions') }") Постановления
+  li(class="dropdown")
+    a(href="#", class="dropdown-toggle", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false") Добавить <span class="caret"></span>
+    ul(class="dropdown-menu")
+      li
+        a(href="{ url_for('edit_resolution') }") Постановление
+      li
+        a(href="{ url_for('edit_decision') }") Решение
+      li
+        a(href="{ url_for('edit_protocol') }") Протокол
+      li
+        a(href="{ url_for('edit_case') }") Дело
+      li
+        a(href="{ url_for('edit_register') }") Опись
+  li(class="dropdown")
+    a(href="#", class="dropdown-toggle", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false") Справочники <span class="caret"></span>
+    ul(class="dropdown-menu")
+      li
+        a(href="{ url_for('list_cases') }") Дела
+      li
+        a(href="{ url_for('list_registers') }") Описи
+
+  | {% if current_user.is_authenticated %}
+  | {% if current_user.is_admin %}
+  li
+    a(href="{ url_for('home.admin_dashboard') }") Dashboard
+  li
+    a(href="{ url_for('admin.list_departments') }") Departments
+  li
+    a(href="{ url_for('admin.list_roles') }") Roles
+  li
+    a(href="{ url_for('admin.list_employees') }") Employees
+  | {% else %}
+  li
+    a(href="{ url_for('home.dashboard') }") Dashboard
+  | {% endif %}
+  li
+    a(href="{ url_for('auth.logout') }") Logout
+  li
+    a <i class="fa fa-user"></i> Hi, {{ current_user.username }}!
+  | {% else %}
+  li
+    a(href="{ url_for('home.homepage') }") Home
+  li
+    a(href="{ url_for('auth.register') }") Register
+  li
+    a(href="{ url_for('auth.login') }") Login
+  | {% endif %}
