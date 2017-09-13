@@ -10,11 +10,11 @@ block navbar
   include _menu.pug
 
 block style
-  link(href="{{ url_for('static', filename='css/dropzone.min.css') }}", rel="stylesheet")
-  link(href="{{ url_for('static', filename='css/main.css') }}", rel="stylesheet")
+  // link(href="{{ url_for('static', filename='css/dropzone.min.css') }}", rel="stylesheet")
+  link(href="{{ url_for('static', filename='css/index.css') }}", rel="stylesheet")
   | {% block style %}{% endblock %}
 
 block script
-  script(src="{{ url_for('static', filename='js/dropzone.min.js') }}")
-  script(src="{{ url_for('static', filename='js/index.js') }}")
+  // script(src="{{ url_for('static', filename='js/dropzone.min.js') }}")
+  // script(src="{{ url_for('static', filename='js/index.js') }}")
   | {% block script %}{% endblock %}
