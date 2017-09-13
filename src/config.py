@@ -16,7 +16,7 @@ class Config(object):
     TESTING = False
 
     LOG = {
-        "FILENAME": os.path.join(BASE_DIR, "log", "execom.log"),
+        "FILENAME": os.path.join(BASE_DIR, "log", "rpg.log"),
         "MAX_BYTES": 1024 * 1024,
         "BACKUP_COUNT": 10,
         "FORMAT": "%(asctime)s[%(levelname)s]:\t%(message)s\tin %(module)s at %(lineno)d",
