@@ -138,7 +138,7 @@ class User(UserMixin, db.Model):
     @property
     def fullname(self):
         username = self.username.capitalize()
-        if username == "Phantom":
+        if self.is_admin:
             return "The {}".format(username)
         return username
 
