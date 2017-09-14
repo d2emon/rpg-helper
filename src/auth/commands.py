@@ -1,61 +1,39 @@
-from flask_script import Manager, prompt, prompt_bool, prompt_pass
+from flask_script import Manager, prompt_pass
 from app import app, db
 from .models import User, Role
+from .utils import cls, input_username, input_password, input_new_password, show_title, show_motd
 
 
 manager = Manager(usage="User management")
 # from d2lib import printfile
 # from mud.talker import talker
 
-USERNAME_PROMPT = "By what name shall I call you?\n*\t"
-USERNAME_CONFIRM = "Did I get the name right {}? "
-PASSWORD_PROMPT = "This user already exists, what is the password? "
-NEW_USER_PASSWORD_PROMPT = "Give me a password for this user "
 TRIES = 3
 
 
-def cls():
-    print("\n" * 80)
-
-
-def crapup(text=""):
-    prompt_pass("\n{}\n\nHit Return to Continue...\n".format(text), default="")
-
-    import sys
-    sys.exit(0)
-
-
-def login(username=""):
+def login(username="", password=""):
     '''
     Does all the login stuff
     The whole login system is called from this
     '''
-    user = User.login(username)
-
-    # Get the user name
-    while not user:
-        user = input_username()
-
+    user = input_username(username)
     if user.is_new:
-        register(user)
-        db.session.add(user)
-        db.session.commit()
+        register(user, password=password)
     else:
-        # Password checking
         authenticate(user)
     cls()
-
     return user
 
 
 def authenticate(user):
     '''
     Main login code
+    Password checking
     '''
     tries = TRIES
     while tries:
+        password = input_password()
         try:
-            password = prompt_pass(PASSWORD_PROMPT)
             return user.verify_password(password)
         except AssertionError as e:
             print(e)
@@ -64,37 +42,22 @@ def authenticate(user):
     return True
 
 
-def register(user, password=None):
+def register(user=None, username=None, password=None, role=None):
     '''
     this bit registers the new user
     '''
+    if user is None:
+        user = input_username(username)
+    assert User.query.by_username(username) is None, "User allready exists"
+
     print("Creating new user...")
-    while True:
-        if not password:
-            password = prompt_pass(NEW_USER_PASSWORD_PROMPT)
-        try:
-            user.password = password
-            break
-        except AssertionError as e:
-            print(e)
-            password = None
-    user.qnmrq = True
-    user.ttyt = 0
+    password = input_new_password(user, password)
+    if role:
+        user.role = role
+    user.register()
+    db.session.add(user)
+    db.session.commit()
     return True
-
-
-def input_username(username="", prompt_str=USERNAME_PROMPT):
-    if not username:
-        username = prompt(prompt_str)[:15]
-
-    user = User.query.by_username(username)
-    if user:
-        return user
-
-    # If he/she doesnt exist
-    if prompt_bool(USERNAME_CONFIRM.format(username)):
-        return User(username=username.lower())
-    return user
 
 
 @manager.command
@@ -103,28 +66,17 @@ def title():
     Check for all the created at stuff
     We use stats for this which is a UN*X system call
     '''
-    cls()
-    time_created = 0
-    time_elapsed = 0
-    print("""
-                     A B E R  M U D
-
-              By Alan Cox, Richard Acott Jim Finnis
-
-    This AberMUD was created: {}
-    {}
-    """.format(time_created, time_elapsed))
+    show_title()
 
 
 @manager.command
-def motd():
+def motd(show=True):
     '''
     list the message of the day
     '''
-    cls()
-    app.logger.debug("printfile(FILES['MOTD'])")
-    prompt_pass("", default="")
-    print("\n\n")
+    if not show:
+        return
+    show_motd()
 
 
 @manager.option('-n', '--name', dest='username', default=None)
@@ -134,15 +86,7 @@ def createsuperuser(username, password):
     Creates superuser
     """
     admin = Role.query.filter_by(is_admin=True).one()
-
-    assert User.query.by_username(username) is None, "User allready exists"
-
-    user = input_username(username)
-    register(user, password)
-    user.role = admin
-
-    db.session.add(user)
-    db.session.commit()
+    register(username=username, password=password, role=admin)
 
 
 @manager.option('-n', '--name', dest='username', default=None)
@@ -162,8 +106,7 @@ def management(username):
         title()
 
     user = login(username)
-    if not user.qnmrq:
-        motd()
+    motd(not user.qnmrq)
 
     # Log entry
     app.logger.info("Game entry by %s : UID %s", user, user.uid)

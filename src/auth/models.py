@@ -166,7 +166,7 @@ class User(UserMixin, db.Model):
 
     # Other methods
     @classmethod
-    def login(cls, username):
+    def login(cls, username, password=None):
         if not username:
             return None
 
@@ -186,6 +186,10 @@ class User(UserMixin, db.Model):
             return None
 
         return user
+
+    def register(self):
+        self.qnmrq = True
+        self.ttyt = 0
 
     @staticmethod
     def chkname(username):
