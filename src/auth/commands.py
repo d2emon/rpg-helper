@@ -1,6 +1,6 @@
 from flask_script import Manager, prompt, prompt_bool, prompt_pass
 from app import app, db
-from .models import User
+from .models import User, Role
 
 
 manager = Manager(usage="User management")
@@ -38,8 +38,8 @@ def login(username=""):
 
     if user.is_new:
         register(user)
-        user.qnmrq = True
-        user.ttyt = 0
+        db.session.add(user)
+        db.session.commit()
     else:
         # Password checking
         authenticate(user)
@@ -64,21 +64,22 @@ def authenticate(user):
     return True
 
 
-def register(user):
+def register(user, password=None):
     '''
     this bit registers the new user
     '''
     print("Creating new user...")
-
-    password = None
     while True:
+        if not password:
+            password = prompt_pass(NEW_USER_PASSWORD_PROMPT)
         try:
-            user.password = prompt_pass(NEW_USER_PASSWORD_PROMPT)
+            user.password = password
             break
         except AssertionError as e:
             print(e)
-    db.session.add(user)
-    db.session.commit()
+            password = None
+    user.qnmrq = True
+    user.ttyt = 0
     return True
 
 
@@ -127,13 +128,30 @@ def motd():
 
 
 @manager.option('-n', '--name', dest='username', default=None)
+@manager.option('-p', '--pass', dest='password', default=None)
+def createsuperuser(username, password):
+    """
+    Creates superuser
+    """
+    admin = Role.query.filter_by(is_admin=True).one()
+
+    assert User.query.by_username(username) is None, "User allready exists"
+
+    user = input_username(username)
+    register(user, password)
+    user.role = admin
+
+    db.session.add(user)
+    db.session.commit()
+
+
+@manager.option('-n', '--name', dest='username', default=None)
 def management(username):
     "Manage users"
     # if username is not None:
     #     # # Now check the option entries
     #     # # -n(name)
     #     # # user = User.by_username(username)
-    #     # # print("USER is", user)
     #     # # if user:
     #     # #    # authenticate(user)
     #     # # else:
