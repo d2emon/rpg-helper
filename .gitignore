@@ -106,3 +106,5 @@ node_modules/
 /gulpfile.js
 /static/
 /templates/
+/.project
+/.pydevproject
