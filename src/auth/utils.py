@@ -55,6 +55,28 @@ def input_new_password(user=None, password="", prompt_str=NEW_USER_PASSWORD_PROM
     return password
 
 
+def list_users():
+    users = User.query.all()
+    for u in users:
+        print("{}:\t{}".format(u.id, u.username))
+    return prompt("\nUser Name: ")
+
+
+def show_user(username):
+    user = User.query.by_username(username)
+    if user is None:
+        print("\nNo user registered in that name\n\n")
+        return None
+
+    print("\n\n")
+    print("User Data For\t{}\n".format(user.username))
+    print("Name:\t{}".format(user.username))
+    print("Password:\t{}".format(user.password_hash))
+    print("Role:\t{}".format(user.role))
+    print("Is Admin:\t{}".format(user.is_admin))
+    return user
+
+
 def show_title():
     cls()
     time_created = 0

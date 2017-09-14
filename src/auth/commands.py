@@ -1,13 +1,12 @@
 from flask_script import Manager, prompt_pass
 from app import app, db
 from .models import User, Role
-from .utils import cls, input_username, input_password, input_new_password, show_title, show_motd, show_menu
-from .menu import menu_items, admin_menu_items
+from .utils import cls, input_username, input_password, input_new_password, show_title, show_motd, show_menu, list_users, show_user
+# from .menu import admin_option
 
 
 manager = Manager(usage="User management")
 # from d2lib import printfile
-# from mud.talker import talker
 
 TRIES = 3
 
@@ -19,7 +18,7 @@ def login(username="", password=""):
     '''
     user = input_username(username)
     if user.is_new:
-        register(user, password=password)
+        register_user(user, password=password)
     else:
         authenticate(user)
     cls()
@@ -44,7 +43,7 @@ def authenticate(user):
     return True
 
 
-def register(user=None, username=None, password=None, role=None):
+def register_user(user=None, username=None, password=None, role=None):
     '''
     this bit registers the new user
     '''
@@ -60,6 +59,110 @@ def register(user=None, username=None, password=None, role=None):
     db.session.add(user)
     db.session.commit()
     return True
+
+
+def assert_admin(user=None):
+    if user is None:
+        user = login()
+    assert user.is_admin is True, "Access Denied"
+    return user
+
+
+def search_user(search=None):
+    if search is None:
+        search = list_users()
+    print(search)
+    # user = User.query.by_username(username)
+    return show_user(search)
+
+
+# Menu Items
+
+
+@manager.option('-n', '--name', dest='username', default=None)
+def change_password(username=None, user=None):
+    cls()
+    if user is None:
+        user = User.query.by_username(username)
+    try:
+        old_password = input_password(prompt_str="\nOld Password\n*\t")
+        assert user.verify_password(old_password) is True, "Incorrect password"
+    except AssertionError as e:
+        print(e)
+        return
+
+    while True:
+        try:
+            password = input_password(prompt_str="\nNew Password\n*\t")
+            verify = input_password(prompt_str="\nVerify Password\n*\t")
+            assert verify == password, "Passwords doesn't match"
+            user.password = password
+        except AssertionError as e:
+            print(e)
+            continue
+        break
+
+    db.session.add(user)
+    db.session.commit()
+    print("Changed")
+    return
+
+
+@manager.option('-n', '--name', dest='username', default=None)
+# @admin_option
+def show(username=None, **kwargs):
+    """
+    Show user data
+    """
+    user = assert_admin(kwargs.get('user'))
+    cls()
+    print(user, username)
+    s = search_user(username)
+    prompt_pass("\nHit Return...", default="")
+
+
+@manager.option('-n', '--name', dest='username', default=None)
+# @admin_option
+def edit(username=None, **kwargs):
+    """
+    Edit user data
+    """
+    user = assert_admin(kwargs.get('user'))
+    cls()
+    print(user, username)
+    s = search_user(username)
+    if s is None:
+        s = User(username=username)
+    print("\nEditing : {}\n".format(username))
+    # try:
+    #     shuser.username = edit_field("Name: ", shuser.username)
+    #     shuser.password = edit_field("Password: ", shuser.password)
+    #     shuser.save(session)
+    #     print("{} saved".format(shuser.username))
+    # except AssertionError as e:
+    #     print(e)
+    #     print("Changes not saved")
+
+
+@manager.option('-n', '--name', dest='username', default=None)
+# @admin_option
+def del_user(username=None, **kwargs):
+    """
+    Delete user
+    """
+    user = assert_admin(kwargs.get('user'))
+    cls()
+    print(user, username)
+    s = search_user(username)
+    assert s is not None, "\nCannot delete non-existant user"
+    db.session.delete(s)
+    db.session.commit()
+
+
+def exit_mud(username=None, user=None):
+    print("Bye!")
+    import sys
+    sys.exit(0)
 
 
 @manager.command
@@ -83,12 +186,33 @@ def motd(show=True):
 
 @manager.option('-n', '--name', dest='username', default=None)
 @manager.option('-p', '--pass', dest='password', default=None)
+def createuser(username, password):
+    """
+    Creates user
+    """
+    register_user(username=username, password=password)
+
+
+@manager.option('-n', '--name', dest='username', default=None)
+@manager.option('-p', '--pass', dest='password', default=None)
 def createsuperuser(username, password):
     """
     Creates superuser
     """
     admin = Role.query.filter_by(is_admin=True).one()
-    register(username=username, password=password, role=admin)
+    register_user(username=username, password=password, role=admin)
+
+
+menu_items = [
+    {'id': '1', 'text': "Change Password\n\n", 'action': change_password},
+    {'id': '0', 'text': "Exit\n", 'action': exit_mud},
+]
+
+admin_menu_items = menu_items + [
+    {'id': 'a', 'text': "Show persona", 'action': show},
+    {'id': 'b', 'text': "Edit persona", 'action': edit},
+    {'id': 'c', 'text': "Delete persona", 'action': del_user},
+]
 
 
 @manager.option('-n', '--name', dest='username', default=None)
