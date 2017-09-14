@@ -1,8 +1,8 @@
 from flask_script import Manager, prompt_pass
 from app import app, db
 from .models import User, Role
-from .utils import cls, input_username, input_password, input_new_password, show_title, show_motd
-from .menu import menu_items
+from .utils import cls, input_username, input_password, input_new_password, show_title, show_motd, show_menu
+from .menu import menu_items, admin_menu_items
 
 
 manager = Manager(usage="User management")
@@ -35,7 +35,8 @@ def authenticate(user):
     while tries:
         password = input_password()
         try:
-            return user.verify_password(password)
+            assert user.verify_password(password) is True, "Wrong password"
+            return True
         except AssertionError as e:
             print(e)
             tries -= 1
@@ -59,41 +60,6 @@ def register(user=None, username=None, password=None, role=None):
     db.session.add(user)
     db.session.commit()
     return True
-
-
-def talker(user):
-    if user.qnmrq:
-        app.logger.debug("main(\"   --}----- ABERMUD -----{--    Playing as \", user)")
-    cls()
-    while True:
-        print("""
-Welcome To AberMUD II [Unix]
-
-
-Options
-
-1]  Enter The Game
-2]  Change Password
-
-
-0] Exit AberMUD
-
-        """)
-        if user.is_admin:
-            print("""
-4] Run TEST game
-A] Show persona
-B] Edit persona
-C] Delete persona
-            """)
-        print("\n\n")
-        answer = input("Select > ").lower()
-        action = menu_items.get(answer)
-        if action is None:
-            cls()
-            print("Bad Option({})".format(answer))
-        else:
-            action(user)
 
 
 @manager.command
@@ -148,7 +114,15 @@ def management(username):
     app.logger.info("Game entry by %s : UID %s", user, user.uid)
 
     # Run system
-    talker(user)
+    if user.qnmrq:
+        app.logger.debug("main(\"   --}----- ABERMUD -----{--    Playing as \", user)")
+    cls()
+    description = "Welcome To AberMUD II [Unix]"
+    if user.is_admin:
+        mi = admin_menu_items
+    else:
+        mi = menu_items
+    show_menu(mi, description, user=user)
 
     # Exit
     prompt_pass("\nBye Bye\n\nHit Return to Continue...\n", default="")

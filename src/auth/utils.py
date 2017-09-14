@@ -74,3 +74,21 @@ def show_motd():
     app.logger.debug("printfile(FILES['MOTD'])")
     prompt_pass("", default="")
     print("\n\n")
+
+
+def show_menu(menu_items, description="", **kwargs):
+    cls()
+    actions = {action['id']: action['action'] for action in menu_items}
+    while True:
+        print(description)
+        print("Options\n")
+        for action in menu_items:
+            print("{}] {}".format(action['id'], action['text']))
+        print("\n\n")
+        answer = input("Select > ").lower()
+        action = actions.get(answer)
+        if action is None:
+            cls()
+            print("Bad Option({})".format(answer))
+        else:
+            action(**kwargs)
