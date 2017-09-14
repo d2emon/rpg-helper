@@ -70,32 +70,11 @@ def show_user(username):
 
     print("\n\n")
     print("User Data For\t{}\n".format(user.username))
-    print("Name:\t{}".format(user.username))
+    print("Name:\t\t{}".format(user.username))
     print("Password:\t{}".format(user.password_hash))
-    print("Role:\t{}".format(user.role))
+    print("Role:\t\t{}".format(user.role))
     print("Is Admin:\t{}".format(user.is_admin))
     return user
-
-
-def show_title():
-    cls()
-    time_created = 0
-    time_elapsed = 0
-    print("""
-                     A B E R  M U D
-
-              By Alan Cox, Richard Acott Jim Finnis
-
-    This AberMUD was created: {}
-    {}
-    """.format(time_created, time_elapsed))
-
-
-def show_motd():
-    cls()
-    app.logger.debug("printfile(FILES['MOTD'])")
-    prompt_pass("", default="")
-    print("\n\n")
 
 
 def show_menu(menu_items, description="", **kwargs):

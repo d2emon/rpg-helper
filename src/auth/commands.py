@@ -1,8 +1,7 @@
-from flask_script import Manager, prompt_pass
+from flask_script import Manager, prompt, prompt_pass
 from app import app, db
 from .models import User, Role
-from .utils import cls, input_username, input_password, input_new_password, show_title, show_motd, show_menu, list_users, show_user
-# from .menu import admin_option
+from .utils import cls, input_username, input_password, input_new_password, show_menu, list_users, show_user
 
 
 manager = Manager(usage="User management")
@@ -61,14 +60,20 @@ def register_user(user=None, username=None, password=None, role=None):
     return True
 
 
-def assert_admin(user=None):
+def login_needed(**kwargs):
+    user = kwargs.get('user')
     if user is None:
         user = login()
+    return user
+
+
+def assert_admin(**kwargs):
+    user = login_needed(**kwargs)
     assert user.is_admin is True, "Access Denied"
     return user
 
 
-def search_user(search=None):
+def search_user(user=None, search=None):
     if search is None:
         search = list_users()
     print(search)
@@ -76,14 +81,21 @@ def search_user(search=None):
     return show_user(search)
 
 
+def edit_field(title, value):
+    new_value = prompt("{}(Currently {}): ".format(title, value))
+
+    if not new_value:
+        new_value = value
+    return new_value
+
+
 # Menu Items
 
 
 @manager.option('-n', '--name', dest='username', default=None)
-def change_password(username=None, user=None):
+def change_password(username=None, **kwargs):
+    user = login_needed(**kwargs)
     cls()
-    if user is None:
-        user = User.query.by_username(username)
     try:
         old_password = input_password(prompt_str="\nOld Password\n*\t")
         assert user.verify_password(old_password) is True, "Incorrect password"
@@ -114,9 +126,8 @@ def show(username=None, **kwargs):
     """
     Show user data
     """
-    user = assert_admin(kwargs.get('user'))
     cls()
-    print(user, username)
+    user = assert_admin(**kwargs)
     s = search_user(username)
     prompt_pass("\nHit Return...", default="")
 
@@ -127,21 +138,21 @@ def edit(username=None, **kwargs):
     """
     Edit user data
     """
-    user = assert_admin(kwargs.get('user'))
     cls()
-    print(user, username)
+    user = assert_admin(**kwargs)
     s = search_user(username)
     if s is None:
         s = User(username=username)
     print("\nEditing : {}\n".format(username))
-    # try:
-    #     shuser.username = edit_field("Name: ", shuser.username)
-    #     shuser.password = edit_field("Password: ", shuser.password)
-    #     shuser.save(session)
-    #     print("{} saved".format(shuser.username))
-    # except AssertionError as e:
-    #     print(e)
-    #     print("Changes not saved")
+    try:
+        s.username = edit_field("Name: ", s.username)
+        # s.password = edit_field("Password: ", s.password)
+        db.session.add(s)
+        db.session.commit()
+        print("{} saved".format(s.username))
+    except AssertionError as e:
+        print(e)
+        print("Changes not saved")
 
 
 @manager.option('-n', '--name', dest='username', default=None)
@@ -150,9 +161,8 @@ def del_user(username=None, **kwargs):
     """
     Delete user
     """
-    user = assert_admin(kwargs.get('user'))
     cls()
-    print(user, username)
+    user = assert_admin(**kwargs)
     s = search_user(username)
     assert s is not None, "\nCannot delete non-existant user"
     db.session.delete(s)
@@ -163,25 +173,6 @@ def exit_mud(username=None, user=None):
     print("Bye!")
     import sys
     sys.exit(0)
-
-
-@manager.command
-def title():
-    '''
-    Check for all the created at stuff
-    We use stats for this which is a UN*X system call
-    '''
-    show_title()
-
-
-@manager.command
-def motd(show=True):
-    '''
-    list the message of the day
-    '''
-    if not show:
-        return
-    show_motd()
 
 
 @manager.option('-n', '--name', dest='username', default=None)
@@ -218,28 +209,12 @@ admin_menu_items = menu_items + [
 @manager.option('-n', '--name', dest='username', default=None)
 def management(username):
     "Manage users"
-    # if username is not None:
-    #     # # Now check the option entries
-    #     # # -n(name)
-    #     # # user = User.by_username(username)
-    #     # # if user:
-    #     # #    # authenticate(user)
-    #     # # else:
-    #     pass
-    # else:
-    #     app.logger.debug("getty()")
-    if not username:
-        title()
-
     user = login(username)
-    motd(not user.qnmrq)
 
     # Log entry
     app.logger.info("Game entry by %s : UID %s", user, user.uid)
 
     # Run system
-    if user.qnmrq:
-        app.logger.debug("main(\"   --}----- ABERMUD -----{--    Playing as \", user)")
     cls()
     description = "Welcome To AberMUD II [Unix]"
     if user.is_admin:
