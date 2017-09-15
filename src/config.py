@@ -15,14 +15,14 @@ class Config(object):
     DEBUG = False
     TESTING = False
 
+    CACHE_TYPE = "simple"
+
     LOG = {
         "FILENAME": os.path.join(BASE_DIR, "log", "rpg.log"),
         "MAX_BYTES": 1024 * 1024,
         "BACKUP_COUNT": 10,
         "FORMAT": "%(asctime)s[%(levelname)s]:\t%(message)s\tin %(module)s at %(lineno)d",
     }
-
-    VIEW_CASE = "edit_case"
 
     UPLOAD_PATH = os.path.join(BASE_DIR, "upload")
     # UPLOAD_FOLDER = './static/upload/'
