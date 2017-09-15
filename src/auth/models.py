@@ -178,7 +178,7 @@ class User(UserMixin, db.Model):
         #     return url_for('home.admin_dashboard')
         # else:
         #     return url_for('home.dashboard')
-        return url_for('home.dashboard')
+        return url_for('home.index')
 
     # Other methods
     @classmethod

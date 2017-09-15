@@ -59,9 +59,8 @@ cache = Cache(app)
 toolbar = DebugToolbarExtension(app)
 
 login_manager = LoginManager(app)
-# login_manager.login_message = "You must be logged in to access this page."
-# login_manager.login_view = "auth.login"
-login_manager.login_view = 'login'
+login_manager.login_message = "You must be logged in to access this page."
+login_manager.login_view = "auth.login"
 
 manager = Manager(app)
 
@@ -76,18 +75,18 @@ migrate = Migrate(app, db)
 from auth import models
 
 
-# from .admin import admin as admin_blueprint
-# app.register_blueprint(admin_blueprint, url_prefix='/admin')
-
-# from .home import home as home_blueprint
-# app.register_blueprint(home_blueprint)
+from home import home as home_blueprint
+app.register_blueprint(home_blueprint)
 
 from auth import auth as auth_blueprint
 app.register_blueprint(auth_blueprint)
 
+# from .admin import admin as admin_blueprint
+# app.register_blueprint(admin_blueprint, url_prefix='/admin')
+
 
 from app.views import *
-# from blog.views import *
+from home.views import *
 
 
 from auth.commands import manager as auth_manager
