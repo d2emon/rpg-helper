@@ -87,6 +87,15 @@ app.register_blueprint(auth_blueprint)
 from rpg import rpg as rpg_blueprint
 app.register_blueprint(rpg_blueprint, url_prefix='/rpg')
 
+from pathfinder import pathfinder as pathfinder_blueprint
+app.register_blueprint(pathfinder_blueprint, url_prefix='/pathfinder')
+
+from gurps import gurps as gurps_blueprint
+app.register_blueprint(gurps_blueprint, url_prefix='/gurps')
+
+from tnt import tnt as tnt_blueprint
+app.register_blueprint(tnt_blueprint, url_prefix='/tnt')
+
 
 from app.views import *
 

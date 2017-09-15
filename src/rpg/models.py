@@ -2,28 +2,12 @@ class GameSystem():
     def __init__(self, **kwargs):
         self.title = kwargs.get('title', "RPG")
         self.website = kwargs.get('website', "")
+        # url_for('select_rpg', rpg_id=rpg.id)
+        self.url = kwargs.get('url', "/")
 
     def __repr__(self):
         return self.title
 
     @property
-    def url(self):
-        # url_for('select_rpg', rpg_id=rpg.id)
-        return "/"
-
-    @property
     def edit_url(self):
         return False
-
-
-games = [
-    GameSystem(title="Game", website="http://127.0.0.1:5000/"),
-    GameSystem(title="Game1", website="http://127.0.0.1:8000/"),
-    GameSystem(title="Pathfinder"),
-    GameSystem(title="GURPS"),
-    GameSystem(title="Tunels & Trolls"),
-]
-
-
-class GamesList():
-    items = [[g.title, g.url] for g in games]
