@@ -72,7 +72,8 @@ migrate = Migrate(app, db)
 # Session(app)
 
 
-from auth import models
+from auth.models import *
+from campaign.models import *
 
 
 from home import home as home_blueprint

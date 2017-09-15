@@ -31,7 +31,7 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # configuration page num
-    RECORDS_ON_PAGE = 50
+    RECORDS_ON_PAGE = 10
     # PER_PAGE = 10
 
     STATIC_FOLDER = os.path.join(BASE_DIR, 'static')
