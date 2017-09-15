@@ -84,9 +84,11 @@ app.register_blueprint(auth_blueprint)
 # from .admin import admin as admin_blueprint
 # app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
+from rpg import rpg as rpg_blueprint
+app.register_blueprint(rpg_blueprint, url_prefix='/rpg')
+
 
 from app.views import *
-from home.views import *
 
 
 from auth.commands import manager as auth_manager
