@@ -45,6 +45,7 @@ class ProductionConfig(Config):
 class DebugConfig(Config):
     DEBUG = True
     SQLALCHEMY_ECHO = True
+    EXPLAIN_TEMPLATE_LOADING = True
 
 
 class TestingConfig(Config):
