@@ -87,6 +87,9 @@ app.register_blueprint(auth_blueprint)
 from rpg import rpg as rpg_blueprint
 app.register_blueprint(rpg_blueprint, url_prefix='/rpg')
 
+from campaign import campaign as campaign_blueprint
+app.register_blueprint(campaign_blueprint, url_prefix='/campaign')
+
 from pathfinder import pathfinder as pathfinder_blueprint
 app.register_blueprint(pathfinder_blueprint, url_prefix='/pathfinder')
 
