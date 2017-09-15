@@ -2,23 +2,30 @@ ul(class="nav navbar-nav navbar-right")
   | {% if current_user.is_authenticated %}
   li
     a(href="{{ current_user.after_login }}") Dashboard
+  li
+    a(href="{{ url_for('rpg.index') }}") RPG
   li(class="dropdown")
-    a(href="#", class="dropdown-toggle", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false") Справочники <span class="caret"></span>
+    a(href="#", class="dropdown-toggle", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false") Systems <span class="caret"></span>
     ul(class="dropdown-menu")
       li
-        a(href="{ url_for('list_cases') }") Дела
+        a(href="{{ url_for('pathfinder.index') }}") Pathfinder
       li
-        a(href="{ url_for('list_registers') }") Описи
+        a(href="{{ url_for('gurps.index') }}") GURPS
+      li
+        a(href="{{ url_for('tnt.index') }}") Tunels & Trolls
   | {% if current_user.is_admin %}
-  li
-    a(href="{ url_for('admin.list_departments') }") Departments
-  li
-    a(href="{ url_for('admin.list_roles') }") Roles
-  li
-    a(href="{ url_for('admin.list_employees') }") Employees
+  li(class="dropdown")
+    a(href="#", class="dropdown-toggle", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false") Admin <span class="caret"></span>
+    ul(class="dropdown-menu")
+      li
+        a(href="{ url_for('admin.list_departments') }") Departments
+      li
+        a(href="{ url_for('admin.list_roles') }") Roles
+      li
+        a(href="{ url_for('admin.list_employees') }") Employees
   | {% endif %}
   li
-    a(href="{ url_for('auth.logout') }") Logout
+    a(href="{{ url_for('auth.logout') }}") Logout
   li
     a <i class="fa fa-user"></i> Hi, {{ current_user.username }}!
   | {% else %}
