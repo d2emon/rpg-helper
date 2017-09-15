@@ -1,13 +1,7 @@
-extends ../base.pug
+extends _error.pug
 
-block body
-  | {% import "bootstrap/wtf.html" as wtf %}
-  .content-section
-    .outer
-      .middle
-        .inner
-          div(style="text-align: center;")
-            h1 403 Error
-            h3 You do not have sufficient permissions to access this page.
-            hr.intro-divider
-            a(href="{{ url_for('home.homepage') }}", class="btn btn-default btn-lg") <i class="fa fa-home"></i> Home
+block errortitle
+  | 403 Error
+
+block description
+  | You do not have sufficient permissions to access this page.

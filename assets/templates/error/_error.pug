@@ -1,0 +1,17 @@
+extends ../_base.pug
+
+block content
+  | {% import "bootstrap/wtf.html" as wtf %}
+  .content-section
+    .outer
+      .middle
+        .inner
+          div(style="text-align: center;")
+            h1 
+              block errortitle
+                | Error
+
+            h3
+              block description
+                | Error. That's all we know.
+            a(href="{ url_for('home.homepage') }", class="btn btn-default btn-lg") <i class="fa fa-home"></i> Home
