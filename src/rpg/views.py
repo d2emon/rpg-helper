@@ -12,7 +12,13 @@ def index():
     """
     Render the homepage template on the / route
     """
-    return render_template('rpg/list.html', title="Game Systems", games=games)
+    return render_template(
+        'rpg/list.html',
+        title="Game Systems",
+        games=games,
+        items=games,
+        # items=GamesList(),
+    )
     # return render_template("rpg.html", games=GameSystem.query.all(), selected=current_rpg())
 
 

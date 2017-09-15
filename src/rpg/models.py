@@ -11,6 +11,10 @@ class GameSystem():
         # url_for('select_rpg', rpg_id=rpg.id)
         return "/"
 
+    @property
+    def edit_url(self):
+        return False
+
 
 games = [
     GameSystem(title="Game", website="http://127.0.0.1:5000/"),
@@ -19,3 +23,7 @@ games = [
     GameSystem(title="GURPS"),
     GameSystem(title="Tunels & Trolls"),
 ]
+
+
+class GamesList():
+    items = [[g.title, g.url] for g in games]

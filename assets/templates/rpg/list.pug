@@ -3,18 +3,28 @@ extends ../_base.pug
 block content
   .content-section
     h1 Select RPG
-    div(class="btn-toolbar", role="toolbar", aria-label="toolbar")
-      a(href="{{ url_for('rpg.rpg_add') }}", type="button", class="btn btn-default") <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><br>Add
-      a(href="{{ url_for('rpg.rpg_del') }}", type="button", class="btn btn-default") <span class="glyphicon glyphicon-minus" aria-hidden="true"></span><br>Del
-    | {% if games %}
-    ul
-      | {% for rpg in games %}
-      li
-        a(href="{{rpg.url}}") {{rpg}}
-        | {%if rpg.website %} - 
-        a(href="{{rpg.website}}") {{rpg.website}}
-        | {% endif %}
-      | {% endfor %}
-    | {% else %}
-    div No aviable RPGs
-    | {% endif %}
+
+    +panel("Select RPG", false, false, false)
+      | {% if items %}
+      //
+        div(class="well well-sm btn-toolbar well-toolbar", role="toolbar", aria-label="toolbar")
+          | &nbsp;
+          a(href="{{ add }}", class="btn btn-sm btn-primary", data-toggle="tooltip", title="Добавить") <i class="fa fa-plus"></i>
+          a(href="{{ url_for('rpg.rpg_add') }}", type="button", class="btn btn-sm btn-default", data-toggle="tooltip", title="Add") <span class="fa fa-plus" aria-hidden="true"></span><br>Add
+          a(href="{{ url_for('rpg.rpg_del') }}", type="button", class="btn btn-sm btn-default", data-toggle="tooltip", title="Del") <span class="fa fa-minus" aria-hidden="true"></span><br>Del
+      div
+        .table-responsive
+          table(class="table table-bordered table-hover")
+            tbody
+              | {% for i in items %}
+              tr
+                td 
+                  a(href="{{i.url}}") {{i}}
+                  | {%if i.website %} - 
+                  a(href="{{i.website}}") {{i.website}}
+                  | {% endif %}
+              | {% endfor %}
+      | {% else %}
+      .panel-body
+        h3 No aviable RPGs
+      | {% endif %}
