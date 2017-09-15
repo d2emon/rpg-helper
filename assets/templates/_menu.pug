@@ -42,7 +42,7 @@ ul(class="nav navbar-nav navbar-right")
   li
     a(href="{ url_for('home.homepage') }") Home
   li
-    a(href="{ url_for('auth.register') }") Register
+    a(href="{{ url_for('auth.register') }}") Register
   li
     a(href="{{ url_for('auth.login') }}") Login
   | {% endif %}

@@ -1,38 +1,29 @@
-from flask import Blueprint, render_template, redirect, flash
+from flask import Blueprint, render_template, redirect, flash, url_for
 # from flask import url_for
 # from flask_login import login_required, login_user, logout_user
+from app import db
+from .models import User
+from .forms import LoginForm, RegisterForm
 
 
 auth = Blueprint('auth', __name__)
 
 
-from .forms import LoginForm  # , RegistrationForm
-from .models import User
-# from .. import db
-
-
-# @auth.route('/register', methods=['GET', 'POST'])
+@auth.route('/register', methods=['GET', 'POST'])
 def register():
     """
     Handle requests to the /register route
     Add an employee to the database through the registration form
     """
-    # form = RegistrationForm()
-    # if form.validate_on_submit():
-    #     employee = Employee(
-    #         email=form.email.data,
-    #         username=form.username.data,
-    #         first_name=form.first_name.data,
-    #         last_name=form.last_name.data,
-    #         password=form.password.data,
-    #     )
-
-    #     db.session.add(employee)
-    #     db.session.commit()
-    #     flash('You have successfully registered! You may now login.')
-
-    #     return redirect(url_for('auth.login'))
-    # return render_template('auth/register.html', form=form, title='Register')
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user = User()
+        form.populate_obj(user)
+        db.session.add(user)
+        db.session.commit()
+        flash('You have successfully registered! You may now login.')
+        return redirect(url_for('auth.login'))
+    return render_template('auth/register.html', form=form, title='Register')
 
 
 @auth.route('/login', methods=['GET', 'POST'])

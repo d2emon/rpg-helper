@@ -37,7 +37,7 @@ class RegisterForm(ModelForm):
     #     allow_blank=True,
     # )
     password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Login')
+    submit = SubmitField('Register')
 
     class Meta:
         model = User
