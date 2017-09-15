@@ -1,6 +1,6 @@
 # from flask import Flask, render_template
 from flask import Flask
-# from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap
 from flask_cache import Cache
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
@@ -52,7 +52,7 @@ debug = os.environ.get('FLASK_DEBUG', False)
 config_name = os.environ.get('FLASK_CONFIG', 'production')
 app = create_app(config_name=config_name)
 
-# bootstrap = Bootstrap(app)
+bootstrap = Bootstrap(app)
 
 cache = Cache(app)
 
