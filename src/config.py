@@ -17,12 +17,7 @@ class Config(object):
 
     CACHE_TYPE = "simple"
 
-    LOG = {
-        "FILENAME": os.path.join(BASE_DIR, "log", "rpg.log"),
-        "MAX_BYTES": 1024 * 1024,
-        "BACKUP_COUNT": 10,
-        "FORMAT": "%(asctime)s[%(levelname)s]:\t%(message)s\tin %(module)s at %(lineno)d",
-    }
+    LOG_FILENAME = os.path.join(BASE_DIR, "log", "rpg.log")
 
     UPLOAD_PATH = os.path.join(BASE_DIR, "upload")
     # UPLOAD_FOLDER = './static/upload/'

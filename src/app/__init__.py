@@ -3,6 +3,7 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_cache import Cache
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_logging import RotatingFileLogging
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_script import Manager
@@ -10,19 +11,10 @@ from flask_sqlalchemy import SQLAlchemy
 from config import app_config
 
 
-import logging
-from logging.handlers import RotatingFileHandler
+import os
 
-
-def create_logger(log_config=dict()):
-    handler = RotatingFileHandler(
-        log_config.get("FILENAME"),
-        maxBytes=log_config.get("MAX_BYTES"),
-        backupCount=log_config.get("BACKUP_COUNT"),
-    )
-    formatter = logging.Formatter(log_config.get("FORMAT"))
-    handler.setFormatter(formatter)
-    return handler
+debug = os.environ.get('FLASK_DEBUG', False)
+config_name = os.environ.get('FLASK_CONFIG', 'production')
 
 
 def create_app(debug=False, config_name='production'):
@@ -34,29 +26,19 @@ def create_app(debug=False, config_name='production'):
     # app.config.from_envvar('FLASK_CONFIG_FILE')
     app.static_folder = app.config.get('STATIC_FOLDER', 'static')
     app.template_folder = app.config.get('TEMPLATE_FOLDER', 'templates')
-
-    log_config = app.config.get("LOG", dict())
-    app.logger.addHandler(create_logger(log_config))
-    # logger = logging.getLogger('game')
-    # mud_logger = logging.getLogger('mud')
-
-    # from execom import models
-
     return app
 
 
-import os
-
-
-debug = os.environ.get('FLASK_DEBUG', False)
-config_name = os.environ.get('FLASK_CONFIG', 'production')
 app = create_app(config_name=config_name)
 
+# Loading modules
 bootstrap = Bootstrap(app)
 
 cache = Cache(app)
 
 toolbar = DebugToolbarExtension(app)
+
+logging = RotatingFileLogging(app)
 
 login_manager = LoginManager(app)
 login_manager.login_message = "You must be logged in to access this page."
@@ -71,6 +53,7 @@ migrate = Migrate(app, db)
 
 # Session(app)
 
+# Importing blueprints
 from home import *
 from auth import *
 # from .admin import admin as admin_blueprint
@@ -98,6 +81,6 @@ app.register_blueprint(tnt_blueprint, url_prefix='/tnt')
 
 from app.views import *
 
-
+# Adding commands from managers
 from auth.commands import manager as auth_manager
 manager.add_command("user", auth_manager)
