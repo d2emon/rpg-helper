@@ -2,12 +2,12 @@ extends ../_base.pug
 
 block content
   .content-section
-    h1 Select Campaign
+    h1 Select Session
 
-    +panel("Select Campaign", false, false, true)
+    +panel("Select Session", false, false, true)
       div(class="well well-sm btn-toolbar well-toolbar", role="toolbar", aria-label="toolbar")
         | &nbsp;
-        a(href="{{ url_for('campaign.campaign_edit') }}", class="btn btn-sm btn-primary", data-toggle="tooltip", title="Добавить") <i class="fa fa-plus"></i>
+        a(href="{{ url_for('session.session_edit', campaign_id=campaign_id) }}", class="btn btn-sm btn-primary", data-toggle="tooltip", title="Добавить") <i class="fa fa-plus"></i>
         // a(href="{{ url_for('rpg.rpg_add') }}", type="button", class="btn btn-sm btn-default", data-toggle="tooltip", title="Add") <span class="fa fa-plus" aria-hidden="true"></span><br>Add
         // a(href="{{ url_for('rpg.rpg_del') }}", type="button", class="btn btn-sm btn-default", data-toggle="tooltip", title="Del") <span class="fa fa-minus" aria-hidden="true"></span><br>Del
 
@@ -22,24 +22,24 @@ block content
               tr
                 th(class="col-md-1 col-lg1 col-sm-1")
                 th
-                  | Campaign
+                  | Session
             tbody
               | {% for i in items %}
               tr
                 td 
                   center
                     div(class="btn-group btn-group-xs")
-                      a(href="{{ url_for('session.session_list', campaign_id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Просмотреть")
+                      a(href="{{ url_for('session.session_list', campaign_id=campaign_id, session_id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Просмотреть")
                         i(class="fa fa-search")
-                      a(href="{{ url_for('campaign.campaign_edit', campaign_id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Редактировать")
+                      a(href="{{ url_for('session.session_edit', campaign_id=campaign_id, session_id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Редактировать")
                         i(class="fa fa-edit")
-                      a(data-href="{{ url_for('campaign.campaign_del', campaign_id=i.id) }}", class="btn btn-sm btn-primary confirm" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
+                      a(data-href="{{ url_for('session.session_del', campaign_id=campaign_id, session_id=i.id) }}", class="btn btn-sm btn-primary confirm" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
                         i(class="fa fa-eraser")
                 td
-                  a(href="{{ url_for('session.session_list', campaign_id=i.id) }}") {{i}}
+                  a(href="{{ url_for('session.session_list', campaign_id=campaign_id, session_id=i.id) }}") {{i}}
 
               | {% endfor %}
       | {% else %}
       .panel-body
-        h3 No aviable Campaigns
+        h3 No aviable Sessions
       | {% endif %}

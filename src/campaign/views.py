@@ -74,15 +74,3 @@ def campaign_del(campaign_id):
     # db_session.commit()
 
     # return redirect(url_for("campaign_list"))
-
-
-@campaign.route("/<int:campaign_id>")
-def campaign_show(campaign_id):
-    """
-    Show campaign
-    """
-    # campaign = Campaign.query.get(campaign_id)
-    # session["campaign"] = campaign
-
-    # return redirect(url_for("session_list"))
-    # # return render_template("campaigns.html", campaigns=campaigns, selected=games[rpg_id])
