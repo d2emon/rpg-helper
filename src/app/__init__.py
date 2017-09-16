@@ -1,6 +1,6 @@
 # from flask import Flask, render_template
 from flask import Flask
-# from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap
 from flask_cache import Cache
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
@@ -52,16 +52,15 @@ debug = os.environ.get('FLASK_DEBUG', False)
 config_name = os.environ.get('FLASK_CONFIG', 'production')
 app = create_app(config_name=config_name)
 
-# bootstrap = Bootstrap(app)
+bootstrap = Bootstrap(app)
 
 cache = Cache(app)
 
 toolbar = DebugToolbarExtension(app)
 
 login_manager = LoginManager(app)
-# login_manager.login_message = "You must be logged in to access this page."
-# login_manager.login_view = "auth.login"
-login_manager.login_view = 'login'
+login_manager.login_message = "You must be logged in to access this page."
+login_manager.login_view = "auth.login"
 
 manager = Manager(app)
 
@@ -73,21 +72,36 @@ migrate = Migrate(app, db)
 # Session(app)
 
 
-from auth import models
+from auth.models import *
+from campaign.models import *
 
 
-# from .admin import admin as admin_blueprint
-# app.register_blueprint(admin_blueprint, url_prefix='/admin')
-
-# from .home import home as home_blueprint
-# app.register_blueprint(home_blueprint)
+from home import home as home_blueprint
+app.register_blueprint(home_blueprint)
 
 from auth import auth as auth_blueprint
 app.register_blueprint(auth_blueprint)
 
+# from .admin import admin as admin_blueprint
+# app.register_blueprint(admin_blueprint, url_prefix='/admin')
+
+from rpg import rpg as rpg_blueprint
+app.register_blueprint(rpg_blueprint, url_prefix='/rpg')
+
+from campaign import campaign as campaign_blueprint
+app.register_blueprint(campaign_blueprint, url_prefix='/campaign')
+
+from pathfinder import pathfinder as pathfinder_blueprint
+app.register_blueprint(pathfinder_blueprint, url_prefix='/pathfinder')
+
+from gurps import gurps as gurps_blueprint
+app.register_blueprint(gurps_blueprint, url_prefix='/gurps')
+
+from tnt import tnt as tnt_blueprint
+app.register_blueprint(tnt_blueprint, url_prefix='/tnt')
+
 
 from app.views import *
-# from blog.views import *
 
 
 from auth.commands import manager as auth_manager

@@ -1,13 +1,7 @@
-extends ../_rpg.pug
+extends _error.pug
 
-block content
-  | % import "bootstrap/wtf.html" as wtf %
-  .content-section
-    .outer
-      .middle
-        .inner
-          div(style="text-align: center;")
-            h1 404 Error
-            h3 The page you're looking for doesn't exist.
-            hr.intro-divider
-            a(href="{ url_for('home.homepage') }", class="btn btn-default btn-lg") <i class="fa fa-home"></i> Home
+block errortitle
+  | 404 Error
+
+block description
+  | The page you're looking for doesn't exist.

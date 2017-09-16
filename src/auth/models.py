@@ -1,3 +1,4 @@
+from flask import url_for
 from flask_login import UserMixin
 from flask_sqlalchemy import BaseQuery
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -45,7 +46,14 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # username = Column(String(16), nullable=False)
     # password = Column(String(16), nullable=False)
-    username = db.Column(db.String(60), index=True, unique=True, nullable=False)
+    username = db.Column(
+        db.String(60),
+        index=True,
+        unique=True,
+        nullable=False,
+        default="",
+        info={'label': "Username"}
+    )
     password_hash = db.Column(db.String(128))
     # email = db.Column(db.String(60), index=True, unique=True)
     # first_name = db.Column(db.String(60), index=True)
@@ -163,6 +171,14 @@ class User(UserMixin, db.Model):
                 raise Exception("I'm sorry- that userid has been banned from the Game")
         # fclose(a);
         return False
+
+    @property
+    def after_login(self):
+        # if employee.is_admin:
+        #     return url_for('home.admin_dashboard')
+        # else:
+        #     return url_for('home.dashboard')
+        return url_for('home.index')
 
     # Other methods
     @classmethod
