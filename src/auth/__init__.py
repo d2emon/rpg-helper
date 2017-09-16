@@ -1,1 +1,2 @@
-from .views import auth
+from .models import *
+from .views import auth as auth_blueprint

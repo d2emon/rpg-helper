@@ -71,37 +71,28 @@ migrate = Migrate(app, db)
 
 # Session(app)
 
-
-from auth.models import *
-from campaign.models import *
-from gamesession.models import *
-
-
-from home import home as home_blueprint
-app.register_blueprint(home_blueprint)
-
-from auth import auth as auth_blueprint
-app.register_blueprint(auth_blueprint)
-
+from home import *
+from auth import *
 # from .admin import admin as admin_blueprint
+
+app.register_blueprint(home_blueprint)
+app.register_blueprint(auth_blueprint)
 # app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
-from rpg import rpg as rpg_blueprint
+from rpg import *
+from campaign import *
+from gamesession import *
+
 app.register_blueprint(rpg_blueprint, url_prefix='/rpg')
-
-from campaign import campaign as campaign_blueprint
 app.register_blueprint(campaign_blueprint, url_prefix='/campaign')
-
-from gamesession import gamesession as session_blueprint
 app.register_blueprint(session_blueprint, url_prefix='/session')
 
-from pathfinder import pathfinder as pathfinder_blueprint
+from pathfinder import *
+from gurps import *
+from tnt import *
+
 app.register_blueprint(pathfinder_blueprint, url_prefix='/pathfinder')
-
-from gurps import gurps as gurps_blueprint
 app.register_blueprint(gurps_blueprint, url_prefix='/gurps')
-
-from tnt import tnt as tnt_blueprint
 app.register_blueprint(tnt_blueprint, url_prefix='/tnt')
 
 
