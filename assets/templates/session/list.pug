@@ -29,14 +29,14 @@ block content
                 td 
                   center
                     div(class="btn-group btn-group-xs")
-                      a(href="{{ url_for('session.session_list', campaign_id=campaign_id, session_id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Просмотреть")
+                      a(href="{{ url_for('session.session_show', campaign_id=campaign_id, session_id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Просмотреть")
                         i(class="fa fa-search")
                       a(href="{{ url_for('session.session_edit', campaign_id=campaign_id, session_id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Редактировать")
                         i(class="fa fa-edit")
                       a(data-href="{{ url_for('session.session_del', campaign_id=campaign_id, session_id=i.id) }}", class="btn btn-sm btn-primary confirm" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
                         i(class="fa fa-eraser")
                 td
-                  a(href="{{ url_for('session.session_list', campaign_id=campaign_id, session_id=i.id) }}") {{i}}
+                  a(href="{{ url_for('session.session_show', campaign_id=campaign_id, session_id=i.id) }}") {{i}}
 
               | {% endfor %}
       | {% else %}

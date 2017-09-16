@@ -2,7 +2,10 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from datetime import datetime
 
 from app import app, db
+
+from campaign.views import campaign
 from campaign.models import Campaign
+
 from .models import GameSession
 from .forms import GameSessionForm
 
@@ -10,7 +13,7 @@ from .forms import GameSessionForm
 gamesession = Blueprint('session', __name__)
 
 
-@gamesession.route("/campaign-<int:campaign_id>/list")
+@campaign.route("/campaign-<int:campaign_id>/list")
 def session_list(campaign_id):
     """
     Render session list
