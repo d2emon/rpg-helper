@@ -13,6 +13,8 @@ ul(class="nav navbar-nav navbar-right")
         a(href="{{ url_for('gurps.index') }}") GURPS
       li
         a(href="{{ url_for('tnt.index') }}") Tunels & Trolls
+  li
+    a(href="{{ url_for('world.world_list') }}") Worlds
   | {% if current_user.is_admin %}
   li(class="dropdown")
     a(href="#", class="dropdown-toggle", data-toggle="dropdown", role="button", aria-haspopup="true", aria-expanded="false") Admin <span class="caret"></span>
