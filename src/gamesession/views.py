@@ -85,5 +85,10 @@ def session_show(campaign_id, session_id):
     # session["session"] = gs
 
     # return redirect(url_for("session_list", campaign_id=campaign_id, session_id=session_id))
-    return redirect(url_for("campaign.session_list", campaign_id=campaign_id))
     # return redirect(url_for("char_list"))
+    return render_template(
+        "session/view.html",
+        title=str(gs),
+        campaign_id=campaign_id,
+        session=gs,
+    )
