@@ -76,7 +76,7 @@ def session_del(campaign_id, session_id):
     db.session.commit()
     flash("Сессия {} успешно удалена".format(gs))
 
-    return redirect(url_for("session.session_list", campaign_id=campaign_id, session_id=session_id))
+    return redirect(url_for("campaign.session_list", campaign_id=campaign_id, session_id=session_id))
 
 
 @gamesession.route("/campaign-<int:campaign_id>/<int:session_id>")
@@ -85,5 +85,5 @@ def session_show(campaign_id, session_id):
     # session["session"] = gs
 
     # return redirect(url_for("session_list", campaign_id=campaign_id, session_id=session_id))
-    return redirect(url_for("session.session_list", campaign_id=campaign_id))
+    return redirect(url_for("campaign.session_list", campaign_id=campaign_id))
     # return redirect(url_for("char_list"))
