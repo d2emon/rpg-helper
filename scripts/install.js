@@ -5,6 +5,7 @@ console.log("Installing bower");
 shell.exec("bower install");
 
 console.log("Updating pip modules");
+shell.exec("pip install -r requirements-github.txt");
 shell.exec("pip install -r requirements.txt");
 shell.exec("python ./src/manage.py db upgrade");
 
