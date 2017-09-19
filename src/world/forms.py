@@ -3,7 +3,7 @@ from wtforms import SubmitField
 from wtforms_alchemy import model_form_factory
 
 
-from .models import World
+from .models import World, Galaxy
 
 
 from app import db
@@ -23,3 +23,10 @@ class WorldForm(ModelForm):
 
     class Meta:
         model = World
+
+
+class GalaxyForm(ModelForm):
+    submit = SubmitField('Submit')
+
+    class Meta:
+        model = Galaxy

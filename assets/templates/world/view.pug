@@ -6,7 +6,7 @@ block content
 
     div {{world.description}}
 
-    | {% if galaxies %}
+    a(href="{{ url_for('world.galaxy_edit') }}", class="btn btn-sm btn-primary", data-toggle="tooltip", title="Добавить") <i class="fa fa-plus"></i> Add Galaxy
     +panel("Select Galaxy", false, false, true)
       div(class="well well-sm btn-toolbar well-toolbar", role="toolbar", aria-label="toolbar")
         | &nbsp;
@@ -39,9 +39,21 @@ block content
                   a(href="{{ url_for('world.world_show', world_id=i.id) }}") {{i}}
 
               | {% endfor %}
-    | {% else %}
-    a(href="{{ url_for('world.world_edit') }}", class="btn btn-sm btn-primary", data-toggle="tooltip", title="Добавить") <i class="fa fa-plus"></i> Add Galaxy
-    | {% endif %}
+              | {% for i in random_galaxies %}
+              tr
+                td 
+                  center
+                    div(class="btn-group btn-group-xs")
+                      a(href="{{ url_for('world.world_show', world_id=0) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Просмотреть")
+                        i(class="fa fa-search")
+                      a(href="{{ url_for('world.world_edit', world_id=0) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Редактировать")
+                        i(class="fa fa-edit")
+                      a(data-href="{{ url_for('world.world_del', world_id=0) }}", class="btn btn-sm btn-primary confirm" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
+                        i(class="fa fa-eraser")
+                td
+                  a(href="{{ url_for('world.world_show', world_id=0, title=i.title) }}") {{i}} <strong>Create</strong>
+
+              | {% endfor %}
 
     | {% if stars %}
     +panel("Select Star", false, false, true)
