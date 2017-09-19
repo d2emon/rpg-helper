@@ -1,0 +1,29 @@
+import os
+from datetime import timedelta
+
+
+BASE_DIR = os.path.abspath(os.getcwd())
+
+CSRF_ENABLED = True
+SECRET_KEY = 'a6574003570dc2170c699c12b0f5febd126d7eabced9eea598772064ac266dc7'
+
+# USERNAME = 'admin'
+# PASSWORD = 'admin'
+
+# configuration db
+DB_PATH = os.path.join(BASE_DIR, "db")
+DB_FILENAME = "rpg-helper.db"
+SQLALCHEMY_DATABASE_URI = "sqlite:///%s" % (os.path.join(DB_PATH, DB_FILENAME))
+# SQLALCHEMY_DATABASE_URI = "sqlite:///../db/%s" % (DB_FILENAME)
+# SQLALCHEMY_DATABASE_URI = "sqlite:///db/%s" % (DB_FILENAME)
+# SQLALCHEMY_DATABASE_URI = "mysql://%s:%s@%s/%s" % ('root', 'root', '127.0.0.1', 'pythonpub1')
+
+# RECAPTCHA_PUBLIC_KEY = '6Ld4rwITAAAAAKUD5AntlHi7HL36W2vHJQOIjQmA'
+# RECAPTCHA_PRIVATE_KEY = '6Ld4rwITAAAAAFE8nTS852QbsqCBx1mN8D4BqenE'
+
+BACKUP_TIME = timedelta(minutes=30)
+BACKUP_PATH = os.path.join(BASE_DIR, "db", "backup")
+BACKUP_FILENAME = "rpg-helper-%s.db"
+
+DEBUG = True
+TEMPLATES_AUTO_RELOAD = True

@@ -65,10 +65,12 @@ app.register_blueprint(auth_blueprint)
 from rpg import *
 from campaign import *
 from gamesession import *
+from world import *
 
 app.register_blueprint(rpg_blueprint, url_prefix='/rpg')
 app.register_blueprint(campaign_blueprint, url_prefix='/campaign')
 app.register_blueprint(session_blueprint, url_prefix='/session')
+app.register_blueprint(world_blueprint, url_prefix='/world')
 
 from pathfinder import *
 from gurps import *

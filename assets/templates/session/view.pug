@@ -1,0 +1,13 @@
+extends ../_base.pug
+
+block content
+  .content-section
+    | {% if session.title %}
+    h1 {{session.title}}
+    h2 {{session.real_date}}
+    | {% else %}
+    h1 {{session.real_date}}
+    | {% endif %}
+    h3 {{session.campaign}}
+
+    div {{session.description}}
