@@ -24,9 +24,12 @@ class Galaxy(db.Model):
     title = db.Column(db.String(32), nullable=False)
     description = db.Column(db.UnicodeText())
 
-    def generate(self):
-        generated = GalaxyGenerator.generate_text()
-        self.title = generated
+    @classmethod
+    def generate(cls, **kwargs):
+        title = kwargs.get('title')
+        if not title:
+            title = GalaxyGenerator.generate_text()
+        return cls(title=title)
 
     def __repr__(self):
         if self.title is None:

@@ -79,10 +79,7 @@ def world_show(world_id):
     stars = []
     planets = []
 
-    random_galaxies = [Galaxy() for i in range(5)]
-    for g in random_galaxies:
-        g.generate()
-    # print(random_galaxies)
+    random_galaxies = [Galaxy.generate() for i in range(5)]
 
     return render_template(
         "world/view.html",
@@ -100,12 +97,15 @@ def world_show(world_id):
 @world.route("/galaxy/add", methods=('GET', 'POST'))
 @world.route("/galaxy/<int:galaxy_id>/edit", methods=('GET', 'POST'))
 def galaxy_edit(galaxy_id=0):
+    galaxy_title = request.args.get("galaxy_title")
     if galaxy_id > 0:
         galaxy = Galaxy.query.filter_by(id=galaxy_id).first_or_404()
         title = "Edit Galaxy"
     else:
-        galaxy = Galaxy()
-        galaxy.generate()
+        if galaxy_title is None:
+            galaxy = Galaxy.generate()
+        else:
+            galaxy = Galaxy(title=galaxy_title)
         title = "New Galaxy"
 
     form = GalaxyForm(obj=galaxy)
