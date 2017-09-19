@@ -1,5 +1,5 @@
 from app import db
-from generator.generator.space.galaxy import GalaxyGenerator
+from generator.space.galaxy import GalaxyGenerator
 
 
 class World(db.Model):

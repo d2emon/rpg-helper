@@ -1,1 +1,2 @@
 git+https://github.com/d2emon/flask-logging.git
+git+https://github.com/d2emon/generator-pack.git
