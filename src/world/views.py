@@ -97,15 +97,13 @@ def world_show(world_id):
 @world.route("/galaxy/add", methods=('GET', 'POST'))
 @world.route("/galaxy/<int:galaxy_id>/edit", methods=('GET', 'POST'))
 def galaxy_edit(galaxy_id=0):
+    world_id = request.args.get("world_id")
     galaxy_title = request.args.get("galaxy_title")
     if galaxy_id > 0:
         galaxy = Galaxy.query.filter_by(id=galaxy_id).first_or_404()
         title = "Edit Galaxy"
     else:
-        if galaxy_title is None:
-            galaxy = Galaxy.generate()
-        else:
-            galaxy = Galaxy(title=galaxy_title)
+        galaxy = Galaxy.generate(world_id=world_id, title=galaxy_title)
         title = "New Galaxy"
 
     form = GalaxyForm(obj=galaxy)

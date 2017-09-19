@@ -22,7 +22,10 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=32), nullable=False),
     sa.Column('description', sa.UnicodeText(), nullable=True),
+    sa.Column('world_id', sa.Integer(), nullable=True),
+
     sa.PrimaryKeyConstraint('id')
+    sa.ForeignKey(None, 'galaxy', 'world', ['world_id'], ['id'])
     )
     # ### end Alembic commands ###
 
