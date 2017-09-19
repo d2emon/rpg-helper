@@ -51,7 +51,8 @@ block content
                       a(data-href="{{ url_for('world.world_del', world_id=0) }}", class="btn btn-sm btn-primary confirm" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
                         i(class="fa fa-eraser")
                 td
-                  a(href="{{ url_for('world.galaxy_edit', galaxy_title=i.title) }}") {{i}} <u><strong>Create</strong></u>
+                  a(href="{{ url_for('world.galaxy_edit', galaxy_title=i.title) }}") {{i}} 
+                  span(class="label label-info") Generate
 
               | {% endfor %}
 
