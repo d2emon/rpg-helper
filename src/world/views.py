@@ -71,25 +71,33 @@ def world_del(world_id):
     return redirect(url_for("world.world_list", world_id=world_id))
 
 
+@world.route("/0")
 @world.route("/<int:world_id>")
-def world_show(world_id):
-    world = World.query.filter_by(id=world_id).first_or_404()
-    galaxies = []
+def world_show(world_id=0):
+    try:
+        page = int(request.args.get('page'))
+    except (ValueError, TypeError):
+        page = 1
+
+    if world_id:
+        world = World.query.filter_by(id=world_id).first_or_404()
+    else:
+        world = World()
+
+    galaxies = Galaxy.query.filter_by(world_id=world_id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
+    
     stars = []
     planets = []
 
-    random_galaxies = [Galaxy.generate() for i in range(10)]
 
     return render_template(
         "world/view.html",
         title=str(world),
         world_id=world_id,
         world=world,
-        galaxies=galaxies,
+        galaxies=galaxies.items + [Galaxy.generate() for i in range(10)],
         stars=stars,
         planets=planets,
-
-        random_galaxies=random_galaxies,
     )
 
 
@@ -112,7 +120,7 @@ def galaxy_edit(galaxy_id=0):
         db.session.commit()
 
         flash("Галактика {} успешно добавлена".format(galaxy))
-        return redirect(url_for("world.world_show", world_id=galaxy.id))
+        return redirect(url_for("world.world_show", world_id=galaxy.world_id))
     return render_template(
         "app/form.html",
         title=title,
