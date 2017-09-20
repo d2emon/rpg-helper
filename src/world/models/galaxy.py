@@ -13,17 +13,21 @@ class Galaxy(db.Model):
     world_id = db.Column(db.Integer, db.ForeignKey('world.id'))
 
     world = db.relationship('World', backref='galaxies')
+    
+    @classmethod
+    def generator(cls):
+        g = GalaxyGenerator
+        g.GalaxyGenerator1.galaxy_names[0] = GalaxyName.query.all()
+        g.GalaxyGenerator2.galaxy_names[1] = GalaxyType.query.all()
+        g.GalaxyGenerator3.galaxy_names[1] = GalaxyType.query.all()
+        return g
 
     @classmethod
     def generate(cls, **kwargs):
         title = kwargs.get('title')
         world_id = kwargs.get('world_id') 
         if not title:
-            g = GalaxyGenerator
-            g.GalaxyGenerator1.galaxy_names[0] = GalaxyName.query.all()
-            g.GalaxyGenerator2.galaxy_names[1] = GalaxyType.query.all()
-            g.GalaxyGenerator3.galaxy_names[1] = GalaxyType.query.all()
-            title = g.generate().title
+            title = cls.generator().generate().title
         return cls(title=title, world_id=world_id)
 
     def __repr__(self):
