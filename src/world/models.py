@@ -32,7 +32,7 @@ class Galaxy(db.Model):
         title = kwargs.get('title')
         world_id = kwargs.get('world_id') 
         if not title:
-            title = GalaxyGenerator.generate_text()
+            title = GalaxyGenerator.generate().title
         return cls(title=title, world_id=world_id)
 
     def __repr__(self):

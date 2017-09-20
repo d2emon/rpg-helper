@@ -78,7 +78,7 @@ def world_show(world_id):
     stars = []
     planets = []
 
-    random_galaxies = [Galaxy.generate() for i in range(5)]
+    random_galaxies = [Galaxy.generate() for i in range(10)]
 
     return render_template(
         "world/view.html",
