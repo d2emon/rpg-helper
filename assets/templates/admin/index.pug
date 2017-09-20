@@ -1,0 +1,16 @@
+extends ../_base.pug
+
+block content
+  .intro-header
+    .container
+      .row
+        .col-lg-12
+          .intro-message
+            h1 {{ appname }}
+            h3 Admin page
+            hr.intro-divider
+            ul
+              li
+                a(href="{{ url_for('world.world_list') }}") Worlds
+              li
+                a(href="{{ url_for('admin.galaxy_list') }}") Galaxies

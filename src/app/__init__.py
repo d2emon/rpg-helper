@@ -56,11 +56,11 @@ migrate = Migrate(app, db)
 # Importing blueprints
 from home import *
 from auth import *
-# from .admin import admin as admin_blueprint
+from admin import *
 
 app.register_blueprint(home_blueprint)
 app.register_blueprint(auth_blueprint)
-# app.register_blueprint(admin_blueprint, url_prefix='/admin')
+app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
 from rpg import *
 from campaign import *
