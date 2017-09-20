@@ -85,4 +85,6 @@ from app.views import *
 
 # Adding commands from managers
 from auth.commands import manager as auth_manager
+from admin.commands import manager as admin_manager
 manager.add_command("user", auth_manager)
+manager.add_command("admin", admin_manager)
