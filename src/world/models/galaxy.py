@@ -8,8 +8,8 @@ class Galaxy(db.Model):
     """
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(32), nullable=False)
-    description = db.Column(db.UnicodeText())
+    title = db.Column(db.String(32), nullable=False, info={'label': "Title"})
+    description = db.Column(db.UnicodeText(), info={'label': "Description"})
     world_id = db.Column(db.Integer, db.ForeignKey('world.id'))
 
     world = db.relationship('World', backref='galaxies')
@@ -49,7 +49,7 @@ class GeneratorData:
     """
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(32), nullable=False)
+    title = db.Column(db.String(32), nullable=False, info={'label': "Title"})
 
     def __repr__(self):
         if self.title is None:

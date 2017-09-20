@@ -9,9 +9,9 @@ class GameSession(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     campaign_id = db.Column(db.Integer, db.ForeignKey('campaign.id'))
-    real_date = db.Column(db.Date, server_default=func.now())
-    title = db.Column(db.String(32))
-    description = db.Column(db.UnicodeText())
+    real_date = db.Column(db.Date, server_default=func.now(), info={'label': "Real World Date"})
+    title = db.Column(db.String(32), info={'label': "Title"})
+    description = db.Column(db.UnicodeText(), info={'label': "Description"})
 
     campaign = db.relationship('Campaign', backref='sessions')
 
