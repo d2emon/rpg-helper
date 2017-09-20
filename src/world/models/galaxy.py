@@ -2,19 +2,6 @@ from app import db
 from generator.space.galaxy import GalaxyGenerator
 
 
-class World(db.Model):
-    """
-    Create a World table
-    """
-
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(32), nullable=False)
-    description = db.Column(db.UnicodeText())
-
-    def __repr__(self):
-        return self.title
-
-
 class Galaxy(db.Model):
     """
     Create a Galaxy table
@@ -34,6 +21,21 @@ class Galaxy(db.Model):
         if not title:
             title = GalaxyGenerator.generate().title
         return cls(title=title, world_id=world_id)
+
+    def __repr__(self):
+        if self.title is None:
+            return "<UNTITLED>"
+        else:
+            return self.title
+        
+
+class GalaxyName(db.Model):
+    """
+    Create a GalaxyName table
+    """
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(32), nullable=False)
 
     def __repr__(self):
         if self.title is None:

@@ -1,0 +1,43 @@
+extends ../_base.pug
+
+block content
+  .content-section
+    h1 Select Galaxy Name
+
+    +panel("Select Galaxy Name", false, false, true)
+      div(class="well well-sm btn-toolbar well-toolbar", role="toolbar", aria-label="toolbar")
+        | &nbsp;
+        a(href="{{ url_for('admin.galaxy_edit') }}", class="btn btn-sm btn-primary", data-toggle="tooltip", title="Добавить") <i class="fa fa-plus"></i>
+
+        .pull-right
+          strong Total: 
+          | {{ pagination.total }}
+      | {% if items %}
+      div
+        .table-responsive
+          table(class="table table-bordered table-hover")
+            thead
+              tr
+                th(class="col-md-1 col-lg1 col-sm-1")
+                th
+                  | Galaxy
+            tbody
+              | {% for i in items %}
+              tr
+                td 
+                  center
+                    div(class="btn-group btn-group-xs")
+                      a(href="{{ url_for('world.world_show', world_id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Просмотреть")
+                        i(class="fa fa-search")
+                      a(href="{{ url_for('admin.galaxy_edit', galaxy_id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Редактировать")
+                        i(class="fa fa-edit")
+                      a(data-href="{{ url_for('world.world_del', world_id=i.id) }}", class="btn btn-sm btn-primary confirm" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
+                        i(class="fa fa-eraser")
+                td
+                  a(href="{{ url_for('admin.galaxy_edit', galaxy_id=i.id) }}") {{i}}
+
+              | {% endfor %}
+      | {% else %}
+      .panel-body
+        h3 No aviable Galaxies
+      | {% endif %}

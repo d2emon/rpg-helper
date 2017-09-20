@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 
 from app import app, db
 
-from world.models import World
-from world.forms import WorldForm
+from world.models import World, GalaxyName
+from world.forms import WorldForm, GalaxyNameForm
 
 
 admin = Blueprint('admin', __name__)
@@ -25,30 +25,38 @@ def galaxy_list():
     """
     Render galaxy admin page
     """
+    try:
+        page = int(request.args.get('page'))
+    except (ValueError, TypeError):
+        page = 1
+    
+    galaxies = GalaxyName.query.paginate(page, app.config.get('RECORDS_ON_PAGE'))
     return render_template(
-        'admin/index.html',
+        'admin/list_galaxy.html',
         title="Galaxy",
+        items=galaxies.items,
+        pagination=galaxies,
     )
 
 
-@admin.route("/add", methods=('GET', 'POST'))
-@admin.route("/<int:world_id>/edit", methods=('GET', 'POST'))
-def admin_edit(world_id=0):
-    if world_id > 0:
-        world = World.query.filter_by(id=world_id).first_or_404()
-        title = "Edit World"
+@admin.route("/galaxy/add", methods=('GET', 'POST'))
+@admin.route("/galaxy/<int:galaxy_id>/edit", methods=('GET', 'POST'))
+def galaxy_edit(galaxy_id=0):
+    if galaxy_id > 0:
+        gn = GalaxyName.query.filter_by(id=galaxy_id).first_or_404()
+        title = "Edit Galaxy"
     else:
-        world = World()
-        title = "New World"
+        gn = GalaxyName()
+        title = "New Galaxy"
 
-    form = WorldForm(obj=world)
+    form = GalaxyNameForm(obj=gn)
     if form.validate_on_submit():
-        form.populate_obj(world)
-        db.session.add(world)
+        form.populate_obj(gn)
+        db.session.add(gn)
         db.session.commit()
 
-        flash("Мир {} успешно добавлен".format(world))
-        return redirect(url_for("world.world_show", world_id=world.id))
+        flash("Мир {} успешно добавлен".format(gn))
+        return redirect(url_for("admin.galaxy_list"))
     return render_template(
         "app/form.html",
         title=title,

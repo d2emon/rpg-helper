@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 
 from app import app, db
 
-from .models import World, Galaxy
+from world.models import World, Galaxy
 from .forms import WorldForm, GalaxyForm
 
 
