@@ -2,9 +2,7 @@ from flask_script import Manager
 from app import db
 
 from generator.space.fixtures import galaxy_names
-from world.models import GalaxyName, GalaxyType
-# from .models import User, Role
-# from .utils import cls, input_username, input_password, input_new_password, show_menu, list_users, show_user
+from world.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType
 
 
 manager = Manager(usage="Admin utils")
@@ -26,16 +24,14 @@ def fillgalaxynames():
 
 
 @manager.command
-def fillgalaxynames1():
-    gn = galaxy_names[1]
-    print(gn)
+def fillgalaxyplacements():
+    filldata(GalaxyPlacement, galaxy_names[1])
     return
 
 
 @manager.command
-def fillgalaxynames2():
-    gn = galaxy_names[2]
-    print(gn)
+def fillgalaxyforms():
+    filldata(GalaxyForm, galaxy_names[2])
     return
 
 

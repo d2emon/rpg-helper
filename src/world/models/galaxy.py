@@ -16,14 +16,16 @@ class Galaxy(db.Model):
     
     @classmethod
     def generator(cls):
+        from generator.space.fixtures import galaxy_names
         gn = GalaxyName.query.all()
         gt = GalaxyType.query.all()
-        from generator.space.fixtures import galaxy_names
+        gp = galaxy_names[1]
+        gf = galaxy_names[2]
 
         g = GalaxyGenerator
-        g.GalaxyGenerator1.galaxy_names = [gn, galaxy_names[1]]
-        g.GalaxyGenerator2.galaxy_names = [galaxy_names[1], gt]
-        g.GalaxyGenerator3.galaxy_names = [galaxy_names[2], gt]
+        g.GalaxyGenerator1.galaxy_names = [gn, gp]
+        g.GalaxyGenerator2.galaxy_names = [gp, gt]
+        g.GalaxyGenerator3.galaxy_names = [gf, gt]
         return g
 
     @classmethod
@@ -60,6 +62,18 @@ class GalaxyName(GeneratorData, db.Model):
     Create a GalaxyName table
     """
         
+
+class GalaxyPlacement(GeneratorData, db.Model):
+    """
+    Create a GalaxyPlacement table
+    """
+        
+
+class GalaxyForm(GeneratorData, db.Model):
+    """
+    Create a GalaxyForm table
+    """
+                
 
 class GalaxyType(GeneratorData, db.Model):
     """
