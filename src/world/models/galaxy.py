@@ -21,6 +21,8 @@ class Galaxy(db.Model):
         if not title:
             g = GalaxyGenerator
             g.GalaxyGenerator1.galaxy_names[0] = GalaxyName.query.all()
+            g.GalaxyGenerator2.galaxy_names[1] = GalaxyType.query.all()
+            g.GalaxyGenerator3.galaxy_names[1] = GalaxyType.query.all()
             title = g.generate().title
         return cls(title=title, world_id=world_id)
 
