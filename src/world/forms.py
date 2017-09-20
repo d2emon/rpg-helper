@@ -1,4 +1,4 @@
-from wtforms import SubmitField
+from wtforms import StringField, SubmitField
 
 
 from app.forms import ModelForm
@@ -9,6 +9,7 @@ from world.models.galaxy import Galaxy, GalaxyName, GalaxyPlacement, GalaxyForm 
 
 
 class WorldForm(ModelForm):
+    title = StringField()
     submit = SubmitField('Submit')
 
     class Meta:
@@ -16,6 +17,7 @@ class WorldForm(ModelForm):
 
 
 class GalaxyForm(ModelForm):
+    title = StringField()
     submit = SubmitField('Submit')
 
     class Meta:
@@ -23,6 +25,7 @@ class GalaxyForm(ModelForm):
 
 
 class GalaxyNameForm(ModelForm):
+    title = StringField()
     submit = SubmitField('Submit')
 
     class Meta:
@@ -30,6 +33,7 @@ class GalaxyNameForm(ModelForm):
 
 
 class GalaxyPlacementForm(ModelForm):
+    title = StringField()
     submit = SubmitField('Submit')
 
     class Meta:
@@ -37,6 +41,7 @@ class GalaxyPlacementForm(ModelForm):
         
 
 class GalaxyFormForm(ModelForm):
+    title = StringField()
     submit = SubmitField('Submit')
 
     class Meta:
@@ -44,6 +49,7 @@ class GalaxyFormForm(ModelForm):
         
 
 class GalaxyTypeForm(ModelForm):
+    title = StringField()
     submit = SubmitField('Submit')
 
     class Meta:
