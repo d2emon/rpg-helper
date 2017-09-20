@@ -54,7 +54,7 @@ def campaign_edit(campaign_id=0):
         db.session.commit()
 
         flash("Кампания {} успешно добавлена".format(campaign))
-        return redirect(url_for('campaign.session_list'))
+        return redirect(url_for('campaign.session_list', campaign_id=campaign.id))
     return render_template(
         "app/form.html",
         title=title,
