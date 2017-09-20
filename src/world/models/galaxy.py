@@ -79,3 +79,21 @@ class GalaxyType(GeneratorData, db.Model):
     """
     Create a GalaxyType table
     """
+
+
+class Star(db.Model):
+    """
+    Create a Galaxy table
+    """
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(32), nullable=False, info={'label': "Title"})
+    galaxy_id = db.Column(db.Integer, db.ForeignKey('galaxy.id'))
+
+    galaxy = db.relationship('Galaxy', backref='stars')
+
+    def __repr__(self):
+        if self.title is None:
+            return "<UNTITLED>"
+        else:
+            return self.title

@@ -1,0 +1,49 @@
+extends ../_base.pug
+
+block content
+  .content-section
+    h1 {{galaxy.title}}
+    .row
+      .col-md-4
+        +panel("Star", false, false, true)
+          div(class="well well-sm btn-toolbar well-toolbar", role="toolbar", aria-label="toolbar")
+            | &nbsp;
+            a(href="{{ url_for('world.star_edit') }}", class="btn btn-sm btn-primary", data-toggle="tooltip", title="Добавить") <i class="fa fa-plus"></i>
+          div
+            .table-responsive
+              table(class="table table-bordered table-hover")
+                thead
+                  tr
+                    th(class="col-md-4 col-lg-4 col-sm-4")
+                    th
+                      | Star
+                tbody
+                  | {% for i in stars %}
+                  tr
+                    td 
+                      center
+                        div(class="btn-group btn-group-xs")
+                          a(href="{{ url_for('world.galaxy_show', id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Просмотреть")
+                            i(class="fa fa-search")
+                          | {% if i.id %}
+                          a(href="{{ url_for('world.star_edit', id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Редактировать")
+                            i(class="fa fa-edit")
+                          a(data-href="{{ url_for('world.star_del', id=i.id) }}", class="btn btn-sm btn-primary confirm" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
+                            i(class="fa fa-eraser")
+                          | {% else %}
+                          a(href="{{ url_for('world.star_edit', title=i.title, galaxy_id=galaxy_id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Редактировать")
+                            i(class="fa fa-edit")
+                          a(data-href="#", class="btn btn-sm btn-primary confirm disabled" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
+                            i(class="fa fa-eraser")
+                          | {% endif %}
+                    td
+                      | {% if i.id %}
+                      a(href="{{ url_for('world.galaxy_show', id=i.id) }}") {{i}}
+                      | {% else %}
+                      a(href="{{ url_for('world.galaxy_show', galaxy_title=i.title, galaxy_id=galaxy_id) }}") {{i}} 
+                      span(class="label label-info") Generate
+                      | {% endif %}
+
+                  | {% endfor %}
+      .col-md-8
+        div {{galaxy.description}}

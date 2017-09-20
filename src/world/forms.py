@@ -5,7 +5,7 @@ from app.forms import ModelForm
 
 
 from world.models import World
-from world.models.galaxy import Galaxy, GalaxyName, GalaxyPlacement, GalaxyForm as GalaxyFormModel, GalaxyType
+from world.models.galaxy import Galaxy, GalaxyName, GalaxyPlacement, GalaxyForm as GalaxyFormModel, GalaxyType, Star
 
 
 class WorldForm(ModelForm):
@@ -54,3 +54,10 @@ class GalaxyTypeForm(ModelForm):
 
     class Meta:
         model = GalaxyType                
+
+class StarForm(ModelForm):
+    title = StringField()
+    submit = SubmitField('Submit')
+
+    class Meta:
+        model = Star

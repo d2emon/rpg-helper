@@ -23,24 +23,24 @@ block content
                     td 
                       center
                         div(class="btn-group btn-group-xs")
-                          a(href="{{ url_for('world.world_show', world_id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Просмотреть")
+                          a(href="{{ url_for('world.galaxy_show', id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Просмотреть")
                             i(class="fa fa-search")
                           | {% if i.id %}
                           a(href="{{ url_for('world.galaxy_edit', galaxy_id=i.id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Редактировать")
                             i(class="fa fa-edit")
-                          a(data-href="{{ url_for('world.world_del', world_id=i.id) }}", class="btn btn-sm btn-primary confirm" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
+                          a(data-href="{{ url_for('world.galaxy_del', world_id=i.id) }}", class="btn btn-sm btn-primary confirm" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
                             i(class="fa fa-eraser")
                           | {% else %}
                           a(href="{{ url_for('world.galaxy_edit', galaxy_title=i.title, world_id=world_id) }}", class="btn btn-sm btn-primary" data-toggle="tooltip", title="Редактировать")
                             i(class="fa fa-edit")
-                          a(data-href="{{ url_for('world.world_del', world_id=0) }}", class="btn btn-sm btn-primary confirm disabled" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
+                          a(data-href="#", class="btn btn-sm btn-primary confirm disabled" data-toggle="modal", title="Удалить", data-text="Вы уверены, что хотите удалить эту запись?", data-target="#confirm-del")
                             i(class="fa fa-eraser")
                           | {% endif %}
                     td
                       | {% if i.id %}
-                      a(href="{{ url_for('world.galaxy_edit', galaxy_id=i.id) }}") {{i}}
+                      a(href="{{ url_for('world.galaxy_show', id=i.id) }}") {{i}}
                       | {% else %}
-                      a(href="{{ url_for('world.galaxy_edit', galaxy_title=i.title, world_id=world_id) }}") {{i}} 
+                      a(href="{{ url_for('world.galaxy_show', galaxy_title=i.title, world_id=world_id) }}") {{i}} 
                       span(class="label label-info") Generate
                       | {% endif %}
 
