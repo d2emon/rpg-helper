@@ -61,11 +61,9 @@ def session_edit(campaign_id, session_id=0):
         flash("Сессия {} успешно добавлена".format(gs))
         return redirect(url_for("session.session_show", campaign_id=campaign_id, session_id=gs.id))
     return render_template(
-        "session/edit.html",
+        "app/form.html",
         title=title,
         form=form,
-        campaign_id=campaign_id,
-        session_id=session_id,
     )
 
 

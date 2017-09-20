@@ -56,10 +56,9 @@ def campaign_edit(campaign_id=0):
         flash("Кампания {} успешно добавлена".format(campaign))
         return redirect(url_for('campaign.session_list'))
     return render_template(
-        "campaign/edit.html",
-        form=form,
-        campaign_id=campaign.id,
+        "app/form.html",
         title=title,
+        form=form,
     )
 
 

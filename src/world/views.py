@@ -55,10 +55,9 @@ def world_edit(world_id=0):
         flash("Мир {} успешно добавлен".format(world))
         return redirect(url_for("world.world_show", world_id=world.id))
     return render_template(
-        "world/edit.html",
+        "app/form.html",
         title=title,
         form=form,
-        world_id=world_id,
     )
 
 
@@ -115,8 +114,7 @@ def galaxy_edit(galaxy_id=0):
         flash("Галактика {} успешно добавлена".format(galaxy))
         return redirect(url_for("world.world_show", world_id=galaxy.id))
     return render_template(
-        "world/edit.html",
+        "app/form.html",
         title=title,
         form=form,
-        world_id=galaxy_id,
     )
