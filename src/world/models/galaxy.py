@@ -19,7 +19,9 @@ class Galaxy(db.Model):
         title = kwargs.get('title')
         world_id = kwargs.get('world_id') 
         if not title:
-            title = GalaxyGenerator.generate().title
+            g = GalaxyGenerator
+            g.GalaxyGenerator1.galaxy_names[0] = GalaxyName.query.all()
+            title = g.generate().title
         return cls(title=title, world_id=world_id)
 
     def __repr__(self):
@@ -29,9 +31,9 @@ class Galaxy(db.Model):
             return self.title
         
 
-class GalaxyName(db.Model):
+class GeneratorData:
     """
-    Create a GalaxyName table
+    Basic class for generator data
     """
 
     id = db.Column(db.Integer, primary_key=True)
@@ -42,3 +44,14 @@ class GalaxyName(db.Model):
             return "<UNTITLED>"
         else:
             return self.title
+
+class GalaxyName(GeneratorData, db.Model):
+    """
+    Create a GalaxyName table
+    """
+        
+
+class GalaxyType(GeneratorData, db.Model):
+    """
+    Create a GalaxyType table
+    """
