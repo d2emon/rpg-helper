@@ -158,16 +158,12 @@ def galaxy_show(id=0):
     planets = []
     print(galaxy)
     
-    for i in range(10):
-        Star().generate()
-
-
     return render_template(
         "world/view_galaxy.html",
         title=str(galaxy),
         galaxy_id=id,
         galaxy=galaxy,
-        stars=stars.items + [Star(title="Star %d" % (i + 1)) for i in range(10)],
+        stars=stars.items + [Star().generate() for i in range(10)],
         planets=planets,
     )
 

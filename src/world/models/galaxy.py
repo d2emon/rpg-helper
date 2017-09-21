@@ -1,4 +1,5 @@
 from app import db
+from generator import ListGenerator
 from generator.space.galaxy import GalaxyGenerator
 
 
@@ -258,41 +259,6 @@ class PlanetGenerator():
         )
 
 
-class StarGenerator():
-    suns = ["sun%d" % (i + 1) for i in range(30)] + ["blue_sun%d" % (i + 30) for i in range(10)]
-
-    drag = "on"
-    res = "on"
-    ttl = 0
-        
-    def rndSolar(self, num_planets=0, blue_sun=False, only_blue=False):
-        import random
-
-        earth = False
-        
-        if num_planets > 0:
-            nrPlanets = num_planets
-        else:
-            nrPlanets = random.randrange(7) + 4
-            
-        sun_type = random.choice(self.suns)
-        if blue_sun:
-            while self.suns.index(sun_type) > 29:
-                sun_type = random.choice(self.suns)
-        if only_blue:
-            while self.suns.index(sun_type) < 30:
-                sun_type = random.choice(self.suns)
-                
-        sun = Sun(sun_type)
-
-        for i in range(nrPlanets):
-            planet = PlanetGenerator.generate(i < 6, earth)
-            # curPlanet = planet.slice(0, -2)
-            if planet.planet_type.earth:
-                earth = True
-            sun.planets.append(planet)
-        return sun
-
 class Star(db.Model):
     """
     Create a Galaxy table
@@ -306,9 +272,7 @@ class Star(db.Model):
 
     @classmethod
     def generate(cls):
-        g = StarGenerator()
-        s = g.rndSolar(blue_sun=True)
-        print(s.sun_type)
+        s = StarGenerator.generate(blue_sun=True)
         for id, p in enumerate(s.planets):
             print(id + 1, p.planet_type)
             print(p.margin_left, p.width)
@@ -320,9 +284,43 @@ class Star(db.Model):
             print("\tOrbit duration:\t\t%s Earth years" % (p.days))
             print("\tNumber of moons:\t%s" % (p.moons))
             print("\tAxial tilt:\t\t%s&#176;" % (p.tilt))
+        return Star(title="Star (%s)" % (s.sun_type))
     
     def __repr__(self):
         if self.title is None:
             return "<UNTITLED>"
         else:
             return self.title
+
+
+class StarGenerator(ListGenerator):
+    generated_class = Sun
+    suns = ["sun%d" % (i + 1) for i in range(30)] + ["blue_sun%d" % (i + 30) for i in range(10)]
+
+    @classmethod
+    def generate(cls, planets=0, blue_sun=False, only_blue=False):
+        generated = cls.generated()
+        return cls.fill_generated(generated, planets=planets, blue_sun=blue_sun, only_blue=only_blue)
+        
+    @classmethod
+    def fill_generated(cls, generated, planets=0, blue_sun=False, only_blue=False):
+        import random
+        suns = cls.suns
+        if not blue_sun:
+            suns = suns[:30]
+        if only_blue:
+            suns = suns[30:]
+                
+        generated.sun_type = cls.generate_value(suns)
+
+        if not planets:
+            planets = random.randrange(7) + 4
+
+        earth = False
+        for i in range(planets):
+            planet = PlanetGenerator.generate(i < 6, earth)
+            # curPlanet = planet.slice(0, -2)
+            if planet.planet_type.earth:
+                earth = True
+            generated.planets.append(planet)
+        return generated
