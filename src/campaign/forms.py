@@ -1,4 +1,4 @@
-from wtforms import StringField, SubmitField
+from wtforms import StringField, TextAreaField, SubmitField
 
 from .models import Campaign
 

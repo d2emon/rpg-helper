@@ -9,7 +9,7 @@ class Campaign(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # gs_id = Column(Integer, ForeignKey('game_system.id'))
     title = db.Column(db.String(32), info={'label': "Title"})
-    # sessions = db.relationship("GameSession")
+    description = db.Column(db.UnicodeText(), info={'label': "Description"})
     # characters = db.relationship("GameCharacter")
 
     def __repr__(self):
