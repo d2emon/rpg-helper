@@ -1,4 +1,5 @@
-from wtforms import StringField, SubmitField
+from wtforms import StringField, TextAreaField, SubmitField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 
 from app.forms import ModelForm
@@ -10,6 +11,7 @@ from world.models.galaxy import Galaxy, GalaxyName, GalaxyPlacement, GalaxyForm 
 
 class WorldForm(ModelForm):
     title = StringField()
+    description = TextAreaField()    
     submit = SubmitField('Submit')
 
     class Meta:
@@ -18,6 +20,11 @@ class WorldForm(ModelForm):
 
 class GalaxyForm(ModelForm):
     title = StringField()
+    world = QuerySelectField(
+        query_factory=lambda: World.query.all(),
+        allow_blank=True,
+    )
+    description = TextAreaField()
     submit = SubmitField('Submit')
 
     class Meta:
@@ -57,6 +64,11 @@ class GalaxyTypeForm(ModelForm):
 
 class StarForm(ModelForm):
     title = StringField()
+    galaxy = QuerySelectField(
+        query_factory=lambda: Galaxy.query.all(),
+        allow_blank=True,
+    )
+    description = TextAreaField()
     submit = SubmitField('Submit')
 
     class Meta:

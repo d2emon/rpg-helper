@@ -8,6 +8,7 @@ from app.forms import ModelForm
 
 class CampaignForm(ModelForm):
     title = StringField()
+    description = TextAreaField()    
     submit = SubmitField('Submit')
 
     class Meta:

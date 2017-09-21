@@ -3,6 +3,9 @@ from generator import ListGenerator
 from generator.space.galaxy import GalaxyGenerator
 
 
+from .world import World
+
+
 class Galaxy(db.Model):
     """
     Create a Galaxy table
@@ -32,10 +35,12 @@ class Galaxy(db.Model):
     @classmethod
     def generate(cls, **kwargs):
         title = kwargs.get('title')
-        world_id = kwargs.get('world_id') 
+        world_id = kwargs.get('world_id', 0) 
         if not title:
             title = cls.generator().generate().title
-        return cls(title=title, world_id=world_id)
+        g = cls(title=title)
+        g.world = World.query.get(world_id)
+        return g
 
     def __repr__(self):
         if self.title is None:

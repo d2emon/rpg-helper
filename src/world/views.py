@@ -110,7 +110,8 @@ def galaxy_edit(galaxy_id=0):
         galaxy = Galaxy.query.filter_by(id=galaxy_id).first_or_404()
         title = "Edit Galaxy"
     else:
-        galaxy = Galaxy.generate(world_id=world_id, title=galaxy_title)
+        galaxy = Galaxy.generate(title=galaxy_title, world_id=world_id)
+        galaxy.world = World.query.get(world_id)
         title = "New Galaxy"
 
     form = GalaxyForm(obj=galaxy)
@@ -152,6 +153,8 @@ def galaxy_show(id=0):
         world_id = request.args.get("world_id")
         galaxy_title = request.args.get("galaxy_title")
         galaxy = Galaxy(world_id=world_id, title=galaxy_title)
+        db.session.add(galaxy)
+        db.session.commit()
 
     stars = Star.query.filter_by(galaxy_id=id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
     
