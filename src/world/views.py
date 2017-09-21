@@ -14,18 +14,7 @@ def world_list():
     """
     Render world list
     """
-    try:
-        page = int(request.args.get('page'))
-    except (ValueError, TypeError):
-        page = 1
-
-    # # rpg = current_rpg()
-    # campaign = session.get("campaign", None)
-    # if campaign is None:
-    #     return redirect(url_for('campaign_list'))
-
-    # campaigns = Campaign.query.filter(Campaign.gs_id==rpg.id).all()
-    worlds = World.query.paginate(page, app.config.get('RECORDS_ON_PAGE'))
+    worlds = World.query.paged()
     return render_template(
         'world/list.html',
         title="Worlds",

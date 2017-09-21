@@ -18,19 +18,10 @@ def session_list(campaign_id):
     """
     Render session list
     """
-    try:
-        page = int(request.args.get('page'))
-    except (ValueError, TypeError):
-        page = 1
-
-    # # rpg = current_rpg()
-    # campaign = session.get("campaign", None)
-    # if campaign is None:
-    #     return redirect(url_for('campaign_list'))
-
     # campaigns = Campaign.query.filter(Campaign.gs_id==rpg.id).all()
     campaign = Campaign.query.filter_by(id=campaign_id).first_or_404()
-    sessions = GameSession.query.filter_by(campaign_id=campaign_id).order_by(GameSession.real_date.desc()).paginate(page, app.config.get('RECORDS_ON_PAGE'))
+    # sessions = GameSession.query.filter_by(campaign_id=campaign_id).order_by(GameSession.real_date.desc()).paginate(page, app.config.get('RECORDS_ON_PAGE'))
+    sessions = GameSession.query.filter_by(campaign_id=campaign_id).order_by(GameSession.real_date.desc()).paged()
     return render_template(
         'session/list.html',
         title="Sessions",

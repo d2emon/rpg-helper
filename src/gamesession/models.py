@@ -1,4 +1,5 @@
 from app import db
+from app.models import PagedQuery
 from sqlalchemy.sql import func
 
 
@@ -6,6 +7,7 @@ class GameSession(db.Model):
     """
     Create a Game Session table
     """
+    query_class = PagedQuery
 
     id = db.Column(db.Integer, primary_key=True)
     campaign_id = db.Column(db.Integer, db.ForeignKey('campaign.id'))
