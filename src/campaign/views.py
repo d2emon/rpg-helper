@@ -13,10 +13,10 @@ def campaign_list():
     """
     Render campaign list
     """
-    try:
-        page = int(request.args.get('page'))
-    except (ValueError, TypeError):
-        page = 1
+    # try:
+    #     page = int(request.args.get('page'))
+    # except (ValueError, TypeError):
+    #     page = 1
 
     # # rpg = current_rpg()
     # rpg = session.get("rpg", None)
@@ -24,7 +24,8 @@ def campaign_list():
     #     return redirect(url_for('rpg_list'))
 
     # campaigns = Campaign.query.filter(Campaign.gs_id==rpg.id).all()
-    campaigns = Campaign.query.paginate(page, app.config.get('RECORDS_ON_PAGE'))
+    # campaigns = Campaign.query.paginate(page, app.config.get('RECORDS_ON_PAGE'))
+    campaigns = Campaign.query.paged()
     return render_template(
         'campaign/list.html',
         title="Campaigns",
