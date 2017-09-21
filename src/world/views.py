@@ -157,6 +157,9 @@ def galaxy_show(id=0):
     
     planets = []
     print(galaxy)
+    
+    for i in range(10):
+        Star().generate()
 
 
     return render_template(
