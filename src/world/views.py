@@ -177,7 +177,6 @@ def galaxy_show(id=0):
     stars = Star.query.filter_by(galaxy_id=id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
     
     planets = []
-    print(galaxy)
     
     return render_template(
         "world/view_galaxy.html",
@@ -211,3 +210,35 @@ def star_del(id):
         id,
         redirect_link="world.galaxy_show"
     )
+
+
+@world.route("/star")
+@world.route("/star/<int:id>")
+def star_show(id=0):
+    try:
+        page = int(request.args.get('page'))
+    except (ValueError, TypeError):
+        page = 1
+
+    if id:
+        star = Star.query.filter_by(id=id).first_or_404()
+    else:
+        galaxy_id = request.args.get("galaxy_id")
+        star_title = request.args.get("title")
+        image=request.args.get("image")
+        star = Star(galaxy_id=galaxy_id, title=star_title, image=image)
+        db.session.add(star)
+        db.session.commit()
+
+    # stars = Star.query.filter_by(galaxy_id=id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
+    
+    planets = []
+    
+    return render_template(
+        "world/view_star.html",
+        title=str(star),
+        star_id=id,
+        star=star,
+        planets=planets,
+    )
+    

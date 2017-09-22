@@ -1,3 +1,6 @@
+from flask import url_for
+
+
 from ..galaxy.models import GeneratorData, Galaxy
  
  
@@ -70,4 +73,7 @@ class Star(db.Model):
         
     @property
     def image_file(self):
-        return "/images/planets/%s.png" % (self.image)
+        # if self.blue:
+        #     return url_for('static', filename="images/sun35.png")
+        return url_for('static', filename="images/sun27.png")
+        # return "/images/planets/%s.png" % (self.image)
