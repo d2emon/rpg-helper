@@ -46,7 +46,8 @@ class Galaxy(db.Model):
         if not title:
             title = cls.generator().generate().title
         g = cls(title=title)
-        g.world = World.query.get(world_id)
+        if world_id:
+            g.world = World.query.get(world_id)
         return g
 
     def __repr__(self):

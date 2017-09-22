@@ -92,71 +92,67 @@ def world_show(world_id=0):
     )
 
 
-def edit_model(modelclass=None, formclass=None, **kwargs):
-    world_id = request.args.get("world_id")
-    galaxy_title = request.args.get("galaxy_title")
-    galaxy_id = kwargs.get("galaxy_id", 0)
-    edit_title = kwargs.get("edit_title", "Edit")
-    new_title = kwargs.get("new_title", "New")
-    redirect_url = kwargs.get("redirect_url", "world.world_show")
-    if galaxy_id > 0:
-        galaxy = modelclass.query.filter_by(id=galaxy_id).first_or_404()
-        title = edit_title
+def edit_model(modelclass, id, modelformclass, **kwargs):
+    title = kwargs.get('title', "Model")
+    new_model = kwargs.get('new_model', None)
+    
+    if id > 0:
+        model = modelclass.query.filter_by(id=id).first_or_404()
+        title = "Edit %s" % (title)
     else:
-        galaxy = modelclass.generate(title=galaxy_title, world_id=world_id)
-        galaxy.world = World.query.get(world_id)
-        title = new_title
+        if new_model is None:
+            model = modelclass()
+        else:
+            model = new_model
+        title = "New %s" % (title)
 
-    form = formclass(obj=galaxy)
+    form = modelformclass(obj=model)
     if form.validate_on_submit():
-        form.populate_obj(galaxy)
-        db.session.add(galaxy)
+        form.populate_obj(model)
+        db.session.add(model)
         db.session.commit()
 
-        flash("Галактика {} успешно добавлена".format(galaxy))
-        return redirect(url_for("world.world_show", world_id=galaxy.world_id))
+        flash("Мир {} успешно добавлен".format(model))
+        redirect_link = kwargs.get('redirect_link', "world.world_show")
+        return redirect(url_for(redirect_link, id=model.id))
     return render_template(
         "app/form.html",
         title=title,
         form=form,
     )
+
+
+def del_model(modelclass, id, **kwargs):
+    model = modelclass.query.filter_by(id=id).first_or_404()
+    db.session.delete(model)
+    db.session.commit()
+    flash("Мир {} успешно удален".format(model))
+    redirect_link = kwargs.get('redirect_link', "world.world_show")
+    return redirect(url_for(redirect_link))
+
 
 @world.route("/galaxy/add", methods=('GET', 'POST'))
-@world.route("/galaxy/<int:galaxy_id>/edit", methods=('GET', 'POST'))
-def galaxy_edit(galaxy_id=0):
+@world.route("/galaxy/<int:id>/edit", methods=('GET', 'POST'))
+def galaxy_edit(id=0):
     world_id = request.args.get("world_id")
     galaxy_title = request.args.get("galaxy_title")
-    if galaxy_id > 0:
-        galaxy = Galaxy.query.filter_by(id=galaxy_id).first_or_404()
-        title = "Edit Galaxy"
-    else:
-        galaxy = Galaxy.generate(title=galaxy_title, world_id=world_id)
-        galaxy.world = World.query.get(world_id)
-        title = "New Galaxy"
-
-    form = GalaxyForm(obj=galaxy)
-    if form.validate_on_submit():
-        form.populate_obj(galaxy)
-        db.session.add(galaxy)
-        db.session.commit()
-
-        flash("Галактика {} успешно добавлена".format(galaxy))
-        return redirect(url_for("world.world_show", world_id=galaxy.world_id))
-    return render_template(
-        "app/form.html",
-        title=title,
-        form=form,
+    return edit_model(
+        Galaxy, 
+        id, 
+        GalaxyForm,
+        title="Galaxy",
+        new_model=Galaxy.generate(title=galaxy_title, world_id=world_id),
+        redirect_link="world.galaxy_show"
     )
 
 
-@world.route("/galaxy/<int:world_id>/del")
-def galaxy_del(world_id):
-    galaxy = Galaxy.query.filter_by(id=galaxy_id).first_or_404()
-    db.session.delete(galaxy)
-    db.session.commit()
-    flash("Мир {} успешно удален".format(galaxy))
-
-    return redirect(url_for("world.galaxy_list", galaxy_id=galaxy_id))
+@world.route("/galaxy/<int:id>/del")
+def galaxy_del(id):
+    return del_model(
+        Galaxy,
+        id,
+        redirect_link="world.galaxy_list"
+    )
 
 
 @world.route("/galaxy")
