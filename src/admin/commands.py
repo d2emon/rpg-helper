@@ -2,7 +2,7 @@ from flask_script import Manager
 from app import db
 
 from generator.space.fixtures import galaxy_names
-from world.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType
+from world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType
 
 
 manager = Manager(usage="Admin utils")

@@ -3,7 +3,7 @@ from generator.space.galaxy import GalaxyGenerator
 from temporary.generator.star import StarGenerator
 
 
-from .world import World
+from world.models import World
 
 
 class Galaxy(db.Model):

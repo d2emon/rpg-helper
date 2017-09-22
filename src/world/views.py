@@ -2,8 +2,10 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 
 from app import app, db
 
-from world.models import World, Galaxy, Star
-from .forms import WorldForm, GalaxyForm, StarForm
+from .models import World
+from .forms import WorldForm
+from .galaxy.models import Galaxy, Star
+from .galaxy.forms import GalaxyForm, StarForm
 
 
 world = Blueprint('world', __name__)
@@ -90,6 +92,35 @@ def world_show(world_id=0):
     )
 
 
+def edit_model(modelclass=None, formclass=None, **kwargs):
+    world_id = request.args.get("world_id")
+    galaxy_title = request.args.get("galaxy_title")
+    galaxy_id = kwargs.get("galaxy_id", 0)
+    edit_title = kwargs.get("edit_title", "Edit")
+    new_title = kwargs.get("new_title", "New")
+    redirect_url = kwargs.get("redirect_url", "world.world_show")
+    if galaxy_id > 0:
+        galaxy = modelclass.query.filter_by(id=galaxy_id).first_or_404()
+        title = edit_title
+    else:
+        galaxy = modelclass.generate(title=galaxy_title, world_id=world_id)
+        galaxy.world = World.query.get(world_id)
+        title = new_title
+
+    form = formclass(obj=galaxy)
+    if form.validate_on_submit():
+        form.populate_obj(galaxy)
+        db.session.add(galaxy)
+        db.session.commit()
+
+        flash("Галактика {} успешно добавлена".format(galaxy))
+        return redirect(url_for("world.world_show", world_id=galaxy.world_id))
+    return render_template(
+        "app/form.html",
+        title=title,
+        form=form,
+    )
+
 @world.route("/galaxy/add", methods=('GET', 'POST'))
 @world.route("/galaxy/<int:galaxy_id>/edit", methods=('GET', 'POST'))
 def galaxy_edit(galaxy_id=0):
@@ -158,7 +189,6 @@ def galaxy_show(id=0):
         stars=stars.items + [Star().generate() for i in range(10)],
         planets=planets,
     )
-
 
 @world.route("/star/add", methods=('GET', 'POST'))
 @world.route("/star/<int:id>/edit", methods=('GET', 'POST'))

@@ -2,9 +2,10 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 
 from app import app, db
 
-from world.models import World, GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType, StarType
-from world.forms import GalaxyNameForm, GalaxyPlacementForm, GalaxyFormForm, GalaxyTypeForm, StarTypeForm
+from world.models import World
 
+from world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType, StarType
+from world.galaxy.forms import GalaxyNameForm, GalaxyPlacementForm, GalaxyFormForm, GalaxyTypeForm, StarTypeForm
 
 admin = Blueprint('admin', __name__)
 
