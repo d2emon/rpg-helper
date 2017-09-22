@@ -2,12 +2,11 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_cache import Cache
-from flask_debugtoolbar import DebugToolbarExtension
-from flask_logging import RotatingFileLogging
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
+from temporary.flask_utils import FlaskUtils 
 from config import app_config
 
 
@@ -24,8 +23,6 @@ def create_app(debug=False, config_name='production'):
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
     # app.config.from_envvar('FLASK_CONFIG_FILE')
-    app.static_folder = app.config.get('STATIC_FOLDER', 'static')
-    app.template_folder = app.config.get('TEMPLATE_FOLDER', 'templates')
     return app
 
 
@@ -36,9 +33,7 @@ bootstrap = Bootstrap(app)
 
 cache = Cache(app)
 
-toolbar = DebugToolbarExtension(app)
-
-logging = RotatingFileLogging(app)
+utils = FlaskUtils(app)
 
 login_manager = LoginManager(app)
 login_manager.login_message = "You must be logged in to access this page."
