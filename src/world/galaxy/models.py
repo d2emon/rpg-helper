@@ -114,20 +114,28 @@ class Star(db.Model):
     galaxy = db.relationship('Galaxy', backref='stars')
 
     @classmethod
-    def generate(cls):
-        s = StarGenerator.generate(blue_sun=True)
-        for id, p in enumerate(s.planets):
-            print(id + 1, p.planet_type)
-            print(p.margin_left, p.width)
-            print("\tEnvironment:\t\t%s" % (p.environment))
-            print("\tAtmosphere:\t\t%s" % (str(p.atmosphere)))
-            print("\tSurface map available:\t%s" % (p.surface_map))
-            print("\tDay duration:\t\t%s hours" % (p.hours))
-            print("\tGravity:\t\t%s (compared to Earth)" % (p.gravity))
-            print("\tOrbit duration:\t\t%s Earth years" % (p.days))
-            print("\tNumber of moons:\t%s" % (p.moons))
-            print("\tAxial tilt:\t\t%s&#176;" % (p.tilt))
-        return Star(title="Star (%s)" % (s.sun_type))
+    def generate(cls, **kwargs):
+        title = kwargs.get('title')
+        galaxy_id = kwargs.get('galaxy_id', 0) 
+        if not title:
+            s = StarGenerator.generate(blue_sun=True)
+            # title = cls.generator().generate().title
+            title = "Star (%s)" % (s.sun_type)
+            for id, p in enumerate(s.planets):
+                print(id + 1, p.planet_type)
+                print(p.margin_left, p.width)
+                print("\tEnvironment:\t\t%s" % (p.environment))
+                print("\tAtmosphere:\t\t%s" % (str(p.atmosphere)))
+                print("\tSurface map available:\t%s" % (p.surface_map))
+                print("\tDay duration:\t\t%s hours" % (p.hours))
+                print("\tGravity:\t\t%s (compared to Earth)" % (p.gravity))
+                print("\tOrbit duration:\t\t%s Earth years" % (p.days))
+                print("\tNumber of moons:\t%s" % (p.moons))
+                print("\tAxial tilt:\t\t%s&#176;" % (p.tilt))
+        star = Star(title=title)
+        if galaxy_id:
+            star.galaxy = Galaxy.query.get(galaxy_id)
+        return star
     
     def __repr__(self):
         if self.title is None:

@@ -191,25 +191,13 @@ def galaxy_show(id=0):
 def star_edit(id=0):
     galaxy_id = request.args.get("galaxy_id")
     star_title = request.args.get("title")
-    if id > 0:
-        star = Star.query.filter_by(id=id).first_or_404()
-        title = "Edit Star"
-    else:
-        star = Star(galaxy_id=galaxy_id, title=star_title)
-        title = "New Star"
-
-    form = StarForm(obj=star)
-    if form.validate_on_submit():
-        form.populate_obj(star)
-        db.session.add(star)
-        db.session.commit()
-
-        flash("Галактика {} успешно добавлена".format(star))
-        return redirect(url_for("world.galaxy_show", id=star.id))
-    return render_template(
-        "app/form.html",
-        title=title,
-        form=form,
+    return edit_model(
+        Star, 
+        id, 
+        StarForm,
+        title="Star",
+        new_model=Star.generate(galaxy_id=galaxy_id, title=star_title),
+        redirect_link="world.galaxy_show"
     )
 
 
