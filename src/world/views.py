@@ -174,7 +174,8 @@ def galaxy_show(id=0):
         db.session.add(galaxy)
         db.session.commit()
 
-    stars = Star.query.filter_by(galaxy_id=id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
+    star_list = Star.query.filter_by(galaxy_id=id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
+    stars = star_list.items
     
     planets = []
     
@@ -183,7 +184,7 @@ def galaxy_show(id=0):
         title=str(galaxy),
         galaxy_id=id,
         galaxy=galaxy,
-        stars=stars.items + [Star().generate() for i in range(10)],
+        stars=stars  + [Star().generate() for i in range(10)],
         planets=planets,
     )
 
@@ -191,6 +192,7 @@ def galaxy_show(id=0):
 @world.route("/star/<int:id>/edit", methods=('GET', 'POST'))
 def star_edit(id=0):
     galaxy_id = request.args.get("galaxy_id")
+    star_type = request.args.get("star_type")
     star_title = request.args.get("title")
     image=request.args.get("image")
     return edit_model(
@@ -198,7 +200,7 @@ def star_edit(id=0):
         id, 
         StarForm,
         title="Star",
-        new_model=Star.generate(galaxy_id=galaxy_id, title=star_title, image=image),
+        new_model=Star.generate(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type),
         redirect_link="world.galaxy_show"
     )
 
@@ -224,9 +226,10 @@ def star_show(id=0):
         star = Star.query.filter_by(id=id).first_or_404()
     else:
         galaxy_id = request.args.get("galaxy_id")
+        star_type = request.args.get("star_type")
         star_title = request.args.get("title")
         image=request.args.get("image")
-        star = Star.generate(galaxy_id=galaxy_id, title=star_title, image=image)
+        star = Star.generate(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type)
         db.session.add(star)
         db.session.commit()
 

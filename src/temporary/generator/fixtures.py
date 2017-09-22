@@ -8,6 +8,8 @@ class PlanetAtmosphere():
     
     
 class SunType():
+    id = 0
+
     def __init__(self, title, blue=False):
         self.title = title
         self.image = title

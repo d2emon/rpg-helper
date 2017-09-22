@@ -21,6 +21,10 @@ class StarTypeForm(ModelForm):
 class StarForm(ModelForm):
     title = StringField()
     image = StringField()
+    star_type = QuerySelectField(
+        query_factory=lambda: StarType.query.all(),
+        allow_blank=True,
+    )
     galaxy = QuerySelectField(
         query_factory=lambda: Galaxy.query.all(),
         allow_blank=True,

@@ -45,7 +45,15 @@ class Star(db.Model):
         title = kwargs.get('title')
         galaxy_id = kwargs.get('galaxy_id', 0) 
         image = kwargs.get('image')
-        s = StarGenerator.generate(blue_sun=True)
+        star_type = kwargs.get('star_type') 
+
+        StarGenerator.sun_list = StarType.query.filter_by(blue=False).all()
+        StarGenerator.blue_sun_list = StarType.query.filter_by(blue=True).all()
+        if star_type:
+            sun = StarType.query.get(star_type)
+        else:
+            sun = None
+        s = StarGenerator.generate(blue_sun=True, sun=sun)
         # title = cls.generator().generate().title
         if not title:
             title = "Star (%s)" % (s.title)
@@ -63,6 +71,10 @@ class Star(db.Model):
         if not image:
             image = s.image
         star = Star(title=title, image=image)
+        if s.star_type:
+            star.star_type_id = s.star_type.id
+        if star_type:
+            star.star_type = s.star_type
         if galaxy_id:
             star.galaxy = Galaxy.query.get(galaxy_id)
         return star
@@ -71,11 +83,17 @@ class Star(db.Model):
         if self.title is None:
             return "<UNTITLED>"
         else:
-            return self.title   
+            return self.title
+        
+    @property
+    def blue(self):
+        if not self.star_type:
+            return False
+        return self.star_type.blue   
         
     @property
     def image_file(self):
-        # if self.blue:
-        #     return url_for('static', filename="images/sun35.png")
+        if self.blue:
+            return url_for('static', filename="images/sun35.png")
         return url_for('static', filename="images/sun27.png")
         # return "/images/planets/%s.png" % (self.image)
