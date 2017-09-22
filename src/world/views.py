@@ -226,7 +226,7 @@ def star_show(id=0):
         galaxy_id = request.args.get("galaxy_id")
         star_title = request.args.get("title")
         image=request.args.get("image")
-        star = Star(galaxy_id=galaxy_id, title=star_title, image=image)
+        star = Star.generate(galaxy_id=galaxy_id, title=star_title, image=image)
         db.session.add(star)
         db.session.commit()
 

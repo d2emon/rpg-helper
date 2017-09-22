@@ -40,7 +40,7 @@ block content
                       | {% if i.id %}
                       a(href="{{ url_for('world.star_show', id=i.id) }}") {{i}}
                       | {% else %}
-                      a(href="{{ url_for('world.star_show', galaxy_title=i.title, galaxy_id=galaxy_id, image=i.image) }}") {{i}} 
+                      a(href="{{ url_for('world.star_show', title=i.title, galaxy_id=galaxy_id, image=i.image) }}") {{i}} 
                       span(class="label label-info") Generate
                       | {% endif %}
 
