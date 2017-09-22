@@ -24,8 +24,8 @@ def upgrade():
     sa.Column('description', sa.UnicodeText(), nullable=True),
     sa.Column('world_id', sa.Integer(), nullable=True),
 
+    sa.ForeignKeyConstraint(['world_id'], ['world.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.ForeignKey(None, 'galaxy', 'world', ['world_id'], ['id'])
     )
     # ### end Alembic commands ###
 
