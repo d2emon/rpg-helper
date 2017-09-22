@@ -92,6 +92,13 @@ class GalaxyType(GeneratorData, db.Model):
     """
     Create a GalaxyType table
     """
+                
+
+class StarType(GeneratorData, db.Model):
+    """
+    Create a StarType table
+    """
+    image = db.Column(db.String(32), nullable=True, info={'label': "Image"})
 
 
 class Star(db.Model):

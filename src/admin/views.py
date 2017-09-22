@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 
 from app import app, db
 
-from world.models import World, GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType
-from world.forms import GalaxyNameForm, GalaxyPlacementForm, GalaxyFormForm, GalaxyTypeForm
+from world.models import World, GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType, StarType
+from world.forms import GalaxyNameForm, GalaxyPlacementForm, GalaxyFormForm, GalaxyTypeForm, StarTypeForm
 
 
 admin = Blueprint('admin', __name__)
@@ -207,6 +207,39 @@ def galaxy_type_del(id):
         redirect_link='admin.galaxy_type_list',
     )
 
+
+@admin.route("/star/type")
+def star_type_list():
+    """
+    Render star admin page
+    """
+    return list_model(
+        StarType,
+        title="Star Types",
+        edit_link='admin.star_type_edit',
+        del_link='admin.star_type_del',
+    )
+
+
+@admin.route("/star/type/add", methods=('GET', 'POST'))
+@admin.route("/star/type/<int:id>/edit", methods=('GET', 'POST'))
+def star_type_edit(id=0):
+    return edit_model(
+        StarType,
+        id,
+        StarTypeForm,
+        title="Galaxy Type",
+        redirect_link='admin.star_type_list',
+    )
+
+
+@admin.route("/star/type/<int:id>/del")
+def star_type_del(id):
+    return del_model(
+        StarType,
+        id,
+        redirect_link='admin.star_type_list',
+    )
 
 @admin.route("/<int:world_id>")
 def admin_show(world_id):
