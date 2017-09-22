@@ -1,7 +1,7 @@
 from generator import ListGenerator
 
 
-from .fixtures import atmospheres, environments, maps, suns, non_earthPlanets, allPlanets
+from .fixtures import suns
 from .planet import PlanetGenerator
 
 
