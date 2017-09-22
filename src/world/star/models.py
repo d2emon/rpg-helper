@@ -5,7 +5,7 @@ from ..galaxy.models import GeneratorData, Galaxy
  
  
 from app import db
-from temporary.generator.star import StarGenerator
+from generator.space.star import StarGenerator
                 
 
 class StarType(GeneratorData, db.Model):
