@@ -1,4 +1,4 @@
-from wtforms import StringField, TextAreaField, SubmitField
+from wtforms import StringField, TextAreaField, BooleanField, SubmitField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 
@@ -13,12 +13,14 @@ class StarTypeForm(ModelForm):
     title = StringField()
     image = StringField()
     submit = SubmitField('Submit')
+    blue = BooleanField()
 
     class Meta:
         model = StarType                
 
 class StarForm(ModelForm):
     title = StringField()
+    image = StringField()
     galaxy = QuerySelectField(
         query_factory=lambda: Galaxy.query.all(),
         allow_blank=True,

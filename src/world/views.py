@@ -193,21 +193,21 @@ def galaxy_show(id=0):
 def star_edit(id=0):
     galaxy_id = request.args.get("galaxy_id")
     star_title = request.args.get("title")
+    image=request.args.get("image")
     return edit_model(
         Star, 
         id, 
         StarForm,
         title="Star",
-        new_model=Star.generate(galaxy_id=galaxy_id, title=star_title),
+        new_model=Star.generate(galaxy_id=galaxy_id, title=star_title, image=image),
         redirect_link="world.galaxy_show"
     )
 
 
 @world.route("/star/<int:id>/del")
 def star_del(id):
-    star = Star.query.filter_by(id=id).first_or_404()
-    db.session.delete(star)
-    db.session.commit()
-    flash("Мир {} успешно удален".format(star))
-
-    return redirect(url_for("world.galaxy_show", galaxy_id=star.galaxy_id))
+    return del_model(
+        Star,
+        id,
+        redirect_link="world.galaxy_show"
+    )

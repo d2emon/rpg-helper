@@ -10,6 +10,7 @@ class PlanetAtmosphere():
 class SunType():
     def __init__(self, title, blue=False):
         self.title = title
+        self.image = title
         self.blue = blue
         
     def __repr__(self):

@@ -6,8 +6,10 @@ from .planet import PlanetGenerator
 
 
 class Sun():
-    def __init__(self, sun_type=None):
-        self.sun_type = sun_type
+    def __init__(self, sun_type=None, blue=False):
+        self.title = sun_type
+        self.image = sun_type
+        self.blue = blue
         self.planets = []
 
 
@@ -30,7 +32,10 @@ class StarGenerator(ListGenerator):
         if only_blue:
             sun_list = cls.blue_sun_list
 
-        generated.sun_type = cls.generate_value(sun_list)
+        sun = cls.generate_value(sun_list)
+        generated.title = str(sun)
+        generated.image = sun.image
+        generated.blue = sun.blue
 
         if not planets:
             planets = random.randrange(7) + 4
