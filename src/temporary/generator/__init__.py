@@ -1,7 +1,7 @@
 from generator import ListGenerator
 
 
-from .fixtures import environments, maps, atmospheres, suns
+from .fixtures import atmospheres, environments, maps, suns, non_earthPlanets, allPlanets
 
 
 class Sun():
@@ -39,69 +39,17 @@ class Planet():
         self.width = kwargs.get('width')
 
 
-class PlanetAtmosphere():
-    def __init__(self, title, exist=True):
-        self.title = title
-        self.exist = exist
-        
-    def __repr__(self):
-        return self.title
-
-
 class PlanetGenerator():
     margin = 5.4
-    atmospheres = [PlanetAtmosphere(a[0], a[1]) for a in atmospheres]
+    atmospheres = atmospheres
     environment = environments
     map = maps
-    
-    class PlanetType():
-        earth = False
-        max_moons = 60
-        
-        def __init__(self, image_id=1):
-            self.image = image_id
-        
-        def __repr__(self):
-            return self.image
-    
-    class EarthPlanet(PlanetType):
-        earth = True
-        max_moons = 5
-        
-        def __repr__(self):
-            if self.image < 10:
-                image = "0" + str(self.image)
-            else:
-                image = str(self.image)
-            return "earthPlanet%s" % (image)
-    
-    class LayerPlanet(PlanetType):
-        def __repr__(self):
-            return "layerPlanet%s" % (self.image)
-    
-    class TerPlanet(PlanetType):
-        def __repr__(self):
-            return "terplanet%s" % (self.image)
-    
-    class MoonPlanet(PlanetType):
-        def __repr__(self):
-            return "moonPlanet%s" % (self.image)
-    
-    class GasPlanet(PlanetType):
-        def __repr__(self):
-            return "gasPlanet%s" % (self.image)
 
     @classmethod
     def generate(cls, near=False, earth=False):
         import random
-        earthPlanets = [cls.EarthPlanet(i + 1) for i in range(40)]
-        layerPlanets = [cls.LayerPlanet(i + 1) for i in range(40)]
-        terplanets = [cls.TerPlanet(i + 1) for i in range(40)]
-        moonPlanets = [cls.MoonPlanet(i + 1) for i in range(40)]
-        gasPlanets = [cls.GasPlanet(i + 1) for i in range(40)]
-
-        noEarthPlanets = (layerPlanets * 2) + terplanets + moonPlanets + gasPlanets
-        combPlanets = earthPlanets + noEarthPlanets
+        noEarthPlanets = non_earthPlanets
+        combPlanets = allPlanets
 
         rnMargin = (random.random() * cls.margin - 0.9 + 1) + 0.9
         # if i < 6:
@@ -153,7 +101,8 @@ class PlanetGenerator():
 
 class StarGenerator(ListGenerator):
     generated_class = Sun
-    suns = suns
+    suns = suns[30:]
+    blue_suns = suns[:30]
 
     @classmethod
     def generate(cls, planets=0, blue_sun=False, only_blue=False):
@@ -164,15 +113,12 @@ class StarGenerator(ListGenerator):
     def fill_generated(cls, generated, planets=0, blue_sun=False, only_blue=False):
         import random
         suns = cls.suns
-        if not blue_sun:
-            suns = suns[:30]
+        if blue_sun:
+            suns += cls.blue_suns
         if only_blue:
-            suns = suns[30:]
+            suns = cls.blue_suns
 
-        sun_type = cls.generate_value(suns)                
-        generated.sun_type = sun_type[0]
-        if sun_type[1]:
-            generated.sun_type += ".blue"
+        generated.sun_type = cls.generate_value(suns)
 
         if not planets:
             planets = random.randrange(7) + 4
