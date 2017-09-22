@@ -8,10 +8,6 @@ class Sun():
     def __init__(self, sun_type=None):
         self.sun_type = sun_type
         self.planets = []
-        
-    @property
-    def image(self):
-        return "../images/planets/%s.png" % (self.sun_type)
 
 
 class Planet():
@@ -172,8 +168,11 @@ class StarGenerator(ListGenerator):
             suns = suns[:30]
         if only_blue:
             suns = suns[30:]
-                
-        generated.sun_type = cls.generate_value(suns)
+
+        sun_type = cls.generate_value(suns)                
+        generated.sun_type = sun_type[0]
+        if sun_type[1]:
+            generated.sun_type += ".blue"
 
         if not planets:
             planets = random.randrange(7) + 4

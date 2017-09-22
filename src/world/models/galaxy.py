@@ -125,4 +125,9 @@ class Star(db.Model):
         if self.title is None:
             return "<UNTITLED>"
         else:
-            return self.title    
+            return self.title   
+        
+    @property
+    def image(self):
+        return "/images/planets/%s.png" % (self.title)
+         

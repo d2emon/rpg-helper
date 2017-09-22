@@ -30,4 +30,4 @@ atmospheres = [
     ("Very thick", True),
     ("Very thin", True)
 ]
-suns = ["sun%d" % (i + 1) for i in range(30)] + ["blue_sun%d" % (i + 30) for i in range(10)]
+suns = [["sun%d" % (i + 1), i > 29] for i in range(40)]
