@@ -1,6 +1,9 @@
 from generator import ListGenerator
 
 
+from .fixtures import environments, maps, atmospheres, suns
+
+
 class Sun():
     def __init__(self, sun_type=None):
         self.sun_type = sun_type
@@ -51,34 +54,9 @@ class PlanetAtmosphere():
 
 class PlanetGenerator():
     margin = 5.4
-    atmospheres = [
-        PlanetAtmosphere("None", False),
-        PlanetAtmosphere("Thick"),
-        PlanetAtmosphere("Thin"),
-        PlanetAtmosphere("Unknown"),
-        PlanetAtmosphere("Fairly thick"),
-        PlanetAtmosphere("Fairly thin"),
-        PlanetAtmosphere("Very thick"),
-        PlanetAtmosphere("Very thin")
-    ]
-    environment = [
-        "Hospitable",
-        "Gentle",
-        "Moderate",
-        "Fairly gentle",
-        "Fairly hospitable",
-        "Unknown",
-        "Quite hostile",
-        "Hostile",
-        "Very hostile",
-        "Dangerous",
-        "Very dangerous",
-        "Deadly",
-        "Unsafe",
-        "Treacherous",
-        "Unstable"
-    ]
-    map = ["Yes","No","Outdated version"]
+    atmospheres = [PlanetAtmosphere(a[0], a[1]) for a in atmospheres]
+    environment = environments
+    map = maps
     
     class PlanetType():
         earth = False
@@ -179,7 +157,7 @@ class PlanetGenerator():
 
 class StarGenerator(ListGenerator):
     generated_class = Sun
-    suns = ["sun%d" % (i + 1) for i in range(30)] + ["blue_sun%d" % (i + 30) for i in range(10)]
+    suns = suns
 
     @classmethod
     def generate(cls, planets=0, blue_sun=False, only_blue=False):
