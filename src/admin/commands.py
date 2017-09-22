@@ -1,8 +1,7 @@
 from flask_script import Manager
 from app import db
 
-from generator.space.fixtures import galaxy_names
-from temporary.generator.fixtures import suns
+from generator.space.fixtures import galaxy_names, suns
 from world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType
 from world.star.models import StarType
 
