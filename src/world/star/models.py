@@ -35,8 +35,10 @@ class Star(db.Model):
     image = db.Column(db.String(32), nullable=True, info={'label': "Image"})
     description = db.Column(db.UnicodeText(), info={'label': "Description"})
     galaxy_id = db.Column(db.Integer, db.ForeignKey('galaxy.id'))
+    star_type_id = db.Column(db.Integer, db.ForeignKey('star_type.id'), nullable=True)
 
     galaxy = db.relationship('Galaxy', backref='stars')
+    star_type = db.relationship('StarType', backref='stars')
 
     @classmethod
     def generate(cls, **kwargs):
