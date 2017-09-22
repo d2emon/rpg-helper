@@ -11,11 +11,10 @@ class Sun():
         self.planets = []
 
 
-
 class StarGenerator(ListGenerator):
     generated_class = Sun
-    suns = suns[30:]
-    blue_suns = suns[:30]
+    sun_list = suns[:30]
+    blue_sun_list = suns[30:]
 
     @classmethod
     def generate(cls, planets=0, blue_sun=False, only_blue=False):
@@ -25,13 +24,13 @@ class StarGenerator(ListGenerator):
     @classmethod
     def fill_generated(cls, generated, planets=0, blue_sun=False, only_blue=False):
         import random
-        suns = cls.suns
+        sun_list = cls.sun_list
         if blue_sun:
-            suns += cls.blue_suns
+            sun_list += cls.blue_sun_list
         if only_blue:
-            suns = cls.blue_suns
+            sun_list = cls.blue_sun_list
 
-        generated.sun_type = cls.generate_value(suns)
+        generated.sun_type = cls.generate_value(sun_list)
 
         if not planets:
             planets = random.randrange(7) + 4
@@ -43,4 +42,4 @@ class StarGenerator(ListGenerator):
             if planet.planet_type.earth:
                 earth = True
             generated.planets.append(planet)
-        return generated
+        return generated    
