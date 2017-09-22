@@ -4,8 +4,11 @@ from app import app, db
 
 from world.models import World
 
-from world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType, StarType
-from world.galaxy.forms import GalaxyNameForm, GalaxyPlacementForm, GalaxyFormForm, GalaxyTypeForm, StarTypeForm
+from world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType
+from world.galaxy.forms import GalaxyNameForm, GalaxyPlacementForm, GalaxyFormForm, GalaxyTypeForm
+from world.star.models import StarType
+from world.star.forms import StarTypeForm
+
 
 admin = Blueprint('admin', __name__)
 

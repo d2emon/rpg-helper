@@ -4,8 +4,10 @@ from app import app, db
 
 from .models import World
 from .forms import WorldForm
-from .galaxy.models import Galaxy, Star
-from .galaxy.forms import GalaxyForm, StarForm
+from .galaxy.models import Galaxy
+from .galaxy.forms import GalaxyForm
+from .star.models import Star
+from .star.forms import StarForm
 
 
 world = Blueprint('world', __name__)
