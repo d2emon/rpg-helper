@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask import Blueprint, render_template, redirect, url_for, flash
 from datetime import datetime
 
-from app import app, db
+from app import db
 
 from campaign.views import campaign
 from campaign.models import Campaign
