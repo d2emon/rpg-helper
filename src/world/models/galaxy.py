@@ -1,6 +1,6 @@
 from app import db
 from generator.space.galaxy import GalaxyGenerator
-from temporary.generator import StarGenerator
+from temporary.generator.star import StarGenerator
 
 
 from .world import World
@@ -130,4 +130,3 @@ class Star(db.Model):
     @property
     def image(self):
         return "/images/planets/%s.png" % (self.title)
-         
