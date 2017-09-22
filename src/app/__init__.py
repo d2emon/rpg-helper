@@ -67,14 +67,7 @@ app.register_blueprint(campaign_blueprint, url_prefix='/campaign')
 app.register_blueprint(session_blueprint, url_prefix='/session')
 app.register_blueprint(world_blueprint, url_prefix='/world')
 
-from temporary.pathfinder import *
-from temporary.gurps import *
-from temporary.tnt import *
-
-app.register_blueprint(pathfinder_blueprint, url_prefix='/pathfinder')
-app.register_blueprint(gurps_blueprint, url_prefix='/gurps')
-app.register_blueprint(tnt_blueprint, url_prefix='/tnt')
-
+rpg_manager = RpgManager(app)
 
 from app.views import *
 
