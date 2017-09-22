@@ -69,6 +69,12 @@ class GeneratorData:
             return "<UNTITLED>"
         else:
             return self.title
+        
+    @classmethod
+    def load_fixture(cls, fixture):
+        model = cls(title=fixture)
+        return model
+
 
 class GalaxyName(GeneratorData, db.Model):
     """

@@ -10,7 +10,16 @@ class StarType(GeneratorData, db.Model):
     Create a StarType table
     """
     image = db.Column(db.String(32), nullable=True, info={'label': "Image"})
-    blue = db.Column(db.Boolean, nullable=True, info={'label': "Blue"})
+    blue = db.Column(db.Boolean, nullable=True, info={'label': "Blue"})        
+
+    @classmethod
+    def load_fixture(cls, fixture):
+        model = cls(
+            title=fixture.title,
+            image=fixture.image,
+            blue=fixture.blue
+        )
+        return model
 
 
 class Star(db.Model):

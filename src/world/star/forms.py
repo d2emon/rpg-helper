@@ -12,8 +12,8 @@ from .models import StarType, Star
 class StarTypeForm(ModelForm):
     title = StringField()
     image = StringField()
-    submit = SubmitField('Submit')
     blue = BooleanField()
+    submit = SubmitField('Submit')
 
     class Meta:
         model = StarType                
