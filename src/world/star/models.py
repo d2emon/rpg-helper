@@ -6,6 +6,7 @@ from ..galaxy.models import GeneratorData, Galaxy
  
 from app import db
 from generator.space.star import StarGenerator
+from generator.space.planet import PlanetGenerator1
                 
 
 class StarType(GeneratorData, db.Model):
@@ -57,17 +58,6 @@ class Star(db.Model):
         # title = cls.generator().generate().title
         if not title:
             title = "Star (%s)" % (s.title)
-            for id, p in enumerate(s.planets):
-                print(id + 1, p.planet_type)
-                print(p.margin_left, p.width)
-                print("\tEnvironment:\t\t%s" % (p.environment))
-                print("\tAtmosphere:\t\t%s" % (str(p.atmosphere)))
-                print("\tSurface map available:\t%s" % (p.surface_map))
-                print("\tDay duration:\t\t%s hours" % (p.hours))
-                print("\tGravity:\t\t%s (compared to Earth)" % (p.gravity))
-                print("\tOrbit duration:\t\t%s Earth years" % (p.days))
-                print("\tNumber of moons:\t%s" % (p.moons))
-                print("\tAxial tilt:\t\t%s&#176;" % (p.tilt))
         if not image:
             image = s.image
         star = Star(title=title, image=image)
@@ -77,6 +67,7 @@ class Star(db.Model):
             star.star_type = s.star_type
         if galaxy_id:
             star.galaxy = Galaxy.query.get(galaxy_id)
+        # star.generate_planets(len(s.planets))
         return star
     
     def __repr__(self):

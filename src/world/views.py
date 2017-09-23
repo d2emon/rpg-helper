@@ -8,6 +8,7 @@ from .galaxy.models import Galaxy
 from .galaxy.forms import GalaxyForm
 from .star.models import Star
 from .star.forms import StarForm
+from .planet.models import Planet
 
 
 world = Blueprint('world', __name__)
@@ -188,6 +189,17 @@ def galaxy_show(id=0):
         planets=planets,
     )
 
+
+def generate_star(**kwargs):
+    galaxy_id = kwargs.get("galaxy_id")
+    star_type = kwargs.get("star_type")
+    star_title = kwargs.get("title")
+    image = kwargs.get("image")
+    s = Star.generate(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type)
+    Planet().generate_planets(s)
+    return s
+
+
 @world.route("/star/add", methods=('GET', 'POST'))
 @world.route("/star/<int:id>/edit", methods=('GET', 'POST'))
 def star_edit(id=0):
@@ -200,7 +212,8 @@ def star_edit(id=0):
         id, 
         StarForm,
         title="Star",
-        new_model=Star.generate(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type),
+        # new_model=Star.generate(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type),
+        new_model=generate_star(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type),
         redirect_link="world.galaxy_show"
     )
 
@@ -229,19 +242,20 @@ def star_show(id=0):
         star_type = request.args.get("star_type")
         star_title = request.args.get("title")
         image=request.args.get("image")
-        star = Star.generate(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type)
+        # star = Star.generate(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type)
+        star = generate_star(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type)
         db.session.add(star)
         db.session.commit()
 
     # stars = Star.query.filter_by(galaxy_id=id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
     
-    planets = []
+    planets = Planet.query.filter_by(star_id=id).all()
     
     return render_template(
         "world/view_star.html",
         title=str(star),
         star_id=id,
         star=star,
-        planets=planets,
+        planets=planets + [Planet().generate() for i in range(10)],
     )
     
