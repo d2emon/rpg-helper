@@ -72,7 +72,7 @@ class GeneratorData:
         
     @classmethod
     def load_fixture(cls, fixture):
-        model = cls(title=fixture)
+        model = cls(title=str(fixture))
         return model
 
 

@@ -1,9 +1,10 @@
 from flask_script import Manager
 from app import db
 
-from generator.space.fixtures import galaxy_names, suns
+from generator.space.fixtures import galaxy_names, suns, atmospheres
 from world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType
 from world.star.models import StarType
+from world.planet.models import Atmosphere
 
 
 manager = Manager(usage="Admin utils")
@@ -11,6 +12,8 @@ manager = Manager(usage="Admin utils")
 
 def filldata(c, data=[]):
     for fixture in data:
+        if fixture is None:
+            continue
         g = c.load_fixture(fixture)
         db.session.add(g)
     db.session.commit()
@@ -45,4 +48,10 @@ def fillgalaxytypes():
 @manager.command
 def fillstartypes():
     filldata(StarType, suns)
+    return
+
+
+@manager.command
+def fillatmospheres():
+    filldata(Atmosphere, atmospheres)
     return

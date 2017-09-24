@@ -6,17 +6,17 @@ from app.forms import ModelForm
 
 
 from ..star.models import Star
-from .models import Planet
+from .models import Atmosphere, Planet
 
 
-# class StarTypeForm(ModelForm):
-#     title = StringField()
+class AtmosphereForm(ModelForm):
+    title = StringField()
 #     image = StringField()
 #     blue = BooleanField()
-#     submit = SubmitField('Submit')
+    submit = SubmitField('Submit')
 
-#     class Meta:
-#         model = StarType                
+    class Meta:
+        model = Atmosphere                
 
 class PlanetForm(ModelForm):
     title = StringField()

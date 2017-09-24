@@ -8,6 +8,8 @@ from world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyT
 from world.galaxy.forms import GalaxyNameForm, GalaxyPlacementForm, GalaxyFormForm, GalaxyTypeForm
 from world.star.models import StarType
 from world.star.forms import StarTypeForm
+from world.planet.models import Atmosphere
+from world.planet.forms import AtmosphereForm
 
 
 admin = Blueprint('admin', __name__)
@@ -243,6 +245,40 @@ def star_type_del(id):
         StarType,
         id,
         redirect_link='admin.star_type_list',
+    )
+
+
+@admin.route("/planet/atmosphere")
+def atmosphere_list():
+    """
+    Render atmosphere admin page
+    """
+    return list_model(
+        Atmosphere,
+        title="Atmospheres",
+        edit_link='admin.atmosphere_edit',
+        del_link='admin.atmosphere_del',
+    )
+
+
+@admin.route("/planet/atmosphere/add", methods=('GET', 'POST'))
+@admin.route("/planet/atmosphere/<int:id>/edit", methods=('GET', 'POST'))
+def atmosphere_edit(id=0):
+    return edit_model(
+        Atmosphere,
+        id,
+        AtmosphereForm,
+        title="Galaxy Type",
+        redirect_link='admin.atmosphere_list',
+    )
+
+
+@admin.route("/planet/atmosphere/<int:id>/del")
+def atmosphere_del(id):
+    return del_model(
+        Atmosphere,
+        id,
+        redirect_link='admin.atmosphere_list',
     )
 
 @admin.route("/<int:world_id>")

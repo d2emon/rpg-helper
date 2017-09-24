@@ -24,6 +24,10 @@ class Atmosphere(GeneratorData, db.Model):
     """
     Create a Atmosphere table
     """
+    # @classmethod
+    # def load_fixture(cls, fixture):
+    #     model = cls(title=fixture.title)
+    #     return model
                 
 
 class SurfaceMap(GeneratorData, db.Model):
