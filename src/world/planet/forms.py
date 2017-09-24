@@ -6,7 +6,17 @@ from app.forms import ModelForm
 
 
 from ..star.models import Star
-from .models import Atmosphere, Planet
+from .models import PlanetType, Atmosphere, Planet
+
+
+class PlanetTypeForm(ModelForm):
+    title = StringField()
+    image = StringField()
+#     blue = BooleanField()
+    submit = SubmitField('Submit')
+
+    class Meta:
+        model = PlanetType                
 
 
 class AtmosphereForm(ModelForm):
@@ -21,6 +31,10 @@ class AtmosphereForm(ModelForm):
 class PlanetForm(ModelForm):
     title = StringField()
     image = StringField()
+    planet_type = QuerySelectField(
+        query_factory=lambda: PlanetType.query.all(),
+        allow_blank=True,
+    )
     size = StringField()
     from_sun = StringField()
     day = StringField()

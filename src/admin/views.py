@@ -10,6 +10,8 @@ from world.star.models import StarType
 from world.star.forms import StarTypeForm
 from world.planet.models import Atmosphere
 from world.planet.forms import AtmosphereForm
+from world.planet.models import PlanetType
+from world.planet.forms import PlanetTypeForm
 
 
 admin = Blueprint('admin', __name__)
@@ -245,6 +247,40 @@ def star_type_del(id):
         StarType,
         id,
         redirect_link='admin.star_type_list',
+    )
+
+
+@admin.route("/planet/type")
+def planet_type_list():
+    """
+    Render planet admin page
+    """
+    return list_model(
+        PlanetType,
+        title="Planet Types",
+        edit_link='admin.planet_type_edit',
+        del_link='admin.planet_type_del',
+    )
+
+
+@admin.route("/planet/type/add", methods=('GET', 'POST'))
+@admin.route("/planet/type/<int:id>/edit", methods=('GET', 'POST'))
+def planet_type_edit(id=0):
+    return edit_model(
+        PlanetType,
+        id,
+        PlanetTypeForm,
+        title="Planet Type",
+        redirect_link='admin.planet_type_list',
+    )
+
+
+@admin.route("/planet/type/<int:id>/del")
+def planet_type_del(id):
+    return del_model(
+        PlanetType,
+        id,
+        redirect_link='admin.planet_type_list',
     )
 
 

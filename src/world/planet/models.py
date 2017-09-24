@@ -12,7 +12,22 @@ class PlanetType(GeneratorData, db.Model):
     """
     Create a PlanetType table
     """
+    image = db.Column(db.String(32), nullable=True, info={'label': "Image"})
+    earth = db.Column(db.Boolean, nullable=True, info={'label': "Earth"})        
+    
+    @classmethod
+    def load_fixture(cls, fixture):
+        model = cls(title=str(fixture))
+        model.image = str(fixture)
+        model.earth = fixture.earth
+        return model
                 
+    @property
+    def max_moons(self):
+        if self.earth:
+            return 5
+        else:
+            return 40
 
 class Environment(GeneratorData, db.Model):
     """
@@ -24,10 +39,6 @@ class Atmosphere(GeneratorData, db.Model):
     """
     Create a Atmosphere table
     """
-    # @classmethod
-    # def load_fixture(cls, fixture):
-    #     model = cls(title=fixture.title)
-    #     return model
                 
 
 class SurfaceMap(GeneratorData, db.Model):
@@ -78,6 +89,8 @@ class Planet(db.Model):
         # else:
         #     sun = None
         PlanetGenerator1.atmospheres = [None,] + Atmosphere.query.all()
+        PlanetGenerator1.combPlanets = PlanetType.query.all()
+        PlanetGenerator1.noEarthPlanets = PlanetType.query.all()
         p = PlanetGenerator1.generate(near, earth)
         if not title:
             title = "Planet (%s)" % (p.planet_type)
@@ -106,6 +119,7 @@ class Planet(db.Model):
             tilt=p.tilt,
         )
         planet.atmosphere = p.atmosphere
+        planet.planet_type = p.planet_type
         if star_id:
             planet.star = Star.query.get(star_id)
         return planet
@@ -134,4 +148,14 @@ class Planet(db.Model):
         
     @property
     def image_file(self):
-        return url_for('static', filename="images/planet/terplanet9.png")
+        if self.planet_type_id in range(0, 40):
+            return url_for('static', filename="images/planet/earthPlanet37.png")
+        elif self.planet_type_id in range(40, 120):
+            return url_for('static', filename="images/planet/layerPlanet31.png")
+        elif self.planet_type_id in range(120, 160):
+            return url_for('static', filename="images/planet/terplanet9.png")
+        elif self.planet_type_id in range(160, 200):
+            return url_for('static', filename="images/planet/moonPlanet14.png")
+        elif self.planet_type_id in range(200, 240):
+            return url_for('static', filename="images/planet/gasPlanet17.png")
+        return url_for('static', filename="images/planet/moonPlanet20.png")
