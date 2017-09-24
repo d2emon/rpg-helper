@@ -257,7 +257,7 @@ def star_show(id=0):
 
     # stars = Star.query.filter_by(galaxy_id=id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
     
-    planets = Planet.query.filter_by(star_id=id).all()
+    planets = Planet.query.filter_by(star_id=id).order_by(Planet.from_sun).all()
     
     return render_template(
         "world/view_star.html",
