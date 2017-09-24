@@ -63,19 +63,4 @@ block content
                     div(style="width:{{i.size}}px;")
                       | {{i}}
               | {% endfor %}
-          //-
-            div(style="background-color:black; color:white; height:450px; width: 2000px;")
-              div(style="display:inline-block;")
-                div
-                  img(src="{{star.image_file}}")
-                div
-                  | {{star}}
-              div(style="display:inline-block; height:450px; width: 1500px; position: relative;")           
-                | {% for i in planets %}
-                div(style="display:inline-block; vertical-align:middle; position:absolute; width:{{i.size}}px; left:{{i.from_sun}}%;")
-                  div
-                    img(src="{{i.image_file}}", width="{{i.size}}")
-                  div(style="width:{{i.size}}px; overflow:hidden;")
-                    | {{i}}
-                | {% endfor %}
         div {{star.description}}
