@@ -267,7 +267,7 @@ def star_show(id=0):
 @world.route("/planet/<int:id>/edit", methods=('GET', 'POST'))
 def planet_edit(id=0):
     star_id = request.args.get("star_id")
-    # star_type = request.args.get("star_type")
+    planet_type = request.args.get("planet_type")
     planet_title = request.args.get("title")
     image=request.args.get("image")
     return edit_model(
@@ -275,7 +275,7 @@ def planet_edit(id=0):
         id, 
         PlanetForm,
         title="planet",
-        new_model=Planet.generate(star_id=star_id, title=planet_title, image=image),
+        new_model=Planet.generate(star_id=star_id, title=planet_title, image=image, planet_type=planet_type),
         redirect_link="world.planet_show"
     )
 
@@ -298,25 +298,22 @@ def planet_show(id=0):
         page = 1
 
     if id:
-        star = Star.query.filter_by(id=id).first_or_404()
+        planet = Planet.query.filter_by(id=id).first_or_404()
     else:
-        galaxy_id = request.args.get("galaxy_id")
-        star_type = request.args.get("star_type")
-        star_title = request.args.get("title")
+        star_id = request.args.get("star_id")
+        planet_type = request.args.get("planet_type")
+        planet_title = request.args.get("title")
         image=request.args.get("image")
-        # star = Star.generate(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type)
-        star = generate_star(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type)
-        db.session.add(star)
+        planet = Planet.generate(star_id=star_id, title=planet_title, image=image, planet_type=planet_type)
+        db.session.add(planet)
         db.session.commit()
 
-    # stars = Star.query.filter_by(galaxy_id=id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
-    
-    planets = Planet.query.filter_by(star_id=id).all()
+    # planets = Planet.query.filter_by(star_id=id).all()
     
     return render_template(
-        "world/view_star.html",
-        title=str(star),
-        star_id=id,
-        star=star,
-        planets=planets + [Planet().generate() for i in range(10)],
+        "world/view_planet.html",
+        title=str(planet),
+        planet_id=id,
+        planet=planet,
+        # planets=planets + [Planet().generate() for i in range(10)],
     )

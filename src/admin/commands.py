@@ -1,10 +1,10 @@
 from flask_script import Manager
 from app import db
 
-from generator.space.fixtures import galaxy_names, suns, atmospheres, allPlanets
+from generator.space.fixtures import galaxy_names, suns, atmospheres, allPlanets, environments, maps
 from world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType
 from world.star.models import StarType
-from world.planet.models import PlanetType, Atmosphere
+from world.planet.models import PlanetType, Atmosphere, Environment, SurfaceMap
 
 
 manager = Manager(usage="Admin utils")
@@ -60,4 +60,16 @@ def fillatmospheres():
 @manager.command
 def fillplanets():
     filldata(PlanetType, allPlanets)
+    return
+
+
+@manager.command
+def fillenvironments():
+    filldata(Environment, environments)
+    return
+
+
+@manager.command
+def fillsurfacemaps():
+    filldata(SurfaceMap, maps)
     return

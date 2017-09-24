@@ -91,19 +91,11 @@ class Planet(db.Model):
         PlanetGenerator1.atmospheres = [None,] + Atmosphere.query.all()
         PlanetGenerator1.combPlanets = PlanetType.query.all()
         PlanetGenerator1.noEarthPlanets = PlanetType.query.all()
+        PlanetGenerator1.environments = Environment.query.all()
+        PlanetGenerator1.maps = SurfaceMap.query.all()
         p = PlanetGenerator1.generate(near, earth)
         if not title:
             title = "Planet (%s)" % (p.planet_type)
-        # print(id + 1, p.planet_type)
-        # print(p.margin_left, p.width)
-        # print("\tEnvironment:\t\t%s" % (p.environment))
-        # print("\tAtmosphere:\t\t%s" % (str(p.atmosphere)))
-        # print("\tSurface map available:\t%s" % (p.surface_map))
-        # print("\tDay duration:\t\t%s hours" % (p.hours))
-        # print("\tGravity:\t\t%s (compared to Earth)" % (p.gravity))
-        # print("\tOrbit duration:\t\t%s Earth years" % (p.days))
-        # print("\tNumber of moons:\t%s" % (p.moons))
-        # print("\tAxial tilt:\t\t%s&#176;" % (p.tilt))
         if not image:
             image = str(p.planet_type)
         m = p.margin_left * p.width * 0.01
@@ -120,6 +112,8 @@ class Planet(db.Model):
         )
         planet.atmosphere = p.atmosphere
         planet.planet_type = p.planet_type
+        planet.environment = p.environment
+        planet.surface_map = p.surface_map
         if star_id:
             planet.star = Star.query.get(star_id)
         return planet

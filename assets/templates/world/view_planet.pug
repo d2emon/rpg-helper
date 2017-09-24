@@ -1,0 +1,27 @@
+extends ../_base.pug
+
+block content
+  .content-section
+    h1 {{planet.title}}
+    .row
+      .col-md-4
+        +panel("Planet", false, false, true)
+          div(class="well well-sm btn-toolbar well-toolbar", role="toolbar", aria-label="toolbar")
+            | &nbsp;
+            a(href="{{ url_for('world.planet_edit') }}", class="btn btn-sm btn-primary", data-toggle="tooltip", title="Добавить") <i class="fa fa-plus"></i>
+
+      .col-md-8
+        div(style="min-height:234px;")
+          div(style="width:234px; float:left;")
+            img(src="{{planet.image_file}}", style="transform: rotate({{planet.tilt}}deg);")
+          div(style="margin-left:240px;")
+            p <strong>Environment:</strong> <em>{{planet.environment}}</em>
+            p <strong>Atmosphere:</strong> <em>{{planet.atmosphere}}</em>
+            p <strong>Surface map available:</strong> <em>{{planet.surface_map}}</em>
+            p <strong>Day duration:</strong> <em>{{planet.day | round(2)}}</em> hours
+            p <strong>Gravity:</strong> <em>{{planet.gravity | round(2)}}</em> (compared to Earth)
+            p <strong>Orbit duration:</strong> <em>{{planet.year | round(2)}}</em> Earth years
+            p <strong>Number of moons:</strong> <em>{{planet.moons}}</em>
+            p <strong>Axial tilt:</strong> <em>{{planet.tilt | round(2)}}</em>&#176;
+          
+        div {{planet.description}}
