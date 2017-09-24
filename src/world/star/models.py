@@ -1,12 +1,10 @@
 from flask import url_for
 
 
-from ..galaxy.models import GeneratorData, Galaxy
- 
- 
 from app import db
 from generator.space.star import StarGenerator
-from generator.space.planet import PlanetGenerator1
+from ..generatordata import GeneratorData
+from ..galaxy.models import Galaxy
                 
 
 class StarType(GeneratorData, db.Model):
