@@ -61,10 +61,11 @@ class Planet(db.Model):
     surface_map = db.relationship('SurfaceMap', backref='planets')    
 
     @classmethod
-    def generate(cls, **kwargs):
+    def generate(cls, near=False, earth=False, **kwargs):
         title = kwargs.get('title')
         star_id = kwargs.get('star_id', 0) 
         image = kwargs.get('image')
+        margin = kwargs.get('margin')
 
         # StarGenerator.sun_list = StarType.query.filter_by(blue=False).all()
         # StarGenerator.blue_sun_list = StarType.query.filter_by(blue=True).all()
@@ -72,9 +73,9 @@ class Planet(db.Model):
         #     sun = StarType.query.get(star_type)
         # else:
         #     sun = None
-        s = StarGenerator.generate()
+        p = PlanetGenerator1.generate(near, earth)
         if not title:
-            title = "Planet (%s)" % (s.title)
+            title = "Planet (%s)" % (p.planet_type)
         # print(id + 1, p.planet_type)
         # print(p.margin_left, p.width)
         # print("\tEnvironment:\t\t%s" % (p.environment))
@@ -86,8 +87,18 @@ class Planet(db.Model):
         # print("\tNumber of moons:\t%s" % (p.moons))
         # print("\tAxial tilt:\t\t%s&#176;" % (p.tilt))
         if not image:
-            image = s.image
-        planet = Planet(title=title, image=image)
+            image = p.planet_type
+        planet = Planet(
+            title=title,
+            image=image,
+            size=p.width,
+            from_sun=p.margin_left + margin,
+            day=p.hours,
+            year=p.days,
+            gravity=p.gravity,
+            moons=p.moons,
+            tilt=p.tilt,
+        )
         if star_id:
             planet.star = Star.query.get(star_id)
         return planet
@@ -104,15 +115,13 @@ class Planet(db.Model):
             planet_count = random.randrange(7) + 4
 
         earth = False
+        base_margin = 0
         for i in range(planet_count):
-            p = PlanetGenerator1.generate(i < 6, earth)
+            planet = self.generate(i < 6, earth, margin=base_margin)
             # curPlanet = planet.slice(0, -2)
-            if p.planet_type.earth:
-                earth = True
-            planet = Planet(
-                title=str(p.planet_type),
-                image=str(p.planet_type),
-            )
+            # if p.planet_type.earth:
+            #     earth = True
+            base_margin += planet.from_sun + planet.size
             star.planets.append(planet)
         return star.planets
         

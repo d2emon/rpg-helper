@@ -9,6 +9,7 @@ from .galaxy.forms import GalaxyForm
 from .star.models import Star
 from .star.forms import StarForm
 from .planet.models import Planet
+from .planet.forms import PlanetForm
 
 
 world = Blueprint('world', __name__)
@@ -258,4 +259,62 @@ def star_show(id=0):
         star=star,
         planets=planets + [Planet().generate() for i in range(10)],
     )
+
+
+@world.route("/planet/add", methods=('GET', 'POST'))
+@world.route("/planet/<int:id>/edit", methods=('GET', 'POST'))
+def planet_edit(id=0):
+    star_id = request.args.get("star_id")
+    # star_type = request.args.get("star_type")
+    planet_title = request.args.get("title")
+    image=request.args.get("image")
+    return edit_model(
+        Planet, 
+        id, 
+        PlanetForm,
+        title="planet",
+        new_model=Planet.generate(star_id=star_id, title=planet_title, image=image),
+        redirect_link="world.planet_show"
+    )
+
+
+@world.route("/planet/<int:id>/del")
+def planet_del(id):
+    return del_model(
+        Planet,
+        id,
+        redirect_link="world.star_show"
+    )
+
+
+@world.route("/planet")
+@world.route("/planet/<int:id>")
+def planet_show(id=0):
+    try:
+        page = int(request.args.get('page'))
+    except (ValueError, TypeError):
+        page = 1
+
+    if id:
+        star = Star.query.filter_by(id=id).first_or_404()
+    else:
+        galaxy_id = request.args.get("galaxy_id")
+        star_type = request.args.get("star_type")
+        star_title = request.args.get("title")
+        image=request.args.get("image")
+        # star = Star.generate(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type)
+        star = generate_star(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type)
+        db.session.add(star)
+        db.session.commit()
+
+    # stars = Star.query.filter_by(galaxy_id=id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
     
+    planets = Planet.query.filter_by(star_id=id).all()
+    
+    return render_template(
+        "world/view_star.html",
+        title=str(star),
+        star_id=id,
+        star=star,
+        planets=planets + [Planet().generate() for i in range(10)],
+    )
