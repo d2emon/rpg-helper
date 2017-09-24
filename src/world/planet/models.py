@@ -2,7 +2,6 @@ from flask import url_for
  
  
 from app import db
-from generator.space.star import StarGenerator
 from generator.space.planet import PlanetGenerator
 from ..galaxy.models import GeneratorData
 from ..star.models import Star
