@@ -58,7 +58,8 @@ block content
               div(style="display:table; position:absolute; width:{{i.size}}px; left:{{i.from_sun * 2}}px; vertical-align: middle;")
                 a(href="{{ url_for('world.planet_show', id=i.id) }}")
                   div(style="display:table-cell; width:{{i.size}}px; height:400px; vertical-align: middle;")
-                    img(src="{{i.image_file}}", width="{{i.size}}")
+                    div(style="transform: rotate({{i.tilt}}deg);")
+                      img(src="{{i.image_file}}", width="{{i.size}}")
                     div(style="width:{{i.size}}px;")
                       | {{i}}
               | {% endfor %}
