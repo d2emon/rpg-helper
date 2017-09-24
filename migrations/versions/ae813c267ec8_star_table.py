@@ -11,7 +11,8 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision = 'ae813c267ec8'
-down_revision = '8d78aefac4d4'
+# down_revision = '8d78aefac4d4'
+down_revision = 'db274dfe98e7'
 branch_labels = None
 depends_on = None
 
@@ -22,7 +23,9 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=32), nullable=False),
     sa.Column('galaxy_id', sa.Integer(), nullable=True),
+    sa.Column('star_type_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['galaxy_id'], ['galaxy.id'], ),
+    sa.ForeignKeyConstraint(['star_type_id'], ['star_type.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
