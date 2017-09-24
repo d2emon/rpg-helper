@@ -85,6 +85,6 @@ class Star(db.Model):
     @property
     def image_file(self):
         if self.blue:
-            return url_for('static', filename="images/sun35.png")
-        return url_for('static', filename="images/sun27.png")
+            return url_for('static', filename="images/star/sun35.png")
+        return url_for('static', filename="images/star/sun27.png")
         # return "/images/planets/%s.png" % (self.image)

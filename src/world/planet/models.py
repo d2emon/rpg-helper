@@ -93,11 +93,12 @@ class Planet(db.Model):
         # print("\tAxial tilt:\t\t%s&#176;" % (p.tilt))
         if not image:
             image = str(p.planet_type)
+        m = p.margin_left * p.width * 0.01
         planet = Planet(
             title=title,
             image=image,
             size=p.width,
-            from_sun=p.margin_left + margin,
+            from_sun=m + margin,
             day=p.hours,
             year=p.days,
             gravity=p.gravity,
@@ -127,10 +128,10 @@ class Planet(db.Model):
             # curPlanet = planet.slice(0, -2)
             # if p.planet_type.earth:
             #     earth = True
-            base_margin += planet.from_sun + planet.size
+            base_margin = planet.from_sun + planet.size
             star.planets.append(planet)
         return star.planets
         
     @property
     def image_file(self):
-        return url_for('static', filename="images/sun27.png")
+        return url_for('static', filename="images/planet/terplanet9.png")
