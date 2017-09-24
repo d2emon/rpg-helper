@@ -175,6 +175,7 @@ def galaxy_show(id=0):
         galaxy = Galaxy(world_id=world_id, title=galaxy_title)
         db.session.add(galaxy)
         db.session.commit()
+        return redirect("world.galaxy_show", id=galaxy.id)
 
     star_list = Star.query.filter_by(galaxy_id=id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
     stars = star_list.items
@@ -247,6 +248,12 @@ def star_show(id=0):
         star = generate_star(galaxy_id=galaxy_id, title=star_title, image=image, star_type=star_type)
         db.session.add(star)
         db.session.commit()
+        planets = Planet().generate_planets(star)
+        for p in planets:
+            # star.planets.append(p)
+            db.session.add(p)
+        db.session.commit()
+        return redirect(url_for("world.star_show", id=star.id))
 
     # stars = Star.query.filter_by(galaxy_id=id).paginate(page, app.config.get('RECORDS_ON_PAGE'))
     
@@ -257,7 +264,7 @@ def star_show(id=0):
         title=str(star),
         star_id=id,
         star=star,
-        planets=planets + [Planet().generate() for i in range(10)],
+        planets=planets,
     )
 
 

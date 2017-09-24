@@ -28,6 +28,10 @@ class PlanetForm(ModelForm):
     gravity = StringField()
     moons = IntegerField()
     tilt = StringField()
+    atmosphere = QuerySelectField(
+        query_factory=lambda: Atmosphere.query.all(),
+        allow_blank=True,
+    )
     star = QuerySelectField(
         query_factory=lambda: Star.query.all(),
         allow_blank=True,

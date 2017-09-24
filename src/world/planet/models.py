@@ -69,7 +69,7 @@ class Planet(db.Model):
         title = kwargs.get('title')
         star_id = kwargs.get('star_id', 0) 
         image = kwargs.get('image')
-        margin = kwargs.get('margin')
+        margin = kwargs.get('margin', 0.0)
 
         # StarGenerator.sun_list = StarType.query.filter_by(blue=False).all()
         # StarGenerator.blue_sun_list = StarType.query.filter_by(blue=True).all()
@@ -77,6 +77,7 @@ class Planet(db.Model):
         #     sun = StarType.query.get(star_type)
         # else:
         #     sun = None
+        PlanetGenerator1.atmospheres = [None,] + Atmosphere.query.all()
         p = PlanetGenerator1.generate(near, earth)
         if not title:
             title = "Planet (%s)" % (p.planet_type)
@@ -91,7 +92,7 @@ class Planet(db.Model):
         # print("\tNumber of moons:\t%s" % (p.moons))
         # print("\tAxial tilt:\t\t%s&#176;" % (p.tilt))
         if not image:
-            image = p.planet_type
+            image = str(p.planet_type)
         planet = Planet(
             title=title,
             image=image,
@@ -103,6 +104,7 @@ class Planet(db.Model):
             moons=p.moons,
             tilt=p.tilt,
         )
+        planet.atmosphere = p.atmosphere
         if star_id:
             planet.star = Star.query.get(star_id)
         return planet
@@ -113,13 +115,13 @@ class Planet(db.Model):
         else:
             return self.title
         
-    def generate_planets(self, star, planet_count=0):
+    def generate_planets(self, star, planet_count=None):
         import random
-        if not planet_count:
+        if planet_count is None:
             planet_count = random.randrange(7) + 4
 
         earth = False
-        base_margin = 0
+        base_margin = 0.0
         for i in range(planet_count):
             planet = self.generate(i < 6, earth, margin=base_margin)
             # curPlanet = planet.slice(0, -2)
