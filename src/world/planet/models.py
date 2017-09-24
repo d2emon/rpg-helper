@@ -88,12 +88,12 @@ class Planet(db.Model):
         #     sun = StarType.query.get(star_type)
         # else:
         #     sun = None
-        PlanetGenerator1.atmospheres = [None,] + Atmosphere.query.all()
-        PlanetGenerator1.combPlanets = PlanetType.query.all()
-        PlanetGenerator1.noEarthPlanets = PlanetType.query.all()
-        PlanetGenerator1.environments = Environment.query.all()
-        PlanetGenerator1.maps = SurfaceMap.query.all()
-        p = PlanetGenerator1.generate(near, earth)
+        PlanetGenerator.atmospheres = [None,] + Atmosphere.query.all()
+        PlanetGenerator.combPlanets = PlanetType.query.all()
+        PlanetGenerator.noEarthPlanets = PlanetType.query.all()
+        PlanetGenerator.environments = Environment.query.all()
+        PlanetGenerator.maps = SurfaceMap.query.all()
+        p = PlanetGenerator.generate(near, earth)
         if not title:
             title = "Planet (%s)" % (p.planet_type)
         if not image:
