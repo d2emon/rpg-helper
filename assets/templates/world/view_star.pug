@@ -55,12 +55,12 @@ block content
                 | {{star}}
             div(style="float:left; display:table; width: 5000px; position: relative;")
               | {% for i in planets %}
-              div(style="display:table; position:absolute; width:{{i.size}}px; left:{{i.from_sun * 2}}px; vertical-align: middle;")
+              div(style="display:table; position:absolute; width:{{i.image_size}}px; left:{{i.image_margin}}px; vertical-align: middle;")
                 a(href="{{ url_for('world.planet_show', id=i.id) }}")
-                  div(style="display:table-cell; width:{{i.size}}px; height:400px; vertical-align: middle;")
+                  div(style="display:table-cell; width:{{i.image_size}}px; height:400px; vertical-align: middle;")
                     div(style="transform: rotate({{i.tilt}}deg);")
-                      img(src="{{i.image_file}}", width="{{i.size}}")
-                    div(style="width:{{i.size}}px;")
+                      img(src="{{i.image_file}}", width="{{i.image_size}}")
+                    div(style="width:{{i.image_size}}px;")
                       | {{i}}
               | {% endfor %}
         div {{star.description}}

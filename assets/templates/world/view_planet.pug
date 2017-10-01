@@ -24,4 +24,5 @@ block content
             p <strong>Number of moons:</strong> <em>{{planet.moons}}</em>
             p <strong>Axial tilt:</strong> <em>{{planet.tilt | round(2)}}</em>&#176;
           
+        div {{planet.generated_description(0)|safe}}
         div {{planet.description}}
