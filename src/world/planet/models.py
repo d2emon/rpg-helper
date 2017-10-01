@@ -1,26 +1,26 @@
 from flask import url_for
- 
- 
+
+
 from app import db
 from generator.space.planet import PlanetGenerator
 from ..generatordata import GeneratorData
 from ..star.models import Star
-                
+
 
 class PlanetType(GeneratorData, db.Model):
     """
     Create a PlanetType table
     """
     image = db.Column(db.String(32), nullable=True, info={'label': "Image"})
-    earth = db.Column(db.Boolean, nullable=True, info={'label': "Earth"})        
-    
+    earth = db.Column(db.Boolean, nullable=True, info={'label': "Earth"})
+
     @classmethod
     def load_fixture(cls, fixture):
         model = cls(title=str(fixture))
         model.image = str(fixture)
         model.earth = fixture.earth
         return model
-                
+
     @property
     def max_moons(self):
         if self.earth:
@@ -28,17 +28,18 @@ class PlanetType(GeneratorData, db.Model):
         else:
             return 40
 
+
 class Environment(GeneratorData, db.Model):
     """
     Create a Environment table
     """
-                
+
 
 class Atmosphere(GeneratorData, db.Model):
     """
     Create a Atmosphere table
     """
-                
+
 
 class SurfaceMap(GeneratorData, db.Model):
     """
@@ -69,15 +70,15 @@ class Planet(db.Model):
     surface_map_id = db.Column(db.Integer, db.ForeignKey('surface_map.id'), nullable=True)
 
     star = db.relationship('Star', backref='planets')
-    planet_type = db.relationship('PlanetType', backref='planets')    
-    environment = db.relationship('Environment', backref='planets')    
-    atmosphere = db.relationship('Atmosphere', backref='planets')    
-    surface_map = db.relationship('SurfaceMap', backref='planets')    
+    planet_type = db.relationship('PlanetType', backref='planets')
+    environment = db.relationship('Environment', backref='planets')
+    atmosphere = db.relationship('Atmosphere', backref='planets')
+    surface_map = db.relationship('SurfaceMap', backref='planets')
 
     @classmethod
     def generate(cls, near=False, earth=False, **kwargs):
         title = kwargs.get('title')
-        star_id = kwargs.get('star_id', 0) 
+        star_id = kwargs.get('star_id', 0)
         image = kwargs.get('image')
         margin = kwargs.get('margin', 0.0)
 
@@ -87,7 +88,7 @@ class Planet(db.Model):
         #     sun = StarType.query.get(star_type)
         # else:
         #     sun = None
-        PlanetGenerator.atmospheres = [None,] + Atmosphere.query.all()
+        PlanetGenerator.atmospheres = [None, ] + Atmosphere.query.all()
         PlanetGenerator.combPlanets = PlanetType.query.all()
         PlanetGenerator.noEarthPlanets = PlanetType.query.all()
         PlanetGenerator.environments = Environment.query.all()
@@ -116,13 +117,13 @@ class Planet(db.Model):
         if star_id:
             planet.star = Star.query.get(star_id)
         return planet
-    
+
     def __repr__(self):
         if self.title is None:
             return "<UNTITLED>"
         else:
             return self.title
-        
+
     def generate_planets(self, star, planet_count=None):
         import random
         if planet_count is None:
@@ -138,7 +139,7 @@ class Planet(db.Model):
             base_margin = planet.from_sun + planet.size
             star.planets.append(planet)
         return star.planets
-        
+
     @property
     def image_file(self):
         if self.planet_type_id in range(0, 40):
