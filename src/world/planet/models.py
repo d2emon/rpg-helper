@@ -223,9 +223,6 @@ class Planet(db.Model):
         if planetType == 3:
             names3 = names3 + names3c
 
-        # var names4 = ["a small solar system with ","a thinly populated solar system with only ","a fairly small solar system with ","a fairly large solar system with ","a densely populated solar system with ","a huge solar system filled with ","a vast solar system with "];
-        # var names5 = ["five","six","seven","eight","nine","ten"];
-
         """
         var names10 = Math.floor((Math.random() * 15) + 1); // Continent Amount
         var names11 = Math.floor((Math.random() * 80) + 10); // Land Mass
