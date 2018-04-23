@@ -1,0 +1,5 @@
+ask
+beg
+request
+seek
+plead

@@ -1,0 +1,54 @@
+a bank
+a biodome
+a bus stop
+a cartoon universe
+a chicken coop
+a circus
+a construction yard
+a coral reef
+a cornfield
+a different continent
+a different planet
+a dry lake
+a dystopian world
+a fairy tale universe
+a farmhouse
+a fire station
+a fjord
+a forest clearing
+a forgotten bunker
+a friend's party
+a future world
+a glacier
+a glacier cave
+a historical setting
+a hospital
+a hotel
+a junkyard
+a laboratory
+a lagoon
+a lake
+a luxury hotel
+"a meteor crater","a metro station","a mountain summit","a movie universe","a
+natural sanctuary","a police station","a power plant","a sanctuary","a
+sand castle","a sinkhole","a spa","a stable","a storm cellar","a strange
+tower","a strange town","a treehouse","a tv show","a utopian world","a
+video game universe","a volcanic island","a wasteland","a waterfall","an
+asylum","an empty field","an underground lair","an underground pit","an
+undiscovered cave system","an uninhabited island","another
+country","another dimension","autumn","castle","earth's orbit","forbidden
+ruins","heaven","hell","hot water springs","nursing
+home","paradise","paradise gardens","space","spring","summer","the
+abandoned building","the abandoned tunnel","the airport","the beach","the
+broken bridge","the capitol","the cinema","the city center","the
+clubhouse","the concert hall","the forest","the garden of Eden","the
+graveyard","the harbor","the kitchen","the library","the local
+market","the local restaurant","the local store","the local
+university","the mall","the mountains","the nearby village","the
+neighborhood","the online world","the park","the pet store","the
+playground","the prison","the river","the river bridge","the royal
+palace","the sacred grounds","the sea","the sport stadium","the
+streets","the swamp","the theater","the town hall","the toy store","the
+woods","the workplace","the zoo","winter","your dream house","your
+dreams","your garden","your house","your neighbor's house","your new
+house","your parents in law's house","your room","your school"

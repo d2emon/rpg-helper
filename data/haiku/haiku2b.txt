@@ -1,0 +1,32 @@
+around
+at dawn
+at day
+at dusk
+at night
+away
+blissful
+brightly
+carefree
+cheerful
+eagerly
+earnest
+fondly
+freely
+gently
+gladly
+gracious
+grateful
+greedy
+humbly
+hungry
+idle
+in light
+lightly
+lively
+lonely
+naive
+nearby
+nervous
+nothing
+on top
+"onward","perfect","quickly","quiet","reckless","selfish","slightly","slowly","smoothly","softly","sudden","swiftly","timely","troubled","truthful","untrue","upset","vivid","weary","wicked"

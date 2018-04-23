@@ -1,0 +1,77 @@
+a Disney character
+a Muppet
+a Roman
+a Spartan
+a band
+a barbarian
+a beggar
+a blind person
+a cat
+a caveman/cavewoman
+a celebrity
+a centaur
+a clown
+a colleague
+a comedian
+a comic/manga/etc character
+a cop
+a coward
+a cowboy
+a crazy professor
+a creepy stranger
+a criminal
+a cyborg
+a deaf person
+a demon
+a dinosaur
+a doctor
+a dog
+a dragon
+a dream creature
+a dwarf
+a fairy
+a famous musician
+a fictional character
+a firefighter
+a freak
+a genie
+a ghost
+a giant
+a gnome
+a goblin
+"a god","a griffin","a hacker","a half-elf","a half-orc","a highly
+intelligent animal","a historic figure","a hitch-hiker","a hobo","a
+hologram","a horse","a hunter","a journalist","a king","a knight","a
+liar","a living snowman","a magician","a man","a martial art
+professional","a mechanic","a mermaid/mernan","a minotaur","a model","a
+monk","a monkey","a mutant","a mute person","a mysterious stranger","a
+mythical creature","a nightmare creature","a ninja","a nomad","a nurse","a
+paladin","a paramedic","a parrot","a pessimist","a phoenix","a pilot","a
+pirate","a pretentious snob","a professional thief","a psychic","a
+queen","a random student","a robot","a robot version of you","a rogue","a
+scientist","a sentient tree","a skeleton","a snake","a soldier","a spoiled
+person","a stranger","a super villain","a superhero","a survival
+expert","a telepath","a time traveller","a titan","a toddler","a
+traveller","a troll","a tv show character","a vampire","a very stubborn
+person","a viking","a waiter/waitress","a wannabe","a warlock","a
+werewolf","a wise old (wo)man","a witch","a wizard","a woman","a
+writer","a zombie","an Olympic athlete","an acrobat","an addict","an
+alien","an angel","an animal companion","an annoying person","an
+arsonist","an astronaut","an elephant","an elf","an enemy","an escaped
+convict","an evil fictional character","an evil historical figure","an
+ex","an expert","an idiot","an imaginary friend","an internet troll","an
+ogre","an old enemy","an online stranger","an optimist","an orc","an
+overly emotional person","cupid","enemies","fictional characters","five
+friends","five students","friends","historic figures","santa","someone who
+can't understand you","the abominable snowman","the boy scouts","the
+dentist","the ghost of somebody famous","the girl scouts","the grim
+reaper","the in-laws","the neighbors","the president","three friends","two
+friends","your (long lost) twin","your baby brother","your baby
+sister","your best friend","your best friends","your boss","your
+boyfriend","your child(ren)","your complete opposite","your cousin","your
+crush","your father","your father-in-law","your future self","your
+girlfriend","your grandfather","your grandmother","your
+grandparents","your husband","your mother","your mother-in-law","your
+older brother","your older sister","your parents","your past self","your
+pets","your secret admirer","your siblings","your soulmate","your
+teacher","your whole family","your wife","your worst enemy","yourself"
