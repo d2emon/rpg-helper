@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GURPS</title>
+</head>
+<body>
+  <h3>Set wilderness</h3>
+  <ul>
+    {% for w in wilderness %}
+    <li><a href="/settings/land/{{w.id}}">{{w.description}}</a></li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

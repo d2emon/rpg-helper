@@ -1,0 +1,21 @@
+{% extends "rpa.html" %}
+{% block content %}
+<h1>Select {{session['campaign'].title}} Session</h1>
+<div class="btn-toolbar" role="toolbar" aria-label="toolbar">
+  <a href="{{ url_for('session_edit') }}" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add</a>
+</div>
+<div>
+{% if sessions %}
+<ul>
+  {% for gs in sessions %}
+  <li>
+    <a href="{{ url_for('session_del', session_id=gs.id) }}" type="button" class="btn btn-default"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></a> 
+    <a href="{{ url_for('session_edit', session_id=gs.id) }}">{{gs}}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div>No aviable RPGs</div>
+{% endif %}
+</div>
+{% endblock %}

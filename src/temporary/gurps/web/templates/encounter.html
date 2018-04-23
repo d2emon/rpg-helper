@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GURPS</title>
+</head>
+<body>
+  <h3>global LAND_TYPES</h3>
+
+  <h3>with open("db/lands.dat") as f:</h3>
+  <ul>
+    <li> LAND_TYPES = [LandType(s) for s in f.readlines()]</li>
+  </ul>
+
+  <h3>Random encounter</h3>
+  <ul>
+    {% for w in wilderness %}
+    <li><a href="/encounter/{{w.id}}">{{w.description}}</a></li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

@@ -1,0 +1,47 @@
+- title: Human
+  creatures:
+  - Adventurer
+  - Adventurer
+  - Bandit
+  - Bandit
+  - Berserker
+  - Brigand
+  - Cleric
+  - Fighter
+  - Magic-User
+  - Merchant
+  - NPC Party
+  - Trader
+- file: db/encounters/flyers.yml
+- title: Humanoid
+  creatures:
+  - Gnoll
+  - Goblin
+  - Hobgoblin
+  - Lizardman
+  - Lizardman
+  - Lizardman
+  - Nixie
+  - Ogre
+  - Orc
+  - Troglodyte
+  - Troll
+  - Troll
+- title: Swimmer
+  creatures:
+  - Giant Crab
+  - Crocodile
+  - Crocodile
+  - Large Crocodile
+  - Large Crocodile
+  - Giant Leech
+  - Giant Leech
+  - Giant Leech
+  - Lizardman
+  - Lizardman
+  - Water Termite
+  - Water Termite
+- file: db/encounters/undead.yml
+- file: db/encounters/undead.yml
+- file: db/encounters/insects.yml
+- file: db/encounters/dragon.yml

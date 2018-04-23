@@ -1,0 +1,10 @@
+- title: Castle
+  creatures:
+  - Castle
+- file: db/encounters/flyers.yml
+- file: db/encounters/humanoid/settled.yml
+- file: db/encounters/human/settled.yml
+- file: db/encounters/human/settled.yml
+- file: db/encounters/animals/settled.yml
+- file: db/encounters/animals/settled.yml
+- file: db/encounters/dragon.yml

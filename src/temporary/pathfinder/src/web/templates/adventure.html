@@ -1,0 +1,10 @@
+{% extends "rpa.html" %}
+{% block content %}
+<h1>{{ adventure.title }}</h1>
+<div>
+  <div>
+  {{ adventure.getDescription() }}
+  </div>
+  {{adventure}}
+</div>
+{% endblock %}

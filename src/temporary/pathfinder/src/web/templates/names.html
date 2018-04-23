@@ -1,0 +1,477 @@
+{% extends "rpa.html" %}
+{% block content %}
+<h1>Random names</h1>
+<ul>
+  <li><a href="{{ url_for('random_name', country='fiction') }}">Fantasy Names</a></li>
+  <li><a href="{{ url_for('random_name', country='real') }}">Real Names</a></li>
+  <li><a href="{{ url_for('random_name', country='place') }}">Place Names</a></li>
+  <li><a href="{{ url_for('random_name', country='culture') }}">Culture Names</a></li>
+  <li><a href="{{ url_for('random_name', country='other') }}">Other Names</a></li>
+  <li><a href="{{ url_for('random_name', country='description') }}">Descriptions</a></li>
+  <li><a href="{{ url_for('random_name', country='generator') }}">Other Generators</a></li>
+</ul>
+<h2>Dungeon</h2>
+<ul>
+  <li>
+    <a href="http://www.apolitical.info/webgame/dungeon/">Age of Fable</a>
+    <ul>
+	  <li>Tunels&Trolls</li>
+	  <li>Labirinth Lord</li>
+    </ul>
+  </li>
+  <li>
+    <a href="http://donjon.bin.sh/">donjon</a>
+    <ul>
+	  <li>
+    General
+    <ul>
+    <li>
+Dice Roll 
+    </li>
+    <li>
+Markov Name Generator
+
+Generate random names using your own source lists
+    </li>
+    <li>
+Fractal World Generator
+
+Generate a random world map.
+    </li>
+    </ul>
+
+	  </li>
+	  <li>
+Fantasy
+    <ul>
+    <li>
+Fantasy Name Generator
+
+Generate random names for characters, events, taverns, etc.
+    </li>
+    <li>
+Random Generator
+
+Generate random quests, NPCs, loot, castles, towns, etc.
+    </li>
+    <li>
+Fantasy Calendar Generator
+
+Generate a calendar of months, weeks, lunar cycles, etc.
+    </li>
+    <li>
+Fantasy World Generator
+
+Generate a random world map with mountain, forest, and city hexes.
+    </li>
+    <li>
+Medieval Demographics Calculator
+
+Based on Medieval Demographics Made Easy by S. John Ross
+    </li>
+    <li>
+Random Adventure Generator
+
+Generate random adventure elements based on the Dungeon Master's Design Kit.
+    </li>
+    <li>
+Random Dungeon Generator
+
+Generate a dungeon with random features, monsters, and traps.
+    </li>
+    <li>
+Random Inn Generator
+
+Generate random inns and taverns, including menu, patrons, and rumors.
+    </li>
+    </ul>
+
+	  </li>
+	  <li>
+AD&D
+    <ul>
+    <li>
+Random Generator
+
+Generate random NPCs, loot, magic items, traps, etc.
+    </li>
+    <li>
+Random Dungeon Generator
+
+Generate a dungeon with random features, monsters, and traps.
+    </li>
+    <li>
+Random Magic Shop Generator
+
+Generate random magic shops with items from the DMG.
+    </li>
+    <li>
+Random Treasure Generator
+
+Coins, gems, jewelry, and magic items.
+    </li>
+    </ul>
+	  </li>
+	  <li>
+d20/Fantasy
+    <ul>
+    <li>
+Initiative Tracker
+
+Track initiative and turn status.
+    </li>
+    <li>
+Power Attack Calculator
+
+Calculate the optimum amount of Power Attack to use.
+    </li>
+    <li>
+Random Generator
+
+Generate random NPCs, loot, magic items, traps, etc.
+    </li>
+    <li>
+d20 Demographics Calculator
+
+Based on Medieval Demographics Made Easy by S. John Ross
+    </li>
+    <li>
+Random Dungeon Generator
+
+Generate a dungeon with monsters and traps from the d20 SRD.
+    </li>
+    <li>
+Random Encounter Generator
+
+Select monsters from the d20 SRD based on encounter level, climate, and terrain.
+    </li>
+    <li>
+Random Magic Shop Generator
+
+Generate random magic shops with items from the d20 SRD.
+    </li>
+    <li>
+Random Treasure Generator
+
+Coins, gems, art objects, and magic items from the d20 SRD.
+    </li>
+    <li>
+Random Weather Generator
+
+Generate random weather, from clear to storms.
+    </li>
+    <li>
+XP Calculator
+
+Calculate the amount of XP earned for your game.
+    </li>
+    </ul>
+
+	  </li>
+	  <li>
+Microlite20
+    <ul>
+    <li>
+Microlite20
+
+Microlite20 purest essence
+    </li>
+    <li>
+Random Generator
+
+Generate random NPCs, loot, magic items, traps, etc.
+    </li>
+    <li>
+Random Monster Generator
+
+Generate random monsters and stats.
+    </li>
+    <li>
+Random Dungeon Generator
+
+Generate a dungeon with monsters and traps.
+    </li>
+    </ul>
+
+	  </li>
+	  <li>
+Pathfinder
+    <ul>
+    <li>
+Power Attack Calculator
+
+Calculate the optimum amount of Power Attack to use.
+    </li>
+    <li>
+Random Generator
+
+Generate random NPCs, loot, magic items, traps, etc.
+    </li>
+    <li>
+Random Dungeon Generator
+
+Generate a dungeon with random features, monsters, and traps.
+    </li>
+    <li>
+Random Encounter Generator
+
+Select monsters based on encounter level, climate, and terrain.
+    </li>
+    <li>
+Random Magic Shop Generator
+
+Generate random magic shops with items from Ultimate Equipment.
+    </li>
+    <li>
+Random Treasure Generator
+
+Coins, gems, art objects, and magic items from Ultimate Equipment.
+    </li>
+    </ul>
+
+	  </li>
+	  <li>
+D&D 4e
+    <ul>
+    <li>
+Random Generator
+
+Generate random NPCs, loot, magic items, traps, etc.
+    </li>
+    <li>
+Random Dungeon Generator
+
+Generate a dungeon with random features, monsters, and traps.
+    </li>
+    <li>
+Random Encounter Generator
+
+Select monsters based on encounter level, climate, and terrain.
+    </li>
+    <li>
+Random Treasure Generator
+
+Coins, gems, art objects, and magic items.
+    </li>
+    </ul>
+
+	  </li>
+	  <li>
+D&D 5e
+    <ul>
+    <li>
+Spell Sheet
+
+List spells by class, level, school, etc.
+    </li>
+    <li>
+Monster List
+
+List monsters by size, type, tags, alignment, etc.
+    </li>
+    <li>
+Magic Items
+
+List magic items by type, rarity, etc.
+    </li>
+    <li>
+Encounter Size Calculator
+
+Calculate encounter size based on party size and level
+    </li>
+    <li>
+Initiative Tracker
+
+Track initiative and turn status.
+    </li>
+    <li>
+Random Generator
+
+Generate random NPCs, etc.
+    </li>
+    <li>
+Random Dungeon Generator
+
+Generate a dungeon with random features, monsters, and traps.
+    </li>
+    <li>
+Random Encounter Generator
+
+Select monsters based on encounter level and environment.
+    </li>
+    <li>
+Random Magic Shop Generator
+
+Generate random magic shops with items from the DMG.
+    </li>
+    <li>
+Random Treasure Generator
+
+Coins, gems, art objects, and magic items.
+    </li>
+    </ul>
+
+	  </li>
+	  <li>
+Weird Fiction
+    <ul>
+    <li>
+Weird Name Generator
+
+Generate random names for characters, eldritch things, tomes, etc.
+    </li>
+    <li>
+Random Generator
+
+Generate random NPCs, etc.
+    </li>
+    </ul>
+
+	  </li>
+	  <li>
+Science Fiction
+    <ul>
+    <li>
+SciFi Name Generator
+
+Generate random names for characters, spaceships, locations, planets, etc.
+    </li>
+    <li>
+Random Generator
+
+Generate random NPCs, mecha, spaceships, etc.
+    </li>
+    <li>
+SWd20 Freight Jobs
+
+Star Wars d20 Freight Jobs, by Ravager of Worlds
+    </li>
+    <li>
+SciFi World Generator
+
+Generate a random world, including size, composition, atmosphere, and other characteristics.
+    </li>
+    <li>
+Star System Generator
+
+Generate a random star system, including companion stars and planets.
+    </li>
+    <li>
+SWd6 System Generator
+
+Generate a random star system, including primary planet physics, population, tech level, and other characteristics.
+    </li>
+    <li>
+Traveller System Generator
+
+Generate a random star system, including primary planet physics, population, tech level, and other characteristics.
+    </li>
+    </ul>
+	  </li>
+    </ul>    
+  </li>
+  <li>
+    <a href="http://http://inkwellideas.com/">Inkwell Ideas</a>
+    <ul>
+	  <li>
+	  Store
+	  <ul>
+        <li>Coat of Arms Design Studio</li>
+        <li>Hexographer</li>
+        <li>Dungeonographer</li>
+        <li>Cityographer</li>
+        <li>Creature Card Decks</li>
+        <li>Encounter Card Decks</li>
+        <li>NPC Portraits Deck: Fantasy</li>
+        <li>Monster Stand-Ins</li>
+        <li>DungeonMoprh Dice, Cards & Font</li>    
+	  </ul>
+	  </li>
+	  <li>
+	  Free Tools
+	  <ul>
+        <li>Icosahedral World Map Generator</li>
+        <li>Magic Item Shop Random Generator</li>
+        <li>
+        Random Inn Generator)
+		<ul>
+        <li>Floor Plans</li>
+        <li>Menu</li>
+        <li>Rumors</li>
+        <li>Staff & Patrons</li>
+		</ul>
+        </li>
+        <li>Random City Map Generator (using overlaid images)</li>
+        <li>Random Village Generator (using SVG image)</li>
+        <li>Random Dungeon Map Generator</li>
+        <li>Random Supers Generator</li>
+        <li>Supers Image Creator</li>	  
+	  </ul>
+	  </li>
+    </ul>    
+  </li>
+  <li>
+    <a href="http://www.thievesguild.cc/">Thieves Guild</a>
+    <ul>
+	  <li>Dice Roller</li>
+      <li>Name Generator</li>
+      <li>Dungeon Room Generator</li>
+      <li>Drink Generator</li>
+      <li>Drink Ingredients Generator</li>
+      <li>Adventure Hook Generator</li>
+      <li>Plants/Herbs Generator</li>
+      <li>Poisons/Potions Generator</li>
+      <li>Treasure Generator</li>
+      <li>Magic Item Generator</li>
+      <li>NPC/People Generator</li>
+      <li>Wild Surge Generator</li>
+    </ul>
+  </li>
+  <li>
+    Soft
+    <ul>
+	  <li>Dungeon Generator</li>
+	  <li>
+	  Generator Pack
+	  <ul>
+	  <li>Adventure</li>
+	  <li>Art Object</li>
+	  <li>Attribute</li>
+	  <li>Character Background</li>
+	  <li>Combat Critical Failure</li>
+
+	  <li>Combat Critical Wound</li>
+	  <li>Creating Magic Item</li>
+	  <li>Equipment Damage</li>
+	  <li>Experience</li>
+	  <li>Gem</li>
+
+	  <li>Healing & Herbalism</li>
+	  <li>Magical Item</li>
+	  <li>Martial Arts Moves Name</li>
+	  <li>Monthly Weather</li>
+	  <li>NPC Description</li>
+
+	  <li>Prandria Encounter</li>
+	  <li>Random Curse</li>
+	  <li>Random Encounter</li>
+	  <li>Random Name</li>
+	  <li>Random NPC</li>
+
+	  <li>Random Town Stats</li>
+	  <li>Random Treasure</li>
+	  <li>Spell</li>
+	  <li>Town Equipment List</li>
+	  <li>Toen Establishment Name</li>
+
+	  <li>Trap Generator</li>
+	  <li>Wild Surge</li>
+	  </ul>
+	  </li>
+	  <li>Fantasy Grounds 2</li>
+	  <li>GenN</li>
+	  <li>NPC</li>
+    </ul>
+  </li>
+</ul>
+{% endblock %}

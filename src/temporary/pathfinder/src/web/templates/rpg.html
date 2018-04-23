@@ -1,0 +1,17 @@
+{% extends "rpa.html" %}
+{% block content %}
+<h1>Select RPG</h1>
+<div class="btn-toolbar" role="toolbar" aria-label="toolbar">
+  <a href="{{ url_for('rpg_add') }}" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><br>Add</a>
+  <a href="{{ url_for('rpg_del') }}" type="button" class="btn btn-default"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span><br>Del</a>
+</div>
+{% if games %}
+<ul>
+  {% for rpg in games %}
+  <li><a href="{{ url_for('select_rpg', rpg_id=rpg.id) }}">{{rpg}}</a>{%if rpg.website %} - <a href="{{rpg.website}}">{{rpg.website}}</a>{% endif %}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<div>No aviable RPGs</div>
+{% endif %}
+{% endblock %}

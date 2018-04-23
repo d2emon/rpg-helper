@@ -1,0 +1,23 @@
+{% extends "rpa.html" %}
+{% block content %}
+<h1>{{ race.name }}</h1>
+<ul>
+  {% if race.custom_ability %}<li><strong>+{{ race.custom_ability }}</strong> к любой Способности</li>{% endif %}
+  <li>Размер <strong>{{ race.size() }}</strong></li>
+  <li>Скорость <strong>{{ race.speed }}</strong></li>
+  {% if race.bonus_feat %}<li>Дополнительные Навыки <strong>{{ race.bonus_feat }}</strong></li>{% endif %}
+  {% if race.bonus_skill %}<li>Дополнительные Умения <strong>{{ race.bonus_skill }}</strong></li>{% endif %}
+  <li>
+    Языки:
+    <ul>
+      {% for l in race.languages() %}
+        <li><strong>{{ l }}</strong></li>
+      {% endfor %}
+    </ul>
+  </li>
+</ul>
+<div>
+{{ race.description }}
+</div>
+{% endblock %}
+

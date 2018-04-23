@@ -1,0 +1,10 @@
+- file: db/encounters/human/settled.yml
+- file: db/encounters/unusual.yml
+- file: db/encounters/flyers.yml
+- file: db/encounters/humanoid/settled.yml
+- file: db/encounters/human/settled.yml
+- file: db/encounters/human/settled.yml
+- file: db/encounters/human/settled.yml
+- title: City
+  creatures:
+  - City

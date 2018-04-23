@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+{{char_id}}
+<ul>
+  <li><a href="/char/new">Добавить</a></li>
+  {% for c in chars %}
+    <li><a href="/char/id-{{c.id}}"><img src="{{c.avatar()}}">{{c.charname}}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

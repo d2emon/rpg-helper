@@ -1,0 +1,34 @@
+- title: Human
+  creatures:
+  - Adventurer
+  - Adventurer
+  - Bandit
+  - Berserker
+  - Brigand
+  - Brigand
+  - Brigand
+  - Caveman
+  - Cleric
+  - Fighter
+  - Magic-User
+  - Merchant
+- file: db/encounters/flyers.yml
+- file: db/encounters/insects.yml
+- file: db/encounters/insects.yml
+- title: Humanoid
+  creatures:
+  - Bugbear
+  - Cyclops
+  - Elf
+  - Fire Giant
+  - Hill Giant
+  - Gnoll
+  - Goblin
+  - Lizardman
+  - Ogre
+  - Orc
+  - Troglodyte
+  - Troll
+- file: db/encounters/animals/jungle.yml
+- file: db/encounters/animals/jungle.yml
+- file: db/encounters/dragon.yml

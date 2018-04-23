@@ -1,0 +1,47 @@
+- title: Human
+  creatures:
+  - Adventurer
+  - Bandit
+  - Berserker
+  - Berserker
+  - Brigand
+  - Caveman
+  - Caveman
+  - Caveman
+  - Cleric
+  - Fighter
+  - Magic-User
+  - Merchant
+- title: Flyer
+  creatures:
+  - Giant Bee
+  - Gargoyle
+  - Griffon
+  - Harpy
+  - Hippogriff
+  - Insect Swarm
+  - Manticore
+  - Pegasus
+  - Robber Fly
+  - Small Roc
+  - Large Roc
+  - Giant Roc
+- file: db/encounters/humanoid/mountain.yml
+- file: db/encounters/unusual.yml
+- title: Animal
+  creatures:
+  - Herd Animal
+  - Snow Ape
+  - White Ape
+  - Rock Baboon
+  - Cave Bear
+  - Grizzly Bear
+  - Mountain Lion
+  - Mule
+  - Viper
+  - Rattler Snake
+  - Wolf
+  - Dire Wolf
+- file: db/encounters/humanoid/mountain.yml
+- file: db/encounters/dragon.yml
+- file: db/encounters/dragon.yml

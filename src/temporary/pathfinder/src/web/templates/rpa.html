@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+{% if title %}
+<title>Pathfinder - {{title}}</title>
+{% else %}
+<title>Pathfinder assistant</title>
+{% endif %}
+<link rel="icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
+<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Pathfinder</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+    	<li class="dropdown">
+    	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System <span class="caret"></span></a>
+  	      <ul class="dropdown-menu">
+  	        <li><a href="#">Index Maintenance</a></li>
+	  	    <li class="dropdown-header">Modify reports</li>
+		    <li>Equipment</li>
+		    <li>Character sheet</li>
+		    <li>Spellbook</li>
+		    <li>DM Report</li>
+		    <li>Encounters</li>
+		    <li>Names</li>
+		    <li>Skill list</li>
+		    <li>Weather</li>
+		    <li>Time Tracker Sheet</li>
+		    <li>Blank Background Sheet</li>
+		    <li>Blank Gear Sheet</li>
+		    <li>Other report</li>
+            <li role="separator" class="divider"></li>
+	  	    <li><a href="#">Modify System Database</a></li>
+	  	    <li>RPA parameters</li>
+	  	    <li><a href="{{ url_for('rpg_list') }}">Select another RPG or database</a></li>
+	  	    <li>Translator configuration</li>
+            <li role="separator" class="divider"></li>
+	  	    <li>Import new generation engine table</li>
+	  	    <li>Import/Export manager</li>
+	  	  </ul>
+	  	</li>
+	  	<li class="dropdown">
+	  	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Edit <span class="caret"></span></a>
+	  	  <ul class="dropdown-menu">
+	  	    <li>Copy PC to group</li>
+	  	    <li>Select/Create group</li>
+	  	  </ul>
+	  	</li>
+	  	<li class="dropdown">
+	  	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
+	  	  <ul class="dropdown-menu">
+	  	    <li class="dropdown-header">Dice Rollers</li>
+	  	    <li>Party dice roller</li>
+	  	    <li>Advanced dice roller</li>
+	  	    <li>Single dice roller</li>
+            <li role="separator" class="divider"></li>
+	  	    <li>Time Tracker/Countdown</li>
+	  	    <li><a href="{{ url_for('campaign_list') }}">Campaign manager</a></li>
+            <li role="separator" class="divider"></li>
+	  	    <li>Name Generator</li>
+	  	    <li>Treasure Generator</li>
+	  	    <li>Weather Generator</li>
+	  	    <li>Randomizer</li>
+	  	    <li>Fractal World Generator</li>
+	  	    <li>Dungeon Map Generator</li>
+	  	    <li>Encounters/Monsters</li>
+	  	  </ul>
+	  	</li>
+	  	<li class="dropdown">
+	  	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Character <span class="caret"></span></a>
+	  	  <ul class="dropdown-menu">
+	  	    <li>Generate a complete character</li>
+	  	    <li>Generate a party</li>
+	  	    <li>Generate only selected options</li>
+            <li role="separator" class="divider"></li>
+	  	    <li>New Character</li>
+	  	    <li>Delete Character</li>
+	  	    <li>Experience history</li>
+	  	    <li>Party status window</li>
+            <li role="separator" class="divider"></li>
+	  	    <li>Export character</li>
+	  	    <li>Email exported character</li>
+	  	    <li>Export and Email current character</li>
+	  	    <li>Backup my characters</li>
+            <li role="separator" class="divider"></li>
+	  	    <li>Import character</li>
+	  	    <li>Import emailed characters</li>
+	  	    <li>Restore a character backup</li>
+	  	    <li>See export database</li>
+	  	  </ul>
+	  	</li>
+	  	<li class="dropdown">
+	  	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RPG structure <span class="caret"></span></a>
+	  	  <ul class="dropdown-menu">
+	  	    <li>Define Substats</li>
+	  	    <li>Define Templates</li>
+            <li role="separator" class="divider"></li>
+	  	    <li>Update Saving Throws</li>
+	  	    <li>Update spheres/schools/discipline</li>
+            <li role="separator" class="divider"></li>
+	  	    <li>Update Races</li>
+	  	    <li>Update Languages</li>
+	  	    <li>Update Colors</li>
+	  	    <li>Update Dice Throwing Method</li>
+	  	    <li>Update Currencies</li>
+	  	    <li>Update Containers</li>
+
+	  	    <li>Update Player list</li>
+	  	    <li>Update Master Ability Bonuses</li>
+	  	    <li>Update Master Ability Table</li>
+	  	    <li>Update Master Skill List</li>
+	  	    <li>Update Master Level Table</li>
+	  	    <li>Update Master Class/Profession</li>
+	  	  </ul>
+	  	</li>
+	  	<li class="dropdown">
+	  	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Names <span class="caret"></span></a>
+	  	  <ul class="dropdown-menu">
+	  	    <li><a href="{{ url_for('list_names') }}">Names</a></li>
+		  </ul>
+	  	</li>
+        <li><a href="{{ url_for('action_list') }}">Actions</a></li>
+      </ul>
+    </div><!--/.navbar-collapse -->
+
+  </div>
+</nav>
+
+{% with messages = get_flashed_messages() %}
+{% for message in messages %}
+  <div class="alert alert-info">{{ message }}</div>
+{% endfor %}
+{% endwith %}
+
+  <div class="row">
+    <div class="col-md-3">
+      {% if session['rpg'] %}
+      <div>
+        <p><strong>Game system:</strong> <a href="{{ url_for('rpg_list')}}">{{session['rpg']}}</a></p>
+      </div>
+      {% endif %}
+      <div>
+	    {% if session['campaign'] %}
+	    <p><strong>Campaign:</strong> <a href="{{ url_for('campaign_list')}}">{{session['campaign'].title}}</a></p>
+        {% endif %}
+	    {% if session['session'] %}
+	    <p><strong>Session:</strong> <a href="{{ url_for('session_list')}}">{{session['session']}}</a></p>
+        {% endif %}
+      </div>
+    </div> 
+    <div class="col-md-9">
+{% block content %}{% endblock %}
+    </div> 
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="{{ url_for("static", filename="bootstrap/js/bootstrap.min.js") }}"></script>  
+</body>
+</html>

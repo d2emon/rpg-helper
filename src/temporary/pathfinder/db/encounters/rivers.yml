@@ -1,0 +1,48 @@
+- title: Human
+  creatures:
+  - Adventurer
+  - Bandit
+  - Buccaneer
+  - Buccaneer
+  - Buccaneer
+  - Cleric
+  - Cleric
+  - Fighter
+  - Magic-User
+  - Merchant
+  - Merchant
+  - NPC Party
+- file: db/encounters/flyers.yml
+- title: Humanoid
+  creatures:
+  - Bugbear
+  - Elf
+  - Gnoll
+  - Goblin
+  - Hobgoblin
+  - Lizardman
+  - Lizardman
+  - Nixie
+  - Ogre
+  - Orc
+  - Sprite
+  - Thoul
+  - Troll
+- file: db/encounters/insects.yml
+- file: db/encounters/swimmer/river.yml
+- file: db/encounters/swimmer/river.yml
+- title: Animal
+  creatures:
+  - Herd Animal
+  - Boar
+  - Panther
+  - Tiger
+  - Giant Crab
+  - Crocodile
+  - Large Crocodile
+  - Rock Fish
+  - Giant Leech
+  - Giant Rat
+  - Giant Shrew
+  - Giant Toad
+- file: db/encounters/dragon.yml

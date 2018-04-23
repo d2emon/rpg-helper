@@ -1,0 +1,411 @@
+{% extends "rpa.html" %}
+{% block content %}
+<h1>Place names</h1>
+{% if names %}
+<ul>
+  {% for name in names %}
+  <li>{{name}}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<div>No names</div>
+{% endif %}
+<div>
+      1. {Arthurian Names} 
+      2. {Avatar (TLA) Names} 
+      3. {Creepypasta Names} 
+      4. {Dark Souls} 
+      5. Destiny > 
+        * {Awoken} 
+        * {Cabal} 
+        * {Exo} 
+        * {Fallen} 
+        * {Hive} 
+        * {Human} 
+        * {Vex}   
+      6. Diablo > 
+        * {Angel} 
+        * {Demon} 
+        * {Khazra} 
+        * {Nephalem}   
+      7. {Digimon Names} 
+      8. Doctor Who > 
+        * {Dalek} 
+        * {Gallifreyan} 
+        * {Raxacori..} 
+        * {Ice Warrior} 
+        * {Silurian} 
+        * {Sontaran} 
+        * {Zygon}   
+      9. Dragon Age Races > 
+        * {Dwarf} 
+        * {Elf} 
+        * {Human} 
+        * {Qunari}   
+      10. Dragon Ball Races > 
+        * {Frieza & Clan} 
+        * {Hakaishin} 
+        * {Human} 
+        * {Namekian} 
+        * {Other} 
+        * {Saiyan} 
+        * {Tuffle}   
+      11. {Dragonriders of Pern} 
+      12. Dungeons & Dragons > 
+        * {Deva} 
+        * {Dragonborn} 
+        * {Drow} 
+        * {Dwarf} 
+        * {Eladrin} 
+        * {Elf} 
+        * {Githzerai} 
+        * {Gnome} 
+        * {Goliath} 
+        * {Half-Elf} 
+        * {Half-Orc} 
+        * {Halfling} 
+        * {Human} 
+        * {Minotaur} 
+        * {Shardmind} 
+        * {Shifter} 
+        * {Tiefling} 
+        * {Wilden}   
+      13. Elder Scrolls Races > 
+        * {Altmer} 
+        * {Argonian} 
+        * {Bosmer} 
+        * {Breton} 
+        * {Daedra} 
+        * {Dragon} 
+        * {Dunmer} 
+        * {Dwemer} 
+        * {Falmer} 
+        * {Forsworn} 
+        * {Imperial} 
+        * {Khajiit} 
+        * {Nord} 
+        * {Orc} 
+        * {Redguard} 
+        * {Spriggan}     
+      1. EVE Online > 
+        * {Amarr} 
+        * {Caldari} 
+        * {Gallente} 
+        * {Minmatar}   
+      2. Final Fantasy XIV > 
+        * {Au Ra} 
+        * {Elezen} 
+        * {Hyur} 
+        * {Lalafell} 
+        * {Miqo'te} 
+        * {Roegadyn}   
+      3. Game of Thrones > 
+        * {Dothraki} 
+        * {Free City} 
+        * {Free Folk} 
+        * {Mountain Clan} 
+        * {Nicknames} 
+        * {Unsullied} 
+        * {Valyrian} 
+        * {Westeros}   
+      4. Guild Wars Races > 
+        * {Asura} 
+        * {Charr} 
+        * {Human} 
+        * {Norn} 
+        * {Sylvari}   
+      5. Halo > 
+        * {Forerunner} 
+        * {Huragok} 
+        * {Jiralhanae} 
+        * {Kig-Yar} 
+        * {Mgalekgolo} 
+        * {Sangheili} 
+        * {San 'Shyuum} 
+        * {Unggoy}   
+      6. Harry Potter > 
+        * {Dragon Species} 
+        * {Goblin} 
+        * {Hippogriff} 
+        * {House Elf} 
+        * {Winged Horse}   
+      7. {Httyd Dragon Names} 
+      8. {Homestuck Names} 
+      9. {Hunger Games Names} 
+      10. {Hyborian Names} 
+      11. Inheritance Cycle > 
+        * {Dragon} 
+        * {Dwarf} 
+        * {Elf} 
+        * {Human} 
+        * {Urgal}   
+      12. Legend of Zelda > 
+        * {Anouki} 
+        * {Deities} 
+        * {Deku} 
+        * {Fairies} 
+        * {Gerudo} 
+        * {Goron} 
+        * {Humans} 
+        * {Korok & Kokiri} 
+        * {Minish} 
+        * {Zora}   
+      13. Lord of the Rings > 
+        * {Balrog} 
+        * {Dwarf} 
+        * {Elf} 
+        * {Hobbit} 
+        * {Human} 
+        * {Maiar} 
+        * {Orc}     
+      1. Lord of the Rings Online > 
+        * {Beorning} 
+        * {Dwarf} 
+        * {Elf} 
+        * {Hobbit} 
+        * {Human}   
+      2. {Lovecraftian Names} 
+      3. Magic: The Gathering > 
+          1. {Angel} 
+          2. {Avatar} 
+          3. {Centaur} 
+          4. {Cephalid} 
+          5. {Demon} 
+          6. {Djinn} 
+          7. {Dryad} 
+          8. {Dragon} 
+          9. {Dwarf} 
+          10. {Eldrazi} 
+          11. {Elemental} 
+          12. {Elf} 
+          13. {Faerie} 
+          14. {Giant} 
+          15. {Goblin} 
+          16. {God} 
+          17. {Golem}   
+          1. {Gorgon} 
+          2. {Horror} 
+          3. {Human} 
+          4. {Kithkin} 
+          5. {Kor} 
+          6. {Merfolk} 
+          7. {Minotaur} 
+          8. {Moonfolk} 
+          9. {Naga} 
+          10. {Ogre} 
+          11. {Orc} 
+          12. {Praetor} 
+          13. {Sphinx} 
+          14. {Treefolk} 
+          15. {Troll} 
+          16. {Vampire}    
+      4. Mass Effect > 
+        * {Asari} 
+        * {Batarian} 
+        * {Drell} 
+        * {Geth} 
+        * {Human} 
+        * {Krogan} 
+        * {Quarian} 
+        * {Salarian} 
+        * {Turian}   
+      5. {Maze Runner Names} 
+      6. {Mortal Kombat Names} 
+      7. {My Little Pony Names} 
+      8. {Na'vi (Avatar) Names} 
+      9. {One Piece Devil Fruit Names} 
+      10. {Pacific Rim Names} 
+      11. Pathfinder > 
+          1. {Aasimar} 
+          2. {Catfolk} 
+          3. {Drow} 
+          4. {Dwarf} 
+          5. {Elf} 
+          6. {Fetchling} 
+          7. {Gnome} 
+          8. {Goblin} 
+          9. {Half-Elf} 
+          10. {Half-Orc} 
+          11. {Halfling} 
+          12. {Hobgoblin}   
+          1. {Human} 
+          2. {Ifrit} 
+          3. {Kobold} 
+          4. {Orc} 
+          5. {Oread} 
+          6. {Ratfolk} 
+          7. {Sylph} 
+          8. {Tengu} 
+          9. {Tian} 
+          10. {Tiefling} 
+          11. {Undine}    
+      12. {Pokemon Descriptions} 
+      13. {Pokemon Names}   
+      1. {Power Rangers Teams} 
+      2. Rift Races > 
+        * {Bahmi} 
+        * {Dwarf} 
+        * {Eth} 
+        * {High Elf} 
+        * {Kelari} 
+        * {Mathosian}   
+      3. {RWBY Names} 
+      4. {Shadowhunter Chronicles} 
+      5. {Skulduggery Pleasant} 
+      6. {StarCraft Names} 
+      7. Star Trek > 
+        * {Andorian} 
+        * {Bajoran} 
+        * {Benzite} 
+        * {Betazoid} 
+        * {Bolian} 
+        * {Caitian} 
+        * {Ferengi} 
+        * {Gorn} 
+        * {Jem'Hadar} 
+        * {Klingon} 
+        * {Lethean} 
+        * {Nausicaan} 
+        * {Orion} 
+        * {Pakled} 
+        * {Reman} 
+        * {Rigelian} 
+        * {Romulan} 
+        * {Saurian} 
+        * {Tellarite} 
+        * {Trill} 
+        * {Vulcan}   
+      8. Star Wars Races > 
+          1. {Anzati} 
+          2. {Bith} 
+          3. {Bothan} 
+          4. {Darth} 
+          5. {Devaronian} 
+          6. {Dug} 
+          7. {Duros} 
+          8. {Ewok} 
+          9. {Falleen} 
+          10. {Gamorrean} 
+          11. {Gand} 
+          12. {Gotal}   
+          1. {Gran} 
+          2. {Gungan} 
+          3. {Hutt} 
+          4. {Iktotchi} 
+          5. {Ishi Tib} 
+          6. {Ithorian} 
+          7. {Jawa} 
+          8. {Kel Dor} 
+          9. {Korunnai} 
+          10. {Mandalorian} 
+          11. {Mon Calamari} 
+          12. {Nautolan}   
+          1. {Neimoidian} 
+          2. {Nikto} 
+          3. {Ortolan} 
+          4. {Quarren} 
+          5. {Rodian} 
+          6. {Shistavanen} 
+          7. {Sullustan} 
+          8. {Toydarian} 
+          9. {Trandoshan} 
+          10. {Tusken} 
+          11. {Weequay} 
+          12. {Wookiee}    
+      9. Star Wars (TOR) Races > 
+        * {Cathar} 
+        * {Chiss} 
+        * {Cyborg} 
+        * {Human} 
+        * {Miraluka} 
+        * {Mirialan} 
+        * {Rattataki} 
+        * {Sith Pureblood} 
+        * {Togruta} 
+        * {Twi'lek} 
+        * {Zabrak}   
+      10. {Stormlight Archive Names} 
+      11. The Chronicles of Narnia > 
+        * {Centaur} 
+        * {Giant} 
+        * {Minotaur} 
+        * {Satyr} 
+        * {Wolf} 
+        * More soon!   
+      12. The Witcher > 
+        * {Dwarf} 
+        * {Elf} 
+        * {Halfling} 
+        * {Human}     
+      1. {Throne of Glass Names} 
+      2. {Transformers Names} 
+      3. {TsolyГЎni Names} 
+      4. Warhammer > 
+        * {Beastmen} 
+        * {Bretonnia} 
+        * {Daemons of Chaos} 
+        * {Dark Elf} 
+        * {Dwarf} 
+        * {Empire} 
+        * {Goblin} 
+        * {High Elf} 
+        * {Lizardmen} 
+        * {Ogre} 
+        * {Orc} 
+        * {Skaven} 
+        * {Tomb King} 
+        * {Vampire Count} 
+        * {Warriors of Chaos} 
+        * {Wood Elf}   
+      5. Warhammer 40k > 
+        * {Chaos} 
+        * {Dark Eldar} 
+        * {Eldar} 
+        * {Necron} 
+        * {Ork} 
+        * {Sisters of Battle} 
+        * {Space Marine} 
+        * {Tau}   
+      6. {Warrior Cat Names} 
+      7. {Wheel Of Time Names} 
+      8. Wildstar > 
+        * {Aurin} 
+        * {Cassian} 
+        * {Chua} 
+        * {Draken} 
+        * {Granok} 
+        * {Human} 
+        * {Mechari} 
+        * {Mordesh}   
+      9. {Wings of Fire Names} 
+      10. World of Warcraft Pets > 
+        * {Bat & Dragonhawk} 
+        * {Bears & Boars} 
+        * {Birds} 
+        * {Cats (Felidae)} 
+        * {Crabs} 
+        * {Creepy Crawlies} 
+        * {Dino & Rhino} 
+        * {Dogs (Canidae)} 
+        * {Goat & Porcupine} 
+        * {Gorilla & Monkey} 
+        * {Reptiles} 
+        * {WoW Misc.}   
+      11. World of Warcraft Races > 
+        * {Blood Elf} 
+        * {Draenei} 
+        * {Dwarf} 
+        * {Forsaken} 
+        * {Gnome} 
+        * {Goblin} 
+        * {Human} 
+        * {Night Elf} 
+        * {Orc} 
+        * {Pandaren} 
+        * {Tauren} 
+        * {Troll} 
+        * {Worgen}   
+      12. {X-men Names}    
+</div>
+{% endblock %}
+

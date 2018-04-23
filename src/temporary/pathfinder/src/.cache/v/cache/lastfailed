@@ -1,0 +1,23 @@
+{
+  "test/test_actions.py::TestActions::testEquipmentAction": true,
+  "test/test_commandline.py::test_actions": true,
+  "test/test_commandline.py::test_count": true,
+  "test/test_commandline.py::test_file": true,
+  "test/test_commandline.py::test_logfile": true,
+  "test/test_commandline.py::test_logformat": true,
+  "test/test_commandline.py::test_loglevel": true,
+  "test/test_commandline.py::test_roll": true,
+  "test/test_generate.py::TestGenerateFunctions::testBuyEquipment": true,
+  "test/test_generate.py::TestGenerateFunctions::testFinishDetails": true,
+  "test/test_generate.py::TestGenerateFunctions::testHelpMessage": true,
+  "test/test_generate.py::TestGenerateFunctions::testHelpOption": true,
+  "test/test_generate.py::TestGenerateFunctions::testParse": true,
+  "test/test_generate.py::TestGenerateFunctions::testPickClass": true,
+  "test/test_generate.py::TestGenerateFunctions::testPickRace": true,
+  "test/test_generate.py::TestGenerateFunctions::testPickSkills": true,
+  "test/test_generate.py::TestGenerateFunctions::testWrongArgs": true,
+  "test/test_gui.py::test_ask_roll_method": true,
+  "test/test_gui.py::test_menu": true,
+  "test/test_rooster.py::TestRooster::testDefineAbility": true,
+  "test/test_rooster.py::TestRooster::testLoad": true
+}

@@ -1,0 +1,34 @@
+- title: Human
+  creatures:
+  - Adventurer
+  - Bandit
+  - Bandit
+  - Berserker
+  - Brigand
+  - Cleric
+  - Fighter
+  - Magic-User
+  - Merchant
+  - Merchant
+  - Noble
+  - Nomad
+- file: db/encounters/flyers.yml
+- title: Humanoid
+  creatures:
+  - Bugbear
+  - Elf
+  - Hill Giant
+  - Gnoll
+  - Goblin
+  - Halfling
+  - Hobgoblin
+  - Ogre
+  - Orc
+  - Pixie
+  - Thoul
+  - Troll
+- file: db/encounters/animals/grass.yml
+- file: db/encounters/animals/grass.yml
+- file: db/encounters/unusual.yml
+- file: db/encounters/dragon.yml
+- file: db/encounters/insects.yml

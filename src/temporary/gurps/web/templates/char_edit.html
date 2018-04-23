@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{c.charname}}</h1>
+<form action="" method="post" name="edit">
+{{form.hidden_tag()}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Портрет</div>
+        <div class="panel-body">
+          <img src="{{c.avatar(128)}}">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Личность</div>
+            <div class="panel-body">
+              <div>Имя: {{form.charname(size = 24)}}</div>
+              <div>Статус</div>
+              <div>Религия</div>
+            </div>
+          </div>
+       </div>
+        <div class="col-md-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Игрок</div>
+            <div class="panel-body">
+              <div>Игрок</div>
+              <div>Кампания</div>
+              <div>Создан</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="panel panel-primary">
+          <div class="panel-heading">Внешность</div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div>Раса</div>
+                <div>Пол</div>
+                <div>Возраст</div>
+                <div>Д. Р.</div>
+              </div>
+              <div class="col-md-4">
+                <div>Рост</div>
+                <div>Вес</div>
+                <div>Размер</div>
+                <div>ТУ</div>
+              </div>
+              <div class="col-md-4">
+                <div>Волосы</div>
+                <div>Глаза</div>
+                <div>Кожа</div>
+                <div>Руки</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="panel panel-primary">
+        <div class="panel-heading">125 очков</div>
+        <div class="panel-body">
+          <div>Раса</div>
+          <div>Атрибуты</div>
+          <div>Преимущества</div>
+          <div>Недостатки</div>
+          <div>Причуды</div>
+          <div>Умения</div>
+          <div>Заклинания</div>
+          <div>Итого</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Атрибут</div>
+        <div class="panel-body">
+  <ul>
+    <li>ST: {{form.st}}</li>
+    <li>DX: {{form.dx}}</li>
+    <li>IQ: {{form.iq}}</li>
+    <li>HT: {{form.ht}}</li>
+  </ul>
+  <ul>
+    <li>HP: {{c.HP}}</li>
+    <li>Will: {{c.Will}}</li>
+    <li>Perc: {{c.Perc}}</li>
+    <li>FP: {{c.FP}}</li>
+    <li>BS: {{c.BS}}</li>
+    <li>Move: {{c.Move}}</li>
+  </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Нагрузка, движение и уклонение</div>
+        <div class="panel-body">
+          <div>Имя: {{form.charname(size = 24)}}</div>
+          <div>Статус</div>
+          <div>Религия</div>
+        </div>
+      </div>
+      <div class="panel panel-primary">
+        <div class="panel-heading">Поднятие и перемещение предметов</div>
+        <div class="panel-body">
+          <div>Игрок</div>
+          <div>Кампания</div>
+          <div>Создан</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Зоны попадания</div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div>Раса</div>
+              <div>Пол</div>
+              <div>Возраст</div>
+              <div>Д. Р.</div>
+            </div>
+            <div class="col-md-4">
+              <div>Рост</div>
+              <div>Вес</div>
+              <div>Размер</div>
+              <div>ТУ</div>
+            </div>
+            <div class="col-md-4">
+              <div>Волосы</div>
+              <div>Глаза</div>
+              <div>Кожа</div>
+              <div>Руки</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Очки</div>
+        <div class="panel-body">
+          <div>Раса</div>
+          <div>Атрибуты</div>
+          <div>Преимущества</div>
+          <div>Недостатки</div>
+          <div>Причуды</div>
+          <div>Умения</div>
+          <div>Заклинания</div>
+          <div>Итого</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div>
+    <input type="submit" value="Сохранить">
+  </div>
+</form>
+{% endblock %}

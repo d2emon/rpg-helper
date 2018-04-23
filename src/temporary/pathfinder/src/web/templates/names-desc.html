@@ -1,0 +1,70 @@
+{% extends "rpa.html" %}
+{% block content %}
+<h1>Place names</h1>
+{% if names %}
+<ul>
+  {% for name in names %}
+  <li>{{name}}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<div>No names</div>
+{% endif %}
+<div>
+      1. {Alien (Race) Descriptions} 
+      2. {Animal Descriptions} 
+      3. {Armor (Leather)} 
+      4. {Armor (Plate)} 
+      5. {Army Descriptions} 
+      6. {Backstory Descriptions} 
+      7. {Battlefield Descriptions} 
+      8. {Castle Descriptions} 
+      9. {Character Descriptions} 
+      10. {City Descriptions} 
+      11. {Clothing (Fancy)}   
+      1. {Clothing (Medieval)} 
+      2. {Clothing (Rags)} 
+      3. {Coat of Arms} 
+      4. {Constellation Descriptions} 
+      5. {Country Descriptions} 
+      6. {Disease Descriptions} 
+      7. {Dragon Descriptions} 
+      8. {Dungeon Descriptions} 
+      9. {Dying Descriptions} 
+      10. {Flag Descriptions} 
+      11. {Gem Descriptions}   
+      1. {Ghost Town Descriptions} 
+      2. {God(dess) Descriptions} 
+      3. {Hand Gesture Descriptions} 
+      4. {Holiday Descriptions} 
+      5. {House Descriptions} 
+      6. {Humanoid Descriptions} 
+      7. {Law Descriptions} 
+      8. {Martial Art Descriptions} 
+      9. {Monument Descriptions} 
+      10. {Pain Descriptions} 
+      11. {Personality Descriptions}   
+      1. {Planet Descriptions} 
+      2. {Plant Descriptions} 
+      3. {Plot Descriptions} 
+      4. {Potion Descriptions} 
+      5. {Prophecy Descriptions} 
+      6. {Quest Descriptions} 
+      7. {School Uniform Descriptions} 
+      8. {Society Descriptions} 
+      9. {Spell Descriptions} 
+      10. {Tavern Descriptions} 
+      11. {Throne Hall Descriptions}   
+      1. {Town Descriptions} 
+      2. {Tradition Descriptions} 
+      3. {Wand Descriptions} 
+      4. {Weapons (A. Rifles)} 
+      5. {Weapons (Blades)} 
+      6. {Weapons (Bows)} 
+      7. {Weapons (Pistol)} 
+      8. {Weapons (Shields)} 
+      9. {Weapons (Shotgun)} 
+      10. {Weapons (Staves)}    
+</div>
+{% endblock %}
+

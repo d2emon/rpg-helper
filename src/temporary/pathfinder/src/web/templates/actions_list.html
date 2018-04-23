@@ -1,0 +1,17 @@
+{% extends "rpa.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<div>
+{% if actions %}
+<ul>
+  {% for action in actions %}
+  <li>
+    <a href="{{ action['url'] }}">{{action['title']}}</a> - {{action}}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div>Нет доступных действий</div>
+{% endif %}
+</div>
+{% endblock %}

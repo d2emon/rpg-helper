@@ -1,0 +1,8 @@
+-e git://github.com/d2emon/pydice.git#egg=pydice
+alembic==0.8.10
+SQLAlchemy==1.1.5
+Flask==0.12
+Flask-Migrate==2.0.3
+Flask-Script==2.0.5
+Flask-SQLAlchemy==2.1
+Flask-WTF==0.14.2

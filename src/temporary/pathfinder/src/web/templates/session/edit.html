@@ -1,0 +1,23 @@
+{% extends "rpa.html" %}
+{% block content %}
+<h1>Add {{session['campaign'].name}} Session</h1>
+<div>
+<form method="POST" action="{{ url_for('session_edit', session_id=session_id) }}">
+    {{ form.csrf_token }}
+    <div>{{ form.title.label }}: {{ form.title(size=64) }}</div>
+    <div>{{ form.real_date.label }}: {{ form.real_date(class='datepicker') }}</div>
+    <div>{{ form.world_date.label }}: {{ form.world_date(class='datepicker') }}</div>
+    <div>
+    <a href="{{ url_for('session_show', session_id=session_id) }}">Опыт</a>
+    <a href="{{ url_for('session_show', session_id=session_id) }}">Подробнее</a>
+    </div>
+    <div>
+    <div>{{ form.description.label }}:</div>
+    <div>
+    {{ form.description(cols="35", rows="20") }}
+    </div>
+    </div>
+    <div><input type="submit" value="Сохранить"></div>
+</form>
+</div>
+{% endblock %}

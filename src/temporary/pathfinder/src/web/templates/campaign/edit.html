@@ -1,0 +1,11 @@
+{% extends "rpa.html" %}
+{% block content %}
+<h1>Add {{session['rpg'].name}} Campaign</h1>
+<div>
+<form method="POST" action="{{ url_for('campaign_edit', campaign_id=campaign_id) }}">
+    {{ form.csrf_token }}
+    {{ form.title.label }}: {{ form.title(size=64) }}
+    <input type="submit" value="Сохранить">
+</form>
+</div>
+{% endblock %}

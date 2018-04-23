@@ -1,0 +1,21 @@
+- title: Human
+  creatures:
+  - Adventurer
+  - Buccaneer
+  - Buccaneer
+  - Merchant
+  - Merchant
+  - Merchant
+  - Merchant
+  - Merchant
+  - Pirate
+  - Pirate
+  - Pirate
+  - Pirate
+- file: db/encounters/flyers.yml
+- file: db/encounters/swimmer/ocean.yml
+- file: db/encounters/swimmer/ocean.yml
+- file: db/encounters/swimmer/ocean.yml
+- file: db/encounters/swimmer/ocean.yml
+- file: db/encounters/swimmer/ocean.yml
+- file: db/encounters/dragon.yml

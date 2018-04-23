@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GURPS</title>
+</head>
+<body>
+  <h3>{{place.title}}</h3>
+  <form action="/encounter/{{place.id}}" method="POST">
+    <div>Сколько часов? <input type="text" name="hours"></div>
+    <div><input type="submit"></div>
+  </form>
+  <p>{{eh}}, ec = getChance({{place}}, hours={{hours}})</p>
+  {% if hours > 0 %}
+  <ul>
+    <li>
+    <p>You spent {{eh}} hours of {{hours}}</p>
+    </li>
+    <li>
+      if not ec and not gui.askYN("No encounter. Roll anyway?"):
+      <div>
+        Без энкаунтера. Бросить все равно?
+        <ul>
+          <li><a href="#">Да</a></li>
+          <li><a href="#">Нет</a></li>
+        </ul>
+      </div>
+      
+      <ul>
+        <li>continue</li>
+      </ul>
+    </li>
+    <ul>
+      {% for w in wilderness %}
+      <li>{{w.title}} <a href="#">eh, ec = getChance({{w}}, hours={{hours}})</a></li>
+      <li>cg = gui.menu.showMenu(items=[l.title for l in LAND_TYPES], func=getCreatureType)</li>
+      {% endfor %}
+    </ul>
+    <li>
+    <p>{cg}</p>
+    </li>
+  </ul>
+  {% endif%}
+</body>
+</html>

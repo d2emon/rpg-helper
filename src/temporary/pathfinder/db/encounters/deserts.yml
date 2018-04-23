@@ -1,0 +1,34 @@
+- file: db/encounters/human/desert.yml
+- title: Flyer
+  creatures:
+  - Gargoyle
+  - Gargoyle
+  - Griffon
+  - Harpy
+  - Insect Swarm
+  - Draco Lizard
+  - Manticore
+  - Manticore
+  - Manticore
+  - Small Roc
+  - Large Roc
+  - Giant Roc
+- title: Humanoid
+  creatures:
+  - Fire Giant
+  - Goblin
+  - Hobgoblin
+  - Hobgoblin
+  - Ogre
+  - Ogre
+  - Ogre
+  - Orc
+  - Orc
+  - Pixie
+  - Sprite
+  - Thoul
+- file: db/encounters/human/desert.yml
+- file: db/encounters/animals/desert.yml
+- file: db/encounters/dragon.yml
+- file: db/encounters/undead.yml
+- file: db/encounters/animals/desert.yml

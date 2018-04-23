@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{c.charname}}</h1>
+<form action="" method="post" name="edit">
+{{form.hidden_tag()}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Портрет</div>
+        <div class="panel-body">
+          <img src="{{c.avatar(128)}}">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="row">
+          <div class="panel panel-primary">
+            <div class="panel-heading">О фракции</div>
+            <div class="panel-body">
+              <div>Название: {{form.title(size = 24)}}</div>
+              <div>Вес: {{form.weight()}}</div>
+            </div>
+          </div>
+          <div class="panel panel-primary">
+            <div class="panel-heading">Описание</div>
+            <div class="panel-body">
+              {{form.description()}}
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <div>
+    <input type="submit" value="Сохранить">
+  </div>
+</form>
+{% endblock %}

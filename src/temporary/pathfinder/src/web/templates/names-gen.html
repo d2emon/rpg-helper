@@ -1,0 +1,80 @@
+{% extends "rpa.html" %}
+{% block content %}
+<h1>Place names</h1>
+{% if names %}
+<ul>
+  {% for name in names %}
+  <li>{{name}}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<div>No names</div>
+{% endif %}
+<div>
+  <ul>
+    <li>
+      Family
+      <ul>
+        <li>
+        4. {Battle Cry Generator} 
+        1. {Coat Of Arms Creator} 
+        5. {Emblem Creator} 
+        6. {Family Tree Creator}   
+        1. {Flag Creator} 
+      2. {Mottos} 
+      5. {Slogan Generator}   
+      1. {Swear Words} 
+      5. {Wisdom Quotes}    
+        </li>
+      </ul>
+    </li>
+    <li>
+      Map
+      <ul>
+        <li>
+      1. {Map Creator} 
+      3. {Town Creator} 
+        </li>
+      </ul>
+    </li>
+    <li>
+      Items
+      <ul>
+        <li>
+      1. {Armor Creator} 
+      4. {Weapon Creator} 
+        </li>
+      </ul>
+    </li>
+    <li>
+      Time
+      <ul>
+        <li>
+      5. {Calendar Creator} 
+      2. {Timeline Creator} 
+        </li>
+      </ul>
+    </li>
+    <li>
+      WTF
+      <ul>
+        <li>
+      3. {Ascii Face Generator} 
+      4. {Demonyms} 
+      2. {Grammar Creator} 
+      3. {Haiku Generator} 
+      5. {Language Generator}   
+      4. {Idiom Generator} 
+        </li>
+      </ul>
+    </li>
+  </ul>
+      2. {Army Formation Creator} 
+      6. {Character Goal Generator}   
+      2. {Concept Ideas (Art)} 
+      3. {Concept Ideas (Story)} 
+      3. {Riddle Generator} 
+      4. {School Subjects} 
+</div>
+{% endblock %}
+

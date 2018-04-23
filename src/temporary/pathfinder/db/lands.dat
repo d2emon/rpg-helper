@@ -1,0 +1,10 @@
+db/encounters/grassland.yml=Grassland
+db/encounters/woods.yml=Woods
+db/encounters/rivers.yml=River
+db/encounters/swamps.yml=Swamp
+db/encounters/mountains.yml=Mountain
+db/encounters/deserts.yml=Desert
+db/encounters/settled.yml=Settled
+db/encounters/city.yml=City
+db/encounters/ocean.yml=Ocean
+db/encounters/jungles.yml=Jungle
