@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>{{appname}}{% if title %} - {{title}}{% endif %}
+    </title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon/favicon.ico') }}">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- link(href="{{ url_for('static', filename='css/dropzone.min.css') }}", rel="stylesheet")-->
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">{% block style %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      <!-- nav(class="navbar navbar-inverse navbar-fixed-top")-->
+      <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+          <div class="navbar-header">
+            <!-- button(type="button", class="navbar-toggle collapsed", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar")-->
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand topnav" href="/">{{appname}}</a>
+          </div>
+          <!-- div(id="navbar", class="navbar-collapse collapse")-->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">{% if current_user.is_authenticated %}
+              <li><a href="{{ current_user.after_login }}">Dashboard</a></li>
+              <li><a href="{{ url_for('rpg.index') }}">RPG</a></li>
+              <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Systems <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ url_for('pathfinder.index') }}">Pathfinder</a></li>
+                  <li><a href="{{ url_for('gurps.index') }}">GURPS</a></li>
+                  <li><a href="{{ url_for('tnt.index') }}">Tunels & Trolls</a></li>
+                </ul>
+              </li>
+              <li><a href="{{ url_for('world.world_list') }}">Worlds</a></li>{% if current_user.is_admin %}
+              <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{ url_for('admin.list_departments') }">Departments</a></li>
+                  <li><a href="{ url_for('admin.list_roles') }">Roles</a></li>
+                  <li><a href="{ url_for('admin.list_employees') }">Employees</a></li>
+                </ul>
+              </li>{% endif %}
+              <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+              <li><a><i class="fa fa-user"></i> Hi, {{ current_user.username }}!</a></li>{% else %}
+              <li><a href="{{ url_for('home.index') }}">Home</a></li>
+              <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+              <li><a href="{{ url_for('auth.login') }}">Login</a></li>{% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="modal fade" id="confirm-del" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">Вы уверены?</div>
+            <div class="modal-body">...</div>
+            <div class="modal-footer">
+              <button class="btn btn-default" type="button" data-dismiss="modal">Отменить</button><a class="btn btn-default btn-danger btn-ok">Удалить</a>
+            </div>
+          </div>
+        </div>
+      </div>{% with messages = get_flashed_messages(with_categories=True) %}
+        {% for category, message in messages %}
+      <div class="alert alert-{{category}}">{{ message }}</div>  {% endfor %}
+      {% endwith %}
+      <div class="row wrapper">
+        <div class="content-section">
+          <h1>Select Session</h1>
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">Select Session</h4>
+                    </div>{% if pagination %}{% if pagination.pages %}
+                    <div class="well well-sm">
+                      <ul class="pagination pagination-sm">
+                        <li class="{% if not pagination.has_prev %}disabled{% endif %}"><a href="?page={{ pagination.prev_num }}"><span class="glyphicon glyphicon-menu-left"></span></a></li>{%- for page in pagination.iter_pages() %}
+                        {% if page %}
+                        <li class="{% if page == pagination.page %}active{% endif %}"><a href="?page={{ page }}">{{ page }}</a></li>{% else %}
+                        <li><span>…</span></li>{% endif %}
+                        {%- endfor %}
+                        <li class="{% if not pagination.has_next %}disabled{% endif %}"><a href="?page={{ pagination.next_num }}"><span class="glyphicon glyphicon-menu-right"></span></a></li>
+                      </ul>
+                    </div>{% endif %}{% endif %}
+                    <div class="well well-sm btn-toolbar well-toolbar" role="toolbar" aria-label="toolbar">&nbsp;<a class="btn btn-sm btn-primary" href="{{ url_for('session.session_edit', campaign_id=campaign_id) }}" data-toggle="tooltip" title="Добавить"><i class="fa fa-plus"></i></a>
+                      <!-- a(href="{{ url_for('rpg.rpg_add') }}", type="button", class="btn btn-sm btn-default", data-toggle="tooltip", title="Add") <span class="fa fa-plus" aria-hidden="true"></span><br>Add-->
+                      <!-- a(href="{{ url_for('rpg.rpg_del') }}", type="button", class="btn btn-sm btn-default", data-toggle="tooltip", title="Del") <span class="fa fa-minus" aria-hidden="true"></span><br>Del-->
+                      <div class="pull-right"><strong>Total: </strong>{{ pagination.total }}</div>
+                    </div>{% if items %}
+                    <div>
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th class="col-md-1 col-lg1 col-sm-1"></th>
+                              <th>Session</th>
+                            </tr>
+                          </thead>
+                          <tbody>{% for i in items %}
+                            <tr>
+                              <td> 
+                                <center>
+                                  <div class="btn-group btn-group-xs"><a class="btn btn-sm btn-primary" href="{{ url_for('session.session_show', campaign_id=campaign_id, session_id=i.id) }}" data-toggle="tooltip" title="Просмотреть"><i class="fa fa-search"></i></a><a class="btn btn-sm btn-primary" href="{{ url_for('session.session_edit', campaign_id=campaign_id, session_id=i.id) }}" data-toggle="tooltip" title="Редактировать"><i class="fa fa-edit"></i></a><a class="btn btn-sm btn-primary confirm" data-href="{{ url_for('session.session_del', campaign_id=campaign_id, session_id=i.id) }}" data-toggle="modal" title="Удалить" data-text="Вы уверены, что хотите удалить эту запись?" data-target="#confirm-del"><i class="fa fa-eraser"></i></a></div>
+                                </center>
+                              </td>
+                              <td><a href="{{ url_for('session.session_show', campaign_id=campaign_id, session_id=i.id) }}">{{i}}</a></td>
+                            </tr>{% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>{% else %}
+                    <div class="panel-body">
+                      <h3>No aviable Sessions</h3>
+                    </div>{% endif %}{% if pagination %}{% if pagination.pages %}
+                    <div class="well well-sm">
+                      <ul class="pagination pagination-sm">
+                        <li class="{% if not pagination.has_prev %}disabled{% endif %}"><a href="?page={{ pagination.prev_num }}"><span class="glyphicon glyphicon-menu-left"></span></a></li>{%- for page in pagination.iter_pages() %}
+                        {% if page %}
+                        <li class="{% if page == pagination.page %}active{% endif %}"><a href="?page={{ page }}">{{ page }}</a></li>{% else %}
+                        <li><span>…</span></li>{% endif %}
+                        {%- endfor %}
+                        <li class="{% if not pagination.has_next %}disabled{% endif %}"><a href="?page={{ pagination.next_num }}"><span class="glyphicon glyphicon-menu-right"></span></a></li>
+                      </ul>
+                    </div>{% endif %}{% endif %}
+                  </div>
+        </div>
+      </div>
+      <div class="push"></div>
+    </div>
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <ul class="list-inline">
+              <li><a href="{ url_for('home.homepage') }">Home</a></li>
+              <li class="footer-menu-divider">.</li>{% if current_user.is_authenticated %}
+              <li><a href="{ url_for('auth.logout') }">Logout</a></li>{% else %}
+              <li><a href="{ url_for('auth.register') }">Register</a></li>
+              <li class="footer-menu-divider">.</li>
+              <li><a href="{{ url_for('auth.login') }}">Login</a></li>{% endif %}
+            </ul>
+            <p class="copyright text-muted small">Copyright &copy; 2017/ All Rights Reserved</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- script(src="{{ url_for('static', filename='js/dropzone.min.js') }}")-->
+    <!-- script(src="{{ url_for('static', filename='js/index.js') }}")-->{% block script %}{% endblock %}
+  </body>
+</html>
