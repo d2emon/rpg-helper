@@ -7,24 +7,13 @@ from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from temporary.flask_utils import FlaskUtils
 from config import app_config
+from .flask_vue import FlaskVue
 
 
 import os
 
 debug = os.environ.get('FLASK_DEBUG', False)
 config_name = os.environ.get('FLASK_CONFIG', 'production')
-
-
-class FlaskVue(Flask):
-    jinja_options = Flask.jinja_options.copy()
-    jinja_options.update(dict(
-      block_start_string='{%',
-      block_end_string='%}',
-      variable_start_string='((',
-      variable_end_string='))',
-      comment_start_string='{#',
-      comment_end_string='#}',
-    ))
 
 
 def create_app(debug=False, config_name='production'):
@@ -37,12 +26,7 @@ def create_app(debug=False, config_name='production'):
     return app
 
 
-# app = CustomFlask(__name__)
-# app.config.from_pyfile('db.cfg')
-# db = SQLAlchemy(app)
-
-
-app = create_app(config_name=config_name)
+app = create_app(debug, config_name=config_name)
 
 # Loading modules
 bootstrap = Bootstrap(app)
