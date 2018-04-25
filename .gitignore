@@ -110,3 +110,6 @@ node_modules/
 /.pydevproject
 
 yarn.lock
+package-lock.json
+
+/templates/vue

@@ -21,24 +21,24 @@
   <h1>Examples & Tips - Flask with Vue.js</h1>
   <a href="https://github.com/yymm/flask-vuejs">README</a>
   <ul>
-    <li><a href="(( url_for('vue.example') ))">Jinja2 & Vue.js</a></li>
-    <li><a href="(( url_for('vue.sqlalchemy') ))">with SQLAlchemy</a></li>
-    <li><a href="(( url_for('vue.more') ))">more...</a></li>
+    <li><a href="{{ url_for('vue.example') }}">Jinja2 & Vue.js</a></li>
+    <li><a href="{{ url_for('vue.sqlalchemy') }}">with SQLAlchemy</a></li>
+    <li><a href="{{ url_for('vue.more') }}">more...</a></li>
   </ul>
   <h2>Single Page Application</h2>
   <h3>using CDN</h3>
   <ul>
-    <li><a href="(( url_for('vue.router') ))">vue-router</a></li>
+    <li><a href="{{ url_for('vue.router') }}">vue-router</a></li>
   </ul>
   <h3>using Node.js</h3>
   <ul>
-    <li><a href="(( url_for('vue.sfc') ))">Single File Component</a></li>
-    <li><a href="(( url_for('vue.typescript') ))">TypeScript</a></li>
-    <li><a href="(( url_for('vue.vuex') ))">Vuex</a></li>
+    <li><a href="{{ url_for('vue.sfc') }}">Single File Component</a></li>
+    <li><a href="{{ url_for('vue.typescript') }}">TypeScript</a></li>
+    <li><a href="{{ url_for('vue.vuex') }}">Vuex</a></li>
   </ul>
   <h2>Ruins...</h2>
   <ul>
-    <li><a href="(( url_for('vue.v0_10_3') ))">vue.js v0.10.3</a></li>
+    <li><a href="{{ url_for('vue.v0_10_3') }}">vue.js v0.10.3</a></li>
   </ul>
 </div>
 {% endblock %}

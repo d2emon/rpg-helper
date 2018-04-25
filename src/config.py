@@ -29,7 +29,8 @@ class Config(object):
     RECORDS_ON_PAGE = 10
     # PER_PAGE = 10
 
-    STATIC_FOLDER = os.path.join(BASE_DIR, 'static')
+    # STATIC_FOLDER = os.path.join(BASE_DIR, 'static')
+    STATIC_FOLDER = os.path.join(BASE_DIR, 'vue-dist', 'static')
     TEMPLATE_FOLDER = os.path.join(BASE_DIR, 'templates')
 
 

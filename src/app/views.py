@@ -4,7 +4,8 @@ from app import app, cache
 import requests
 
 
-DEV_SERVER = 'http://localhost:43057/'
+DEV_SERVER = 'http://localhost:8080/'
+
 
 @app.context_processor
 def template_globals():
@@ -36,4 +37,4 @@ def internal_server_error(error):
 def catch_route(path):
     if app.debug:
         return requests.get('{}{}'.format(DEV_SERVER, path)).text
-    return render_template('vue/router.html')
+    return render_template('vue-dist/index.html')

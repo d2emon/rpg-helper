@@ -7,7 +7,7 @@ from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from temporary.flask_utils import FlaskUtils
 from config import app_config
-from .flask_vue import FlaskVue
+# from .flask_vue import FlaskVue
 
 
 import os
@@ -17,7 +17,10 @@ config_name = os.environ.get('FLASK_CONFIG', 'production')
 
 
 def create_app(debug=False, config_name='production'):
-    app = FlaskVue(__name__, instance_relative_config=True)
+    app = Flask(
+        __name__,
+        instance_relative_config=True
+    )
 
     # Loading config
     app.config.from_object(app_config[config_name])
@@ -53,7 +56,7 @@ from home import *
 from auth import *
 from admin import *
 
-app.register_blueprint(home_blueprint)
+app.register_blueprint(home_blueprint, url_prefix='/main')
 app.register_blueprint(auth_blueprint)
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
