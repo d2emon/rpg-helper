@@ -24,12 +24,14 @@ hr {
 const Home = { template: '&lt;div&gt;home&lt;/div&gt;' }
 const Foo = { template: '&lt;div&gt;foo&lt;/div&gt;' }
 const Bar = { template: '&lt;div&gt;bar&lt;/div&gt;' }
+const Other = { template: '&lt;div&gt;OTHER&lt;/div&gt;' }
 
 const router = new VueRouter({
   routes: [
     { path: '/', component: Home },
     { path: '/foo', component: Foo },
-    { path: '/bar', component: Bar }
+    { path: '/bar', component: Bar },
+    { path: '*', component: Other }
   ]
 })
 
@@ -60,12 +62,14 @@ new Vue({
 const Home = { template: '<div>home</div>' }
 const Foo = { template: '<div>foo</div>' }
 const Bar = { template: '<div>bar</div>' }
+const Other = { template: '<div>OTHER</div>' }
 
 const router = new VueRouter({
   routes: [
     { path: '/', component: Home },
     { path: '/foo', component: Foo },
-    { path: '/bar', component: Bar }
+    { path: '/bar', component: Bar },
+    { path: '*', component: Other }
   ]
 })
 
