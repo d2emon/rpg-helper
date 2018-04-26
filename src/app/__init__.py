@@ -29,27 +29,53 @@ def create_app(debug=False, config_name='production'):
     return app
 
 
+
+
 app = create_app(debug, config_name=config_name)
 
+
 # Loading modules
-bootstrap = Bootstrap(app)
+class FlaskModules:
+    def __init__(self, app):
+        self.app = app
 
-cache = Cache(app)
+        self.bootstrap = Bootstrap(self.app)
 
-utils = FlaskUtils(app)
+        self.cache = Cache(self.app)
 
-login_manager = LoginManager(app)
-login_manager.login_message = "You must be logged in to access this page."
-login_manager.login_view = "auth.login"
+        self.utils = FlaskUtils(self.app)
 
-manager = Manager(app)
+        self.login_manager = LoginManager(self.app)
+        self.login_manager.login_message = "You must be logged in to access this page."
+        self.login_manager.login_view = "auth.login"
 
-db = SQLAlchemy(app)
-db.create_all()
+        self.manager = Manager(self.app)
 
-migrate = Migrate(app, db)
+        self.db = SQLAlchemy(self.app)
+        self.db.create_all()
 
-# Session(app)
+        self.migrate = Migrate(self.app, self.db)
+
+        # self.session = Session(self.app)
+
+print(app)
+app.modules = FlaskModules(app)
+print(app.modules)
+
+# bootstrap = Bootstrap(app)
+
+# cache = Cache(app)
+
+# utils = FlaskUtils(app)
+
+bootstrap = app.modules.bootstrap
+cache = app.modules.cache
+utils = app.modules.utils
+login_manager = app.modules.login_manager
+manager = app.modules.manager
+db = app.modules.db
+migrate = app.modules.migrate
+
 
 # Importing blueprints
 from home import *

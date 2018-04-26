@@ -10,34 +10,35 @@
       type="light"
       variant="light"
     )
-      b-navbar-toggle(target="nav_collapse")
-      b-navbar-brand(
-        to="/"
-        class="topnav"
-        v-text="appname"
-      )
-      b-collapse(is-nav id="nav_collapse")
-        b-navbar-nav(class="ml-auto")
-          template(v-if="current_user.is_authenticated")
-            b-nav-item(:to="current_user.after_login") Dashboard
-            b-nav-item(to="/rpg/index") RPG
-            b-nav-item-dropdown(right)
-              template(slot="button-content") Systems
-              b-dropdown-item(to="/pathfinder/index") Pathfinder
-              b-dropdown-item(to="/gurps/index") GURPS
-              b-dropdown-item(to="/tnt/index") Tunnels & Trolls
-            b-nav-item(to="/world/world_list") Worlds
-            b-nav-item-dropdown(right v-if="current_user.is_admin")
-              template(slot="button-content") Admin
-              b-dropdown-item(to="/admin/list_departments") Departments
-              b-dropdown-item(to="/admin/list_roles") Roles
-              b-dropdown-item(to="/admin/list_eployees") Employees
-            b-nav-item(to="/auth/logout") Logout
-            b-nav-item <i class="fa fa-user"></i> Hi, {{ current_user.username }}!
-          template(v-else)
-            b-nav-item(to="/home/index") Home
-            b-nav-item(to="/auth/register") Register
-            b-nav-item(to="/auth/login") Login
+      b-container
+        b-navbar-toggle(target="nav_collapse")
+        b-navbar-brand(
+          to="/"
+          class="topnav"
+          v-text="appname"
+        )
+        b-collapse(is-nav id="nav_collapse")
+          b-navbar-nav(class="ml-auto")
+            template(v-if="current_user.is_authenticated")
+              b-nav-item(:to="current_user.after_login") Dashboard
+              b-nav-item(to="/rpg/index") RPG
+              b-nav-item-dropdown(right)
+                template(slot="button-content") Systems
+                b-dropdown-item(to="/pathfinder/index") Pathfinder
+                b-dropdown-item(to="/gurps/index") GURPS
+                b-dropdown-item(to="/tnt/index") Tunnels & Trolls
+              b-nav-item(to="/world/world_list") Worlds
+              b-nav-item-dropdown(right v-if="current_user.is_admin")
+                template(slot="button-content") Admin
+                b-dropdown-item(to="/admin/list_departments") Departments
+                b-dropdown-item(to="/admin/list_roles") Roles
+                b-dropdown-item(to="/admin/list_eployees") Employees
+              b-nav-item(to="/auth/logout") Logout
+              b-nav-item <i class="fa fa-user"></i> Hi, {{ current_user.username }}!
+            template(v-else)
+              b-nav-item(to="/home/index") Home
+              b-nav-item(to="/auth/register") Register
+              b-nav-item(to="/auth/login") Login
 
   b-container
     #confirm-del(class="modal fade", tabindex=-1, role="dialog")
@@ -58,7 +59,6 @@
 
     div(class="row wrapper")
       // include _panel.pug
-      img(src="./assets/logo.png")
       router-view
     .push
 
@@ -98,13 +98,36 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  // font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+  // text-align: center;
+  // color: #2c3e50;
   margin-top: 60px;
+}
+
+@import "./scss/_navbar.scss";
+@import "./scss/style.scss";
+@import "./scss/_theme.scss";
+</style>
+
+<style scoped lang="scss">
+.navbar-light {
+  background-color: #f8f8f8;
+  border-bottom: solid 1px #e7e7e7;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #aec251;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #687430;
+}
+
+footer .nav .nav-link, footer .nav .footer-menu-divider {
+  padding: 0px 5px;
 }
 </style>
