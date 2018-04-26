@@ -1,47 +1,9 @@
 <template lang="pug">
-#app
-  app-header
-  b-container
-    confirm-del
-    messages
-
-    div(class="row wrapper")
-      // include _panel.pug
-      router-view
-    .push
-
-  app-footer
+router-view
 </template>
 
 <script>
-import {
-  AppHeader,
-  AppFooter,
-  ConfirmDel,
-  Messages
-} from '@/components/'
-
 export default {
-  components: {
-    AppHeader,
-    AppFooter,
-    ConfirmDel,
-    Messages
-  },
-  data () {
-    // {% with messages = get_flashed_messages(with_categories=True) %}
-    return {
-      appname: 'RPG-Helper',
-      current_user: {
-        is_authenticated: false
-      },
-      messages: [
-        // { category: 'info', message: 'text' },
-        // { category: 'info', message: 'text' },
-        // { category: 'info', message: 'text' }
-      ]
-    }
-  },
   name: 'app'
 }
 </script>

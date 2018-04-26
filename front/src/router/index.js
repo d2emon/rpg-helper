@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+// Containers
+import Full from '@/containers/Full'
+// import Simple from '@/containers/Simple'
+
 // Views
 import Hello from '@/views/Hello'
 
@@ -10,8 +14,17 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      redirect: '/home',
+      name: 'Home',
+      component: Full,
+      children: [
+        {
+          path: '/home',
+          name: 'Hello',
+          component: Hello
+        }
+      ]
+
     }
   ]
 })

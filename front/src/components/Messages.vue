@@ -11,7 +11,7 @@ div
 <script>
 export default {
   name: 'messages',
-  data() {
+  data () {
     // {% with messages = get_flashed_messages(with_categories=True) %}
     return {
       messages: []
