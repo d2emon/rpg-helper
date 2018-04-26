@@ -23,20 +23,7 @@
       router-view
     .push
 
-  footer
-    b-container
-      b-row
-        b-col(col lg="12")
-          b-nav
-            b-nav-item(to="/") Home
-            li.footer-menu-divider .
-            template(v-if="current_user.is_authenticated")
-              b-nav-item(to="/auth/logout") Logout
-            template(v-else)
-              b-nav-item(to="/auth/register") Register
-              li.footer-menu-divider .
-              b-nav-item(to="/auth/login") Login
-          p(class="copyright text-muted small") Copyright &copy; 2017/ All Rights Reserved
+  app-footer
 </template>
 
 <script>
@@ -91,23 +78,4 @@ $fa-font-path: '~font-awesome/fonts/';
 @import "./scss/_navbar.scss";
 @import "./scss/style.scss";
 @import "./scss/_theme.scss";
-</style>
-
-<style scoped lang="scss">
-.navbar-light {
-  background-color: #f8f8f8;
-  border-bottom: solid 1px #e7e7e7;
-}
-
-.navbar-light .navbar-nav .nav-link {
-  color: #aec251;
-}
-
-.navbar-light .navbar-nav .nav-link:hover {
-  color: #687430;
-}
-
-footer .nav .nav-link, footer .nav .footer-menu-divider {
-  padding: 0px 5px;
-}
 </style>
