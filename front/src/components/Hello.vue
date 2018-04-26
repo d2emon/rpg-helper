@@ -34,6 +34,11 @@ li {
   margin: 0 10px;
 }
 
+h3 {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
 .intro-header {
   width: 1170px;
 }
