@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+.flashed-messages
   b-container(
     v-if="utils.flashed_messages.length"
     class="flashed-messages"
@@ -21,10 +21,17 @@ export default {
     return {
       utils: {
         flashed_messages: [
-          // { category: 'info', message: 'Invalid email or password' }
+          { category: 'info', message: 'Invalid email or password' }
         ]
       }
     }
   }
 }
 </script>
+
+<style>
+.flashed-messages {
+  padding-top: 50px;
+  width: 100%;
+}
+</style>

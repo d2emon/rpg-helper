@@ -4,8 +4,9 @@
   b-container
     confirm-del
     messages
-
     div(class="row wrapper")
+      flashed-messages
+
       // include _panel.pug
       router-view
     .push
@@ -18,7 +19,8 @@ import {
   AppHeader,
   AppFooter,
   ConfirmDel,
-  Messages
+  Messages,
+  FlashedMessages
 } from '@/components/'
 
 export default {
@@ -26,7 +28,8 @@ export default {
     AppHeader,
     AppFooter,
     ConfirmDel,
-    Messages
+    Messages,
+    FlashedMessages
   },
   name: 'full'
 }

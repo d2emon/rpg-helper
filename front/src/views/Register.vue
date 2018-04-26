@@ -1,5 +1,5 @@
 <template lang="pug">
-.content-section
+.container(class="content-section")
   br
 
   flashed-messages
@@ -34,8 +34,15 @@
 </template>
 
 <script>
+import {
+  FlashedMessages
+} from '@/components/'
+
 export default {
   name: 'login',
+  components: {
+    FlashedMessages
+  },
   data () {
     // {% import "bootstrap/utils.html" as utils %}
     // {% import "bootstrap/wtf.html" as wtf %}
@@ -56,15 +63,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-h1 {
-  font-size: 36px;
-}
-
-.content-section {
-  padding-top: 100px;
-  width: 100%;
-}
-
 @import "./scss/_colors.scss";
 
 .btn-outline-primary {
