@@ -7,6 +7,7 @@ import Full from '@/containers/Full'
 
 // Views
 import Hello from '@/views/Hello'
+import Login from '@/views/Login'
 
 Vue.use(Router)
 
@@ -25,6 +26,24 @@ export default new Router({
         }
       ]
 
+    },
+    {
+      path: '/auth',
+      redirect: '/auth/login',
+      name: 'Auth',
+      component: Full,
+      children: [
+        {
+          path: 'login',
+          name: 'Login',
+          component: Login
+        /* },
+        {
+          path: 'register',
+          name: 'Register',
+          component: Register */
+        }
+      ]
     }
   ]
 })
