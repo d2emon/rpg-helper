@@ -3,13 +3,7 @@
   app-header
   b-container
     confirm-del
-
-    b-alert(
-      v-for="message, id in messages"
-      :key="id"
-      :variant="message.category"
-      show
-    ) message.message
+    messages
 
     div(class="row wrapper")
       // include _panel.pug
