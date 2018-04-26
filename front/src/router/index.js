@@ -8,6 +8,7 @@ import Full from '@/containers/Full'
 // Views
 import Hello from '@/views/Hello'
 import Login from '@/views/Login'
+import Register from '@/views/Register'
 
 Vue.use(Router)
 
@@ -37,11 +38,11 @@ export default new Router({
           path: 'login',
           name: 'Login',
           component: Login
-        /* },
+        },
         {
           path: 'register',
           name: 'Register',
-          component: Register */
+          component: Register
         }
       ]
     }

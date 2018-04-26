@@ -2,17 +2,7 @@
 .content-section
   br
 
-  b-container(
-    v-if="utils.flashed_messages.length"
-    class="flashed-messages"
-  )
-    b-row(v-for="message, id in utils.flashed_messages")
-      b-col(md="12")
-        b-alert(
-          :key="id"
-          :variant="message.category"
-          show
-        ) {{ message.message }}
+  flashed-messages
 
   br
   .center
@@ -50,13 +40,7 @@ export default {
     // {% import "bootstrap/utils.html" as utils %}
     // {% import "bootstrap/wtf.html" as wtf %}
     return {
-      appname: 'Login',
       msg: 'Login to your account',
-      utils: {
-        flashed_messages: [
-          // { category: 'info', message: 'Invalid email or password' }
-        ]
-      },
       form: {
         username: '',
         password: ''
@@ -71,7 +55,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 h1 {
   font-size: 36px;
