@@ -2,10 +2,10 @@
 #app
   app-header
   b-container
-    confirm-del
-    messages
+    // confirm-del
+    // messages
     div(class="row wrapper")
-      flashed-messages
+      // flashed-messages
 
       // include _panel.pug
       router-view
@@ -34,3 +34,9 @@ export default {
   name: 'full'
 }
 </script>
+
+<style>
+#app {
+  padding-top: 50px;
+}
+</style>

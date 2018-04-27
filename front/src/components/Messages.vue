@@ -5,17 +5,17 @@ div
     :key="id"
     :variant="message.category"
     show
-  ) message.message
+  ) {{ message.message }}
 </template>
 
 <script>
 export default {
   name: 'messages',
-  data () {
-    // {% with messages = get_flashed_messages(with_categories=True) %}
-    return {
-      messages: []
-    }
+  computed: {
+    messages () { return this.$store.state.flash.messages }
+  },
+  update () {
+    this.$store.dispatch('flash/load')
   }
 }
 </script>

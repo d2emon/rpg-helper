@@ -1,11 +1,10 @@
 <template lang="pug">
 .flashed-messages
   b-container(
-    v-if="utils.flashed_messages.length"
-    class="flashed-messages"
+    v-if="messages.length"
   )
-    b-row(v-for="message, id in utils.flashed_messages")
-      b-col(md="12" :key="id")
+    b-row(v-for="message, id in messages")
+      b-col(md="12" :key="'msg' + id")
         b-alert(
           :variant="message.category"
           show
@@ -16,22 +15,20 @@
 <script>
 export default {
   name: 'messages',
-  data () {
-    // {% with messages = get_flashed_messages(with_categories=True) %}
-    return {
-      utils: {
-        flashed_messages: [
-          { category: 'info', message: 'Invalid email or password' }
-        ]
-      }
-    }
+  computed: {
+    messages () { return this.$store.state.flash.messages }
+  },
+  mounted () {
+    console.log('Mounted')
+    this.$store.dispatch('flash/load')
+    console.log(this.messages)
   }
 }
 </script>
 
 <style>
 .flashed-messages {
-  padding-top: 50px;
+  padding-top: 1rem;
   width: 100%;
 }
 </style>

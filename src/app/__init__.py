@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_cache import Cache
+from flask_cors import CORS
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_script import Manager
@@ -43,6 +44,8 @@ class FlaskModules:
 
         self.cache = Cache(self.app)
 
+        self.cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
         self.utils = FlaskUtils(self.app)
 
         self.login_manager = LoginManager(self.app)
@@ -58,15 +61,8 @@ class FlaskModules:
 
         # self.session = Session(self.app)
 
-print(app)
+
 app.modules = FlaskModules(app)
-print(app.modules)
-
-# bootstrap = Bootstrap(app)
-
-# cache = Cache(app)
-
-# utils = FlaskUtils(app)
 
 bootstrap = app.modules.bootstrap
 cache = app.modules.cache

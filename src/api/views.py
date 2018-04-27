@@ -23,7 +23,7 @@ def messages():
     """
     List Messages
     """
-    flash("Test message")
+    flash("Test message", "warning")
     return jsonify(get_flashed_messages(with_categories=True))
 
 
