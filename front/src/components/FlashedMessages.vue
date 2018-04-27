@@ -3,8 +3,8 @@
   b-container(
     v-if="messages.length"
   )
-    b-row(v-for="message, id in messages")
-      b-col(md="12" :key="'msg' + id")
+    b-row(v-for="message, id in messages" :key="'msg' + id")
+      b-col(md="12")
         b-alert(
           :variant="message.category"
           show
