@@ -1,7 +1,5 @@
-from flask import Blueprint, render_template, jsonify, request
-# from flask_login import login_required, login_user, logout_user
+from flask import Blueprint, render_template
 
-from app import db
 from .models import Todo, initialize_database
 
 
@@ -31,30 +29,6 @@ def sqlalchemy():
     except:
         initialize_database()
     return render_template('vue/sqlalchemy.html', todos=todos)
-
-
-@vue.route('/sqlalchemy/get', methods=['GET'])
-def sqlalchemy_get():
-    todos = Todo.query.order_by(Todo.pub_date.desc()).all()
-    return jsonify(todos=[todo.get_dict() for todo in todos])
-
-
-@vue.route('/sqlalchemy/new', methods=['POST'])
-def sqlalchemy_new():
-    if request.json:
-        db.session.add(Todo(request.json['title']))
-        db.session.commit()
-    return jsonify(status='ok') # Oops: always ok...
-
-
-@vue.route('/sqlalchemy/update', methods=['POST'])
-def sqlalchemy_update():
-    if request.json:
-        todo = Todo.query.get(request.json['id'])
-        todo.done = request.json['done']
-        todo.title = request.json['title']
-        db.session.commit()
-    return jsonify(status='ok') # Oops: always ok...
 
 
 @vue.route('/router')

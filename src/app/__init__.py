@@ -78,6 +78,11 @@ migrate = app.modules.migrate
 
 
 # Importing blueprints
+from api import *
+app.register_blueprint(api_blueprint, url_prefix='/api')
+app.register_blueprint(world_api_blueprint, url_prefix='/api/world-api')
+
+
 from home import *
 from auth import *
 from admin import *
