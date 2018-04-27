@@ -57,6 +57,8 @@ export default {
   methods: {
     onSubmit () {
       alert(this.form)
+      this.$store.dispatch('user/login', this.form)
+      this.$store.dispatch('flash/load')
     }
   }
 }

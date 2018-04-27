@@ -27,6 +27,19 @@ const actions = {
     }).catch(e => {
       console.error(e)
     })
+  },
+  login: (context, user) => {
+    console.log(user)
+    axios.post(api + '/login', user).then(response => {
+      console.log(response.data)
+      // context.commit('setUser', response.data.user)
+      context.dispatch('flash/load', null, { root: true })
+      context.commit('flash/addMessage', {
+        message: response.data.token
+      }, { root: true })
+    }).catch(e => {
+      console.error(e)
+    })
   }
 }
 

@@ -6,6 +6,9 @@ from auth.models import User
 from vue.models import Todo
 # from .forms import LoginForm, RegisterForm
 
+from datetime import datetime, timedelta
+
+import jwt
 
 api = Blueprint('api', __name__)
 
@@ -49,6 +52,29 @@ def add_user():
         'message': 'You have successfully registered! You may now login.',
         'status': 'ok',
     }), 201
+
+
+@api.route('/login', methods=['POST'])
+def login():
+    """
+    Login User
+    """
+    data = request.get_json()
+    # user = User.authenticate(**data)
+    user = User.login(**data)
+
+    if not user:
+        return jsonify({
+            'message': 'Invalid credentials',
+            'authenticated': False
+        }), 401
+
+    token = jwt.encode({
+        'sub': user.username,
+        'iat':datetime.utcnow(),
+        'exp': datetime.utcnow() + timedelta(minutes=30)
+    }, app.config['SECRET_KEY'])
+    return jsonify({ 'token': token.decode('UTF-8') })
 
 
 @api.route('/todo/get', methods=['GET'])
