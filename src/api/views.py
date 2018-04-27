@@ -1,7 +1,7 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, flash, get_flashed_messages
 # from flask import Blueprint, render_template, redirect, flash, url_for
 # from flask_login import login_required, login_user, logout_user
-from app import db
+from app import app, db
 from auth.models import User
 from vue.models import Todo
 # from .forms import LoginForm, RegisterForm
@@ -16,6 +16,15 @@ def index():
     Main API page
     """
     return jsonify(status='ok')
+
+
+@api.route('/messages', methods=['GET'])
+def messages():
+    """
+    List Messages
+    """
+    flash("Test message")
+    return jsonify(get_flashed_messages(with_categories=True))
 
 
 @api.route('/users', methods=['GET'])
