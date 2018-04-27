@@ -74,6 +74,20 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User: {}>'.format(self.fullname)
 
+    @property
+    def as_dict(self):
+        return {
+          'id': self.id,
+          'username': self.username,
+          # 'password': user.password_hash,
+          'role': str(self.role),
+          'nologin': self.nologin,
+          # 'namegiv': user.__namegiv,
+          # 'qnmrq': user.__qnmrq,
+          # 'ttyt': user.__ttyt,
+          # 'isawiz': user.__isawiz,
+        }
+
     # Password management
     @property
     def password(self):
