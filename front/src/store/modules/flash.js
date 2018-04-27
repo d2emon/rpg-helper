@@ -13,6 +13,7 @@ const mutations = {
     state.messages = messages
   },
   addMessage: (state, message) => {
+    console.log(message)
     state.messages.push(message)
   }
 }

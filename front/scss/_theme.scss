@@ -25,9 +25,13 @@ p.copyright {
     margin: 15px 0 0;
 }
 
+.alert {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+
 .alert-info {
-    width: 50%;
-    margin: auto;
     color: $alertColor;
     background-color: $alertBackground;
     border-color: $alertBorder;

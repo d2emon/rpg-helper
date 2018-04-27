@@ -44,7 +44,11 @@ def add_user():
     user = User(**data)
     db.session.add(user)
     db.session.commit()
-    return jsonify(user.as_dict), 201
+    return jsonify({
+        'user': user.as_dict,
+        'message': 'You have successfully registered! You may now login.',
+        'status': 'ok',
+    }), 201
 
 
 @api.route('/todo/get', methods=['GET'])
