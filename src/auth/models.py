@@ -196,6 +196,14 @@ class User(UserMixin, db.Model):
 
     # Other methods
     @classmethod
+    def authenticate(cls, username, password=None):
+        user = cls.login(username, password)
+        if user is not None and user.verify_password(password):
+            return user
+        else:
+            return None
+
+    @classmethod
     def login(cls, username, password=None):
         if not username:
             return None

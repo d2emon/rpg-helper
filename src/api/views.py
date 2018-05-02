@@ -60,12 +60,13 @@ def login():
     Login User
     """
     data = request.get_json()
-    # user = User.authenticate(**data)
-    user = User.login(**data)
+    user = User.authenticate(**data)
+    # user = User.login(**data)
     print(data)
     print(user)
 
     if not user:
+        flash('Invalid email or password')
         return jsonify({
             'message': 'Invalid credentials',
             'authenticated': False

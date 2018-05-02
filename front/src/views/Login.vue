@@ -58,7 +58,9 @@ export default {
   },
   methods: {
     onSubmit () {
-      this.$store.dispatch('user/login', this.form)
+      this.$store.dispatch('user/login', this.form).then(response => {
+        this.form.password = ''
+      })
       // this.$store.dispatch('user/login', {
       //   username: this.form.username,
       //   password: this.form.password
@@ -67,7 +69,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('flash/load')
+    // this.$store.dispatch('flash/load')
     MessageBus.$on('authenticated', isAuthenticated => {
       if (isAuthenticated) {
         console.log('authenticated')

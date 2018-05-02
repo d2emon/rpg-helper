@@ -60,7 +60,7 @@ const actions = {
       MessageBus.$emit('authenticated', context.getters.isAuthenticated)
     }).catch(e => {
       console.error('Error Authenticating: ', e)
-      MessageBus.$emit('newError', e)
+      MessageBus.$emit('newError', e.response.data.message)
     })
   },
   logout: (context) => {
