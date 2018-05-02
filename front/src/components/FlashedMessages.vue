@@ -13,13 +13,33 @@
 </template>
 
 <script>
+import { MessageBus } from '@/store/messages'
+
 export default {
   name: 'messages',
   computed: {
     messages () { return this.$store.state.flash.messages }
   },
   mounted () {
-    this.$store.dispatch('flash/load')
+    // this.$store.dispatch('flash/load')
+
+    MessageBus.$on('newMessage', msg => {
+      this.$store.commit('flash/addMessage', {
+        category: 'info',
+        message: msg
+      })
+    })
+    MessageBus.$on('newError', msg => {
+      console.error(msg)
+      this.$store.commit('flash/addMessage', {
+        category: 'danger',
+        message: msg
+      })
+    })
+  },
+  beforeDestroy () {
+    MessageBus.$off('newMessage')
+    MessageBus.$off('newError')
   }
 }
 </script>

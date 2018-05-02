@@ -38,6 +38,8 @@ import {
   FlashedMessages
 } from '@/components/'
 
+import { MessageBus } from '@/store/messages'
+
 export default {
   name: 'login',
   components: {
@@ -56,10 +58,25 @@ export default {
   },
   methods: {
     onSubmit () {
-      alert(this.form)
       this.$store.dispatch('user/login', this.form)
-      this.$store.dispatch('flash/load')
+      // this.$store.dispatch('user/login', {
+      //   username: this.form.username,
+      //   password: this.form.password
+      // })
+      // this.form = {}
     }
+  },
+  mounted () {
+    this.$store.dispatch('flash/load')
+    MessageBus.$on('authenticated', isAuthenticated => {
+      if (isAuthenticated) {
+        console.log('authenticated')
+        this.$router.push('/')
+      }
+    })
+  },
+  beforeDestroy () {
+    MessageBus.$off('authenticated')
   }
 }
 </script>

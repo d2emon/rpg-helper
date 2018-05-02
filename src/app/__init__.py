@@ -73,6 +73,9 @@ db = app.modules.db
 migrate = app.modules.migrate
 
 
+from app.views import *
+
+
 # Importing blueprints
 from api import *
 app.register_blueprint(api_blueprint, url_prefix='/api')
@@ -103,7 +106,7 @@ app.register_blueprint(vue_blueprint, url_prefix='/vue')
 
 rpg_manager = RpgManager(app)
 
-from app.views import *
+# from app.views import *
 
 # Adding commands from managers
 from auth.commands import manager as auth_manager

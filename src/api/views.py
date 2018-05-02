@@ -62,6 +62,8 @@ def login():
     data = request.get_json()
     # user = User.authenticate(**data)
     user = User.login(**data)
+    print(data)
+    print(user)
 
     if not user:
         return jsonify({

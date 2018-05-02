@@ -16,7 +16,7 @@ header
       )
       b-collapse(is-nav id="nav_collapse")
         b-navbar-nav(class="ml-auto")
-          template(v-if="current_user.is_authenticated")
+          template(v-if="isAuthenticated")
             template(v-for="(link, id) in userLinks")
               template(v-if="!link.admin || current_user.is_admin")
                 b-nav-item-dropdown(
@@ -48,13 +48,15 @@ header
 <script>
 var currentUser = {
   username: 'Username',
-  is_authenticated: false,
   is_admin: true,
   after_login: '/'
 }
 
 export default {
   name: 'app-header',
+  computed: {
+    isAuthenticated () { return this.$store.getters['user/isAuthenticated'] }
+  },
   data: () => ({
     appname: 'RPG-Helper',
     current_user: currentUser,

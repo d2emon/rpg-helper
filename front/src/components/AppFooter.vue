@@ -6,27 +6,23 @@ footer
         b-nav
           b-nav-item(to="/") Home
           li.footer-menu-divider .
-          template(v-if="current_user.is_authenticated")
+          template(v-if="isAuthenticated")
             b-nav-item(to="/auth/logout") Logout
           template(v-else)
             b-nav-item(to="/auth/register") Register
             li.footer-menu-divider .
             b-nav-item(to="/auth/login") Login
-        p(class="copyright text-muted small") Copyright &copy; {{year}}/ All Rights Reserved
+        p(class="copyright text-muted small") Copyright {{ token }} &copy; {{year}}/ All Rights Reserved
 </template>
 
 <script>
-var currentUser = {
-  username: 'Username',
-  is_authenticated: false,
-  is_admin: true,
-  after_login: '/'
-}
-
 export default {
   name: 'app-footer',
+  computed: {
+    token () { return this.$store.state.user },
+    isAuthenticated () { return this.$store.getters['user/isAuthenticated'] }
+  },
   data: () => ({
-    current_user: currentUser,
     year: 2018
   })
 }

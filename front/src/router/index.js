@@ -10,6 +10,8 @@ import Hello from '@/views/Hello'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 
+import store from '@/store'
+
 Vue.use(Router)
 
 export default new Router({
@@ -38,6 +40,13 @@ export default new Router({
           path: 'login',
           name: 'Login',
           component: Login
+        },
+        {
+          path: 'logout',
+          beforeEnter (to, from, next) {
+            store.dispatch('user/logout')
+            next('/auth/login')
+          }
         },
         {
           path: 'register',
