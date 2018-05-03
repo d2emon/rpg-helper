@@ -18,7 +18,7 @@ header
         b-navbar-nav(class="ml-auto")
           template(v-if="isAuthenticated")
             template(v-for="(link, id) in userLinks")
-              template(v-if="!link.admin || current_user.is_admin")
+              template(v-if="!link.admin || user.is_admin")
                 b-nav-item-dropdown(
                   right
                   v-if="link.items"
@@ -35,7 +35,7 @@ header
                   :key="id"
                   :to="link.to"
                 ) {{link.title}}
-            b-nav-item <i class="fa fa-user"></i> Hi, {{ current_user.username }}!
+            b-nav-item <i class="fa fa-user"></i> Hi, {{ user.username }}!
 
           template(v-else)
             template(v-for="(link, id) in guestLinks")
@@ -46,50 +46,46 @@ header
 </template>
 
 <script>
-var currentUser = {
-  username: 'Username',
-  is_admin: true,
-  after_login: '/'
-}
-
 export default {
   name: 'app-header',
   computed: {
+    user () { return this.$store.getters['user/user'] },
     isAuthenticated () { return this.$store.getters['user/isAuthenticated'] }
   },
-  data: () => ({
-    appname: 'RPG-Helper',
-    current_user: currentUser,
+  data () {
+    return {
+      appname: 'RPG-Helper',
 
-    userLinks: [
-      { title: 'Dashboard', to: currentUser.after_login },
-      { title: 'RPG', to: '/rpg/index' },
-      {
-        title: 'Systems',
-        items: [
-          { title: 'Pathfinder', to: '/pathfinder/index' },
-          { title: 'GURPS', to: '/gurps/index' },
-          { title: 'Tunels & Trolls', to: '/tnt/index' }
-        ]
-      },
-      { title: 'Worlds', to: '/worlds/world_list' },
-      {
-        admin: true,
-        title: 'Admin',
-        items: [
-          { title: 'Departments', to: '/admin/list_departments' },
-          { title: 'Roles', to: '/admin/list_roles' },
-          { title: 'Employees', to: '/admin/list_employees' }
-        ]
-      },
-      { title: 'Logout', to: '/auth/logout' }
-    ],
-    guestLinks: [
-      { title: 'Home', to: '/' },
-      { title: 'Register', to: '/auth/register' },
-      { title: 'Login', to: '/auth/login' }
-    ]
-  })
+      userLinks: [
+        { title: 'Dashboard', to: '/' },
+        { title: 'RPG', to: '/rpg/index' },
+        {
+          title: 'Systems',
+          items: [
+            { title: 'Pathfinder', to: '/pathfinder/index' },
+            { title: 'GURPS', to: '/gurps/index' },
+            { title: 'Tunels & Trolls', to: '/tnt/index' }
+          ]
+        },
+        { title: 'Worlds', to: '/worlds/world_list' },
+        {
+          admin: true,
+          title: 'Admin',
+          items: [
+            { title: 'Departments', to: '/admin/list_departments' },
+            { title: 'Roles', to: '/admin/list_roles' },
+            { title: 'Employees', to: '/admin/list_employees' }
+          ]
+        },
+        { title: 'Logout', to: '/auth/logout' }
+      ],
+      guestLinks: [
+        { title: 'Home', to: '/' },
+        { title: 'Register', to: '/auth/register' },
+        { title: 'Login', to: '/auth/login' }
+      ]
+    }
+  }
 }
 </script>
 

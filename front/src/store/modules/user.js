@@ -9,18 +9,34 @@ const state = {
 }
 
 const getters = {
-  isAuthenticated: state => {
-    console.log('Authenticated ', state.token)
+  userData: state => {
+    // console.log('Authenticated ', state.token)
     if (!state.token || state.token.split('.').length < 3) {
+      return null
+    }
+    return JSON.parse(atob(state.token.split('.')[1]))
+  },
+  isAuthenticated: (state, getters) => {
+    const data = getters.userData
+    if (!data) {
       return false
     }
-    const data = JSON.parse(atob(state.token.split('.')[1]))
+
     const exp = new Date(data.exp * 1000)
     const now = new Date()
-    console.log(data)
-    console.log(exp)
-    console.log(now)
     return now < exp
+  },
+  user: (state, getters) => {
+    const data = getters.userData
+    if (!data) {
+      return null
+    }
+
+    return {
+      username: data.sub,
+      is_admin: true,
+      after_login: '/'
+    }
   }
 }
 
@@ -36,11 +52,7 @@ const mutations = {
 
 const actions = {
   register: (context, user) => {
-    // context.commit('setUserData', { userData })
-    console.log(user)
     return axios.post(api + '/register', user).then(response => {
-      console.log(response.data)
-      context.commit('setUser', response.data.user)
       MessageBus.$emit('newMessage', response.data.message)
       context.dispatch('login', user)
     }).catch(e => {
@@ -49,14 +61,11 @@ const actions = {
     })
   },
   login: (context, user) => {
-    // context.commit('setUserData', { userData })
-    console.log(user)
     return axios.post(api + '/login', user).then(response => {
-      console.log(response.data)
-      context.dispatch('flash/load', null, { root: true })
-      context.commit('setUser', user)
       context.commit('setToken', response.data.token)
-      MessageBus.$emit('newMessage', response.data.token)
+      // context.commit('setUser', context.getters.user)
+
+      // context.dispatch('flash/load', null, { root: true })
       MessageBus.$emit('authenticated', context.getters.isAuthenticated)
     }).catch(e => {
       console.error('Error Authenticating: ', e)
@@ -66,7 +75,12 @@ const actions = {
   logout: (context) => {
     context.commit('setToken', null)
     context.commit('setUser', null)
-    MessageBus.$emit('newMessage', 'You have successfully been logged out.')
+    context.commit('flash/addMessage', {
+      category: 'info',
+      message: 'You have successfully been logged out.'
+    }, {
+      root: true
+    })
   }
   // submitNewSurvey (context, survey) {
   //   let jwt = context.state.jwt.token

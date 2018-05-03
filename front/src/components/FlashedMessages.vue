@@ -24,6 +24,7 @@ export default {
     // this.$store.dispatch('flash/load')
 
     MessageBus.$on('newMessage', msg => {
+      console.log('Message ', msg)
       this.$store.commit('flash/addMessage', {
         category: 'info',
         message: msg

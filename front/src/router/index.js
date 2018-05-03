@@ -44,8 +44,8 @@ export default new Router({
         {
           path: 'logout',
           beforeEnter (to, from, next) {
-            store.dispatch('user/logout')
             next('/auth/login')
+            store.dispatch('user/logout')
           }
         },
         {

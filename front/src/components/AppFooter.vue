@@ -12,14 +12,15 @@ footer
             b-nav-item(to="/auth/register") Register
             li.footer-menu-divider .
             b-nav-item(to="/auth/login") Login
-        p(class="copyright text-muted small") Copyright {{ token }} &copy; {{year}}/ All Rights Reserved
+        p(class="copyright text-muted small") Copyright {{user}} ({{ token }}) &copy; {{year}}/ All Rights Reserved
 </template>
 
 <script>
 export default {
   name: 'app-footer',
   computed: {
-    token () { return this.$store.state.user },
+    token () { return this.$store.state.user.token },
+    user () { return this.$store.getters['user/user'] },
     isAuthenticated () { return this.$store.getters['user/isAuthenticated'] }
   },
   data: () => ({
