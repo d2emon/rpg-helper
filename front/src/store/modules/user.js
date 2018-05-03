@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { MessageBus } from '../messages'
 
-const api = 'http://127.0.0.1:5000/api'
+const api = process.env.API_BASE_URL
 
 const state = {
   user: null,

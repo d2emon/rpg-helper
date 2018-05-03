@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const api = 'http://127.0.0.1:5000/api'
+const api = process.env.API_BASE_URL
 
 const state = {
   messages: []
