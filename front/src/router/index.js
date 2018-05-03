@@ -9,6 +9,7 @@ import Full from '@/containers/Full'
 import Hello from '@/views/Hello'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
+import Worlds from '@/views/Worlds'
 
 import store from '@/store'
 
@@ -52,6 +53,19 @@ export default new Router({
           path: 'register',
           name: 'Register',
           component: Register
+        }
+      ]
+    },
+    {
+      path: '/worlds',
+      redirect: '/worlds/list',
+      name: 'Worlds',
+      component: Full,
+      children: [
+        {
+          path: 'list',
+          name: 'WorldList',
+          component: Worlds
         }
       ]
     }

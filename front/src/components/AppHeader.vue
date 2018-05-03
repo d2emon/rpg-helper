@@ -67,7 +67,7 @@ export default {
             { title: 'Tunels & Trolls', to: '/tnt/index' }
           ]
         },
-        { title: 'Worlds', to: '/worlds/world_list' },
+        { title: 'Worlds', to: '/worlds/list' },
         {
           admin: true,
           title: 'Admin',
