@@ -49,7 +49,7 @@ class TestingConfig(Config):
 
 
 app_config = {
-    'development': DebugConfig,
+    'dev': DebugConfig,
     'production': ProductionConfig,
     'testing': TestingConfig,
 }
