@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 
 # from app import app, db
 
@@ -38,17 +38,29 @@ def world_list():
     )
 
 
-@world_api.route("/random", methods=['GET'])
+@world_api.route("/list", methods=['GET'])
 def world_random():
     """
     Render random worlds
     """
-    random.shuffle(worlds)
+    try:
+        count = int(request.args.get('count'))
+    except ValueError:
+        count = 1
+
+    try:
+        shuffle = int(request.args.get('random'))
+    except:
+        shuffle = False
+
+    if shuffle:
+        random.shuffle(worlds)
+
     return jsonify(
         worlds=[{
             'id': id,
             'title': world,
             'subtitle': "1,000 miles of wonder",
             'src': "/static/images/{}".format(random.choice(images)),
-        } for id, world in enumerate(worlds)],
+        } for id, world in enumerate(worlds[:count])],
     )
