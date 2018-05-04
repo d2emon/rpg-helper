@@ -15,6 +15,7 @@ const mutations = {
     state.worlds = worlds
     state.worlds.forEach(item => {
       item.flex = (Math.floor(Math.random() * 3) + 1) * 3
+      item.show = false
     })
   }
 }
