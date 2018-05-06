@@ -7,6 +7,7 @@ b-container
   b-row
     b-col
       h1 {{ msg }}
+      b-button('@click'="loadWorlds(true)") btn
       div(v-for="world, id in worlds" :key="id") {{ world }}
   b-row(v-if="worlds.length")
     b-col
@@ -17,29 +18,29 @@ b-container
             b-button(icon)
               i(class="fa fa-search")
             b-button(icon @click="loadWorlds(true)")
-              i(class="fa fa-casino")
+              i(class="fa fa-d_and_d")
         div(slot="footer") Footer Slot
         b-container
           b-row
             div(v-for="world in worlds" :class="'col-sm-' + world.flex" :key="world.id")
               b-card(
                 overlay
-                img-src="https://lorempixel.com/900/250/sports/6/"
-                img-alt="Card Image"
+                class="world-card"
+                :img-src="world.src"
+                :img-alt="world.title"
                 text-variant="white"
                 :title="world.title"
                 :sub-title="world.subtitle"
-                :src="world.src"
-                height="200px"
               )
                 div(slot="footer")
                   // b-button(icon @click.native="world.show = !world.show")
-                  b-button(icon @click.native="alert('world.show = !world.show')")
+                  b-button(icon '@click.native'="loadWorlds('world.show = !world.show')")
                     i(:class="'fa ' + (world.show ? 'fa-angle-down' : 'fa-angle-up')")
                 p {{ world.flex }}
                 p {{ world.show }}
                 p(class="card-text" v-show="world.show")
-                    | I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+                  | {{world}}
+                  | I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
 </template>
 
 <script>
@@ -62,7 +63,7 @@ export default {
   },
   methods: {
     loadWorlds (load) {
-
+      alert(load)
     }
   },
   mounted () {
@@ -75,12 +76,20 @@ export default {
 @import "./scss/_colors.scss";
 
 .btn-outline-primary {
-    border-color: $btnBorder;
-    color: $btnColor;
+  border-color: $btnBorder;
+  color: $btnColor;
 }
 
 .btn-outline-primary:hover {
-    background-color: $btnHover;
-    color: #000000;
+  background-color: $btnHover;
+  color: #000000;
+}
+
+.world-card .card-body {
+  height: 200px;
+}
+
+.world-card .card-img {
+  height: 200px;
 }
 </style>

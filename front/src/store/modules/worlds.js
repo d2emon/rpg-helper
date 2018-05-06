@@ -12,9 +12,16 @@ const getters = {
 
 const mutations = {
   setWorlds: (state, worlds) => {
+    var space = 12
     state.worlds = worlds
     state.worlds.forEach(item => {
       item.flex = (Math.floor(Math.random() * 3) + 1) * 3
+      if (space <= item.flex) {
+        item.flex = space
+        space = 12
+      } else {
+        space -= item.flex
+      }
       item.show = false
     })
   }

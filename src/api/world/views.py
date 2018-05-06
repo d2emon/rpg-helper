@@ -17,10 +17,11 @@ import random
 world_api = Blueprint('world-api', __name__)
 
 images = [
-    'house.jpg',
-    'road.jpg',
-    'plane.jpg',
-    'sunshine.jpg'
+    "/static/images/world/house.jpg",
+    "/static/images/world/road.jpg",
+    "/static/images/world/plane.jpg",
+    "/static/images/world/sunshine.jpg",
+    "https://lorempixel.com/900/250/sports/6/"
 ]
 
 
@@ -61,6 +62,6 @@ def world_random():
             'id': id,
             'title': world,
             'subtitle': "1,000 miles of wonder",
-            'src': "/static/images/{}".format(random.choice(images)),
+            'src': random.choice(images),
         } for id, world in enumerate(worlds[:count])],
     )
