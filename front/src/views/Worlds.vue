@@ -18,29 +18,31 @@ b-container
             b-button(icon)
               i(class="fa fa-search")
             b-button(icon @click="loadWorlds(true)")
-              i(class="fa fa-d_and_d")
+              i(class="fa fa-random")
         div(slot="footer") Footer Slot
         b-container
           b-row
             div(v-for="world in worlds" :class="'col-sm-' + world.flex" :key="world.id")
-              b-card(
-                overlay
-                class="world-card"
-                :img-src="world.src"
-                :img-alt="world.title"
-                text-variant="white"
-                :title="world.title"
-                :sub-title="world.subtitle"
-              )
-                div(slot="footer")
-                  // b-button(icon @click.native="world.show = !world.show")
-                  b-button(icon '@click.native'="loadWorlds('world.show = !world.show')")
-                    i(:class="'fa ' + (world.show ? 'fa-angle-down' : 'fa-angle-up')")
+              b-card(class="world-card")
+                b-card(
+                  overlay
+                  :img-src="world.src"
+                  :img-alt="world.title"
+                  text-variant="white"
+                  :title="world.title"
+                  :sub-title="world.subtitle"
+                )
+                b-button(icon '@click'="loadWorlds('world.show = !world.show')")
+                  i(:class="'fa ' + (world.show ? 'fa-angle-down' : 'fa-angle-up')")
                 p {{ world.flex }}
                 p {{ world.show }}
                 p(class="card-text" v-show="world.show")
                   | {{world}}
                   | I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+                div(slot="footer")
+                  // b-button(icon @click.native="world.show = !world.show")
+                  b-button(icon '@click'="loadWorlds('world.show = !world.show')")
+                    i(:class="'fa ' + (world.show ? 'fa-angle-down' : 'fa-angle-up')")
 </template>
 
 <script>
@@ -90,6 +92,6 @@ export default {
 }
 
 .world-card .card-img {
-  height: 200px;
+  // height: 200px;
 }
 </style>
