@@ -68,17 +68,17 @@ class World:
         self.img = kwargs.get('img')
         self.subtitle = "1,000 miles of wonder"
 
-    def full_img(self):
+    def full_img(self, path="/static/images/world"):
         if self.img is not None:
-            return "/static/images/world/{}".format(self.img)
+            return "{}/{}".format(path, self.img)
         else:
             return "{}?{}".format(random.choice(self.images), random.random())
 
-    def as_dict(self):
+    def as_dict(self, path="/static/images/world"):
         return {
             'title': self.title,
             'subtitle': self.subtitle,
-            'img': self.full_img(),
+            'img': self.full_img(path),
         }
 
 

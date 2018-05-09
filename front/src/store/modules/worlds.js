@@ -22,7 +22,6 @@ const mutations = {
       } else {
         space -= item.flex
       }
-      item.show = false
     })
   }
 }

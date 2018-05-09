@@ -58,6 +58,7 @@ def world_random():
     if shuffle:
         random.shuffle(worlds)
 
+    img_path = "http://localhost:5000/static/images/world"
     return jsonify(
-        worlds=[world.as_dict() for world  in worlds[:count]],
+        worlds=[world.as_dict(img_path) for world  in worlds[:count]],
     )
