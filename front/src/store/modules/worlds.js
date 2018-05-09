@@ -28,8 +28,12 @@ const mutations = {
 }
 
 const actions = {
-  load: (context) => {
-    return axios.get(api + '/world-api/list?count=100', { count: 100 }).then(response => {
+  load: (context, shuffle) => {
+    let count = 100
+    let url = api + '/world-api/list'
+    url += '?count=' + count
+    if (shuffle) { url += '&random=1' }
+    return axios.get(url).then(response => {
       console.log(response.data)
       context.commit('setWorlds', response.data.worlds)
     }).catch(e => {

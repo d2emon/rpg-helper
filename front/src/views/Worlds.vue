@@ -4,11 +4,6 @@ b-container
   b-row
     b-col
       flashed-messages
-  b-row
-    b-col
-      h1 {{ msg }}
-      b-button('@click'="loadWorlds(true)") btn
-      div(v-for="world, id in worlds" :key="id") {{ world }}
   b-row(v-if="worlds.length")
     b-col
       b-card
@@ -22,8 +17,12 @@ b-container
         div(slot="footer") Footer Slot
         b-container
           b-row
-            div(v-for="world in worlds" :class="'col-sm-' + world.flex" :key="world.id")
-              b-card(class="world-card")
+            div(v-for="world, id in worlds" :class="'col-sm-' + world.flex" :key="world.id")
+              b-card(
+                class="world-card"
+              )
+                div(slot="header")
+                  h6 {{ world.title }}
                 b-card(
                   overlay
                   :img-src="world.src"
@@ -32,17 +31,11 @@ b-container
                   :title="world.title"
                   :sub-title="world.subtitle"
                 )
-                b-button(icon '@click'="loadWorlds('world.show = !world.show')")
-                  i(:class="'fa ' + (world.show ? 'fa-angle-down' : 'fa-angle-up')")
-                p {{ world.flex }}
-                p {{ world.show }}
-                p(class="card-text" v-show="world.show")
-                  | {{world}}
-                  | I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+                div(class="card-text" v-show="selectedId === id")
+                  p {{ world }}
                 div(slot="footer")
-                  // b-button(icon @click.native="world.show = !world.show")
-                  b-button(icon '@click'="loadWorlds('world.show = !world.show')")
-                    i(:class="'fa ' + (world.show ? 'fa-angle-down' : 'fa-angle-up')")
+                  b-button(icon '@click'="switchFull(id)")
+                    i(:class="'fa ' + (selectedId === id ? 'fa-angle-up' : 'fa-angle-down')")
 </template>
 
 <script>
@@ -60,16 +53,24 @@ export default {
   },
   data () {
     return {
-      msg: 'Login to your account'
+      msg: 'Login to your account',
+      selectedId: null
     }
   },
   methods: {
-    loadWorlds (load) {
-      alert(load)
+    loadWorlds (shuffle) {
+      this.$store.dispatch('worlds/load', shuffle)
+    },
+    switchFull (id) {
+      if (this.selectedId === id) {
+        this.selectedId = null
+      } else {
+        this.selectedId = id
+      }
     }
   },
   mounted () {
-    this.$store.dispatch('worlds/load')
+    this.$store.dispatch('worlds/load', false)
   }
 }
 </script>
@@ -87,11 +88,7 @@ export default {
   color: #000000;
 }
 
-.world-card .card-body {
-  height: 200px;
-}
-
-.world-card .card-img {
-  // height: 200px;
+.world-card {
+  margin-bottom: 10px;
 }
 </style>
