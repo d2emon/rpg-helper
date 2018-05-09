@@ -1,7 +1,9 @@
 from flask_script import Manager
 from app import db
 
+from world.default import worlds
 from generator.space.fixtures import galaxy_names, suns, atmospheres, allPlanets, environments, maps
+from world.models import World
 from world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType
 from world.star.models import StarType
 from world.planet.models import PlanetType, Atmosphere, Environment, SurfaceMap
@@ -21,6 +23,12 @@ def filldata(c, data=[]):
     return
 
 # Menu Items
+@manager.command
+def fillworlds():
+    filldata(World, worlds)
+    return
+
+
 @manager.command
 def fillgalaxynames():
     filldata(GalaxyName, galaxy_names[0])

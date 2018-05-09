@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from sqlalchemy import func
 
 # from app import app, db
 
@@ -16,26 +17,37 @@ import random
 
 world_api = Blueprint('world-api', __name__)
 
-images = [
-    # "/static/images/world/0-house.jpg",
-    # "/static/images/world/0-road.jpg",
-    # "/static/images/world/0-plane.jpg",
-    # "/static/images/world/0-sunshine.jpg",
-    "https://lorempixel.com/400/300/",
-]
 
+def get_int(argname, default=0):
+    try:
+        return int(request.args.get(argname))
+    except (ValueError, TypeError):
+        return default
 
 @world_api.route("/", methods=['GET'])
 def world_list():
     """
     Render world list
     """
-    worlds = World.query.paged()
+    count = get_int('count', None)
+    shuffle = get_int('random', False)
+
+    img_path = "http://localhost:5000/static/images/world"
+
+    query = World.query
+    if shuffle:
+        query = query.order_by(func.random())
+    worlds = query.paged(count=count)
+
     return jsonify(
-        # campaign=campaign,
-        # campaign_id=campaign_id,
-        items=worlds.items,
-        # pagination=worlds,
+        count=count,
+        shuffle=shuffle,
+        items=[w.toDict(img_path) for w in worlds.items],
+        pages={
+            'page': worlds.page,
+            'pages': worlds.pages,
+            'total': worlds.total,
+        },
     )
 
 
@@ -46,12 +58,12 @@ def world_random():
     """
     try:
         count = int(request.args.get('count'))
-    except ValueError:
+    except (ValueError, TypeError):
         count = 1
 
     try:
         shuffle = int(request.args.get('random'))
-    except:
+    except (ValueError, TypeError):
         shuffle = False
 
     worlds = list_worlds()
