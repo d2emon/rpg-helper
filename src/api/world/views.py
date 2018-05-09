@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from sqlalchemy import func
 
-# from app import app, db
+from app import app # , db
 
 from world.models import World
 # from .galaxy.models import Galaxy
@@ -32,7 +32,7 @@ def world_list():
     count = get_int('count', None)
     shuffle = get_int('random', False)
 
-    img_path = "http://localhost:5000/static/images/world"
+    img_path = "{}static/images/world".format(request.url_root)
 
     query = World.query
     if shuffle:
@@ -40,14 +40,12 @@ def world_list():
     worlds = query.paged(count=count)
 
     return jsonify(
-        count=count,
         shuffle=shuffle,
-        items=[w.toDict(img_path) for w in worlds.items],
-        pages={
-            'page': worlds.page,
-            'pages': worlds.pages,
-            'total': worlds.total,
-        },
+        worlds=[w.toDict(img_path) for w in worlds.items],
+        page=worlds.page,
+        pages=worlds.pages,
+        count=count,
+        total=worlds.total,
     )
 
 
@@ -56,21 +54,15 @@ def world_random():
     """
     Render random worlds
     """
-    try:
-        count = int(request.args.get('count'))
-    except (ValueError, TypeError):
-        count = 1
+    count = get_int('count', None)
+    shuffle = get_int('random', False)
 
-    try:
-        shuffle = int(request.args.get('random'))
-    except (ValueError, TypeError):
-        shuffle = False
+    img_path = "{}/world".format(app.config.get('IMG_URL'))
 
     worlds = list_worlds()
     if shuffle:
         random.shuffle(worlds)
 
-    img_path = "http://localhost:5000/static/images/world"
     return jsonify(
         worlds=[world.as_dict(img_path) for world  in worlds[:count]],
     )

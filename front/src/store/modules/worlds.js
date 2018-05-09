@@ -28,8 +28,8 @@ const mutations = {
 
 const actions = {
   load: (context, shuffle) => {
-    let count = 100
-    let url = api + '/world-api/list'
+    let count = -1
+    let url = api + '/world-api/'
     url += '?count=' + count
     if (shuffle) { url += '&random=1' }
     return axios.get(url).then(response => {
