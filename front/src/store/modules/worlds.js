@@ -30,9 +30,12 @@ const actions = {
   load: (context, shuffle) => {
     let count = -1
     let url = api + '/world-api/'
-    url += '?count=' + count
-    if (shuffle) { url += '&random=1' }
-    return axios.get(url).then(response => {
+    return axios.get(url, {
+      params: {
+        count: count,
+        random: 1 * shuffle
+      }
+    }).then(response => {
       console.log(response.data)
       context.commit('setWorlds', response.data.worlds)
     }).catch(e => {
