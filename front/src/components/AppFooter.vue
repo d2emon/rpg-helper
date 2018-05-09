@@ -1,18 +1,14 @@
 <template lang="pug">
-footer
-  b-container
-    b-row
-      b-col(col lg="12")
-        b-nav
-          b-nav-item(to="/") Home
-          li.footer-menu-divider .
-          template(v-if="isAuthenticated")
-            b-nav-item(to="/auth/logout") Logout
-          template(v-else)
-            b-nav-item(to="/auth/register") Register
-            li.footer-menu-divider .
-            b-nav-item(to="/auth/login") Login
-        p(class="copyright text-muted small") Copyright {{user}} ({{ token }}) &copy; {{year}}/ All Rights Reserved
+v-footer(:fixed="fixed" app)
+  v-layout(row wrap justify-center)
+    v-btn(flat small color="primary" to="/") Home
+    template(v-if="isAuthenticated")
+      v-btn(flat small color="primary" to="/auth/logout") Logout
+    template(v-else)
+      v-btn(flat small color="primary" to="/auth/register") Register
+      v-btn(flat small color="primary" to="/auth/login") Login
+    v-flex(xs12 py-3 text-xs-center class="copyright text-muted small")
+      | Copyright {{user}} ({{ token }}) &copy; {{year}}/ All Rights Reserved
 </template>
 
 <script>
@@ -24,6 +20,7 @@ export default {
     isAuthenticated () { return this.$store.getters['user/isAuthenticated'] }
   },
   data: () => ({
+    fixed: true,
     year: 2018
   })
 }

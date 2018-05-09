@@ -8,13 +8,11 @@ export default {
 }
 </script>
 
-<style>
-/* Import Font Awesome Icons Set */
-$fa-font-path: '~font-awesome/fonts/';
-@import '~font-awesome/css/font-awesome.min.css';
-</style>
-
 <style lang="scss">
+/* Import Font Awesome Icons Set */
+// $fa-font-path: '~font-awesome/fonts/';
+// @import '~font-awesome/css/font-awesome.min.css';
+
 #app {
   // font-family: 'Avenir', Helvetica, Arial, sans-serif;
   // -webkit-font-smoothing: antialiased;
