@@ -9,7 +9,7 @@ from world.models import World
 # from .star.forms import StarForm
 # from .planet.models import Planet
 # from .planet.forms import PlanetForm
-from .models.worlds import worlds
+from .models.worlds import World as World1, list_worlds
 
 import random
 
@@ -17,11 +17,11 @@ import random
 world_api = Blueprint('world-api', __name__)
 
 images = [
-    "/static/images/world/house.jpg",
-    "/static/images/world/road.jpg",
-    "/static/images/world/plane.jpg",
-    "/static/images/world/sunshine.jpg",
-    "https://lorempixel.com/900/250/sports/6/"
+    # "/static/images/world/0-house.jpg",
+    # "/static/images/world/0-road.jpg",
+    # "/static/images/world/0-plane.jpg",
+    # "/static/images/world/0-sunshine.jpg",
+    "https://lorempixel.com/400/300/",
 ]
 
 
@@ -54,14 +54,10 @@ def world_random():
     except:
         shuffle = False
 
+    worlds = list_worlds()
     if shuffle:
         random.shuffle(worlds)
 
     return jsonify(
-        worlds=[{
-            'id': id,
-            'title': world,
-            'subtitle': "1,000 miles of wonder",
-            'src': random.choice(images),
-        } for id, world in enumerate(worlds[:count])],
+        worlds=[world.as_dict() for world  in worlds[:count]],
     )

@@ -25,11 +25,8 @@ b-container
                   h6 {{ world.title }}
                 b-card(
                   overlay
-                  :img-src="world.src"
+                  :img-src="world.img"
                   :img-alt="world.title"
-                  text-variant="white"
-                  :title="world.title"
-                  :sub-title="world.subtitle"
                 )
                 div(class="card-text" v-show="selectedId === id")
                   p {{ world }}
