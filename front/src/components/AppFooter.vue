@@ -7,7 +7,7 @@ v-footer(:fixed="fixed" app)
     template(v-else)
       v-btn(flat small color="primary" to="/auth/register") Register
       v-btn(flat small color="primary" to="/auth/login") Login
-    v-flex(xs12 py-3 text-xs-center class="copyright text-muted small")
+    v-flex(xs12 pd-3 text-xs-center class="caption copyright grey--text text--darken-1")
       | Copyright {{user}} ({{ token }}) &copy; {{year}}/ All Rights Reserved
 </template>
 
