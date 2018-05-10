@@ -41,9 +41,3 @@ export default {
   name: 'full'
 }
 </script>
-
-<style>
-#app {
-  padding-top: 50px;
-}
-</style>

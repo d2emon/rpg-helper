@@ -74,10 +74,6 @@ export default {
   data () {
     return {
       drawer: this.state,
-      // items: [{
-      //   icon: 'bubble_chart',
-      //   title: 'Inspire'
-      // }],
 
       userLinks: [
         { title: 'Dashboard', icon: 'web', to: '/' },
@@ -104,8 +100,8 @@ export default {
       ],
       guestLinks: [
         { title: 'Home', icon: 'home', to: '/' },
-        { title: 'Register', to: '/auth/register' },
-        { title: 'Login', to: '/auth/login' }
+        { title: 'Register', icon: 'person_add', to: '/auth/register' },
+        { title: 'Login', icon: 'person', to: '/auth/login' }
       ]
     }
   },
@@ -121,7 +117,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-</style>
-
-<style lang="scss">
+.navigation-drawer {
+  opacity: 0.90;
+}
 </style>
