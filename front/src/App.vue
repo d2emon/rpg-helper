@@ -3,6 +3,9 @@ router-view
 </template>
 
 <script>
+/* Import Vuetify Styles */
+import 'vuetify/dist/vuetify.min.css'
+
 export default {
   name: 'app'
 }
@@ -10,8 +13,13 @@ export default {
 
 <style lang="scss">
 /* Import Font Awesome Icons Set */
+/* @import '~flag-icon-css/css/flag-icon.min.css'; */
+/* Import Font Awesome Icons Set */
 // $fa-font-path: '~font-awesome/fonts/';
 // @import '~font-awesome/css/font-awesome.min.css';
+/* Import Simple Line Icons Set */
+/* $simple-line-font-path: '~simple-line-icons/fonts/'; */
+/* @import '~simple-line-icons/css/simple-line-icons.css'; */
 
 #app {
   // font-family: 'Avenir', Helvetica, Arial, sans-serif;

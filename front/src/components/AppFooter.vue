@@ -15,12 +15,12 @@ v-footer(:fixed="fixed" app)
 export default {
   name: 'app-footer',
   computed: {
+    fixed () { return this.$store.state.menu.fixed },
     token () { return this.$store.state.user.token },
     user () { return this.$store.getters['user/user'] },
     isAuthenticated () { return this.$store.getters['user/isAuthenticated'] }
   },
   data: () => ({
-    fixed: true,
     year: 2018
   })
 }

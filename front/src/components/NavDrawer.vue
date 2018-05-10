@@ -64,23 +64,23 @@ export default {
   name: 'app-header',
   computed: {
     user () { return this.$store.getters['user/user'] },
-    isAuthenticated () { return this.$store.getters['user/isAuthenticated'] }
+    isAuthenticated () { return this.$store.getters['user/isAuthenticated'] },
+
+    state () { return this.$store.state.menu.navDrawer },
+
+    miniVariant () { return this.$store.state.menu.miniVariant },
+    clipped () { return this.$store.state.menu.clipped }
   },
   data () {
     return {
-      clipped: false,
-      drawer: true,
-      // fixed: false,
+      drawer: this.state,
       // items: [{
       //   icon: 'bubble_chart',
       //   title: 'Inspire'
       // }],
-      miniVariant: false,
-      // right: true,
-      // rightDrawer: false,
 
       userLinks: [
-        { title: 'Dashboard', to: '/' },
+        { title: 'Dashboard', icon: 'web', to: '/' },
         { title: 'RPG', to: '/rpg/index' },
         {
           title: 'Systems',
@@ -103,10 +103,18 @@ export default {
         { title: 'Logout', to: '/auth/logout' }
       ],
       guestLinks: [
-        { title: 'Home', to: '/' },
+        { title: 'Home', icon: 'home', to: '/' },
         { title: 'Register', to: '/auth/register' },
         { title: 'Login', to: '/auth/login' }
       ]
+    }
+  },
+  watch: {
+    drawer (value) {
+      this.$store.commit('setNavDrawer', value)
+    },
+    state (value) {
+      this.drawer = value
     }
   }
 }

@@ -3,30 +3,38 @@ v-toolbar(
   app
   :clipped-left="clipped"
 )
-  v-toolbar-side-icon('@click.stop'="drawer = !drawer")
-  v-btn(icon '@click.stop'="miniVariant = !miniVariant")
+  v-toolbar-side-icon('@click.stop'="switchNavDrawer")
+  v-btn(icon '@click.stop'="switchMini")
     v-icon(v-html="miniVariant ? 'chevron_right' : 'chevron_left'")
-  v-btn(icon '@click.stop'="clipped = !clipped")
-    v-icon web
-  v-btn(icon '@click.stop'="fixed = !fixed")
-    v-icon remove
   v-toolbar-title(v-text="appname")
   v-spacer
-  v-btn(icon '@click.stop'="rightDrawer = !rightDrawer")
+  v-btn(icon '@click.stop'="switchUtilityDrawer")
     v-icon menu
 </template>
 
 <script>
 export default {
   name: 'app-header',
+  computed: {
+    // drawer () { return this.$store.state.menu.drawer },
+    miniVariant () { return this.$store.state.menu.miniVariant },
+    clipped () { return this.$store.state.menu.clipped }
+    // fixed () { return this.$store.state.menu.fixed },
+  },
   data () {
     return {
-      appname: 'RPG-Helper',
-
-      clipped: false,
-      drawer: null,
-      miniVariant: true,
-      rightDrawer: true
+      appname: 'RPG-Helper'
+    }
+  },
+  methods: {
+    switchMini () {
+      this.$store.commit('switchMini')
+    },
+    switchNavDrawer () {
+      this.$store.commit('switchNavDrawer')
+    },
+    switchUtilityDrawer () {
+      this.$store.commit('switchUtilityDrawer')
     }
   }
 }

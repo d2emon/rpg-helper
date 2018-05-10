@@ -12,18 +12,7 @@ v-app
       // include _panel.pug
       router-view
     .push
-  v-navigation-drawer(
-    temporary
-    :right="right"
-    v-model="rightDrawer"
-    fixed
-    app
-  )
-    v-list
-      v-list-tile('@click'="right = !right")
-        v-list-tile-action
-          v-icon compare_arrows
-        v-list-tile-title Switch drawer (click me)
+    utility-drawer
 
   app-footer
 </template>
@@ -31,6 +20,7 @@ v-app
 <script>
 import {
   NavDrawer,
+  UtilityDrawer,
   AppHeader,
   AppFooter,
   ConfirmDel,
@@ -41,17 +31,12 @@ import {
 export default {
   components: {
     NavDrawer,
+    UtilityDrawer,
     AppHeader,
     AppFooter,
     ConfirmDel,
     Messages,
     FlashedMessages
-  },
-  data () {
-    return {
-      right: true,
-      rightDrawer: false
-    }
   },
   name: 'full'
 }
