@@ -1,8 +1,8 @@
 <template lang="pug">
 .intro-header
-  .container
-    .row
-      .col-lg-12
+  v-container
+    v-layout(row)
+      v-flex(xs6 offset-xs3)
         .intro-message
           // img(src="../assets/logo.png")
           h1 {{ appname }}
