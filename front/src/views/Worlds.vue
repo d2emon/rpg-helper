@@ -1,10 +1,8 @@
 <template lang="pug">
 v-container(fluid)
-  v-layout(row wrap v-if="worlds.length")
-    v-flex(sm2)
-      div {{ worlds }}
+  v-layout(column v-if="worlds.length")
     v-flex(sm10)
-      v-toolbar(color="indigo" dark)
+      v-toolbar(color="primary" dark)
         v-toolbar-side-icon
         v-toolbar-title Миры
         v-spacer
@@ -14,14 +12,6 @@ v-container(fluid)
           v-icon casino
       v-container(fluid grid-list-md class="grey lighten-4")
         v-layout(row wrap)
-          v-flex(xs6)
-            v-card
-              img(src="@/assets/logo.png" alt="Vuetify.js" class="mb-5")
-              blockquote
-                | &#8220;First, solve the problem. Then, write the code.&#8221;
-                footer
-                  small
-                    em &mdash;John Johnson
           v-flex(
             v-for="world in worlds"
             v-bind="{ [`xs${world.flex}`]: true }"
@@ -54,16 +44,18 @@ v-container(fluid)
                 v-card-text(v-show="selectedId === world.id")
                   p {{ world }}
                   p I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
-  v-layout(column)
-    v-flex(xs12 v-if="worlds.length")
-      v-toolbar(color="indigo" dark)
-        v-toolbar-side-icon
-        v-toolbar-title Миры
-        v-spacer
-        v-btn(icon)
-          v-icon search
-        v-btn(icon @click="loadWorlds(true)")
-          v-icon casino
+          v-flex(xs6)
+            v-card
+              img(src="@/assets/logo.png" alt="Vuetify.js" class="mb-5")
+              blockquote
+                | &#8220;First, solve the problem. Then, write the code.&#8221;
+                footer
+                  small
+                    em &mdash;John Johnson
+  v-layout(row)
+    v-flex(sm6)
+      | {{ worlds }}
+    v-flex(sm6)
       v-container(fluid grid-list-md class="grey lighten-4")
         v-layout(row wrap)
           v-flex(
@@ -80,25 +72,6 @@ v-container(fluid)
                   v-layout(fill-height)
                     v-flex(xs12 align-end flexbox)
                       span(class="headline white--text" v-text="world.title")
-              v-card-title(primary-title)
-                div
-                  .headline {{ world.title }}
-                  span(class="grey--text") {{ world.subtitle }}
-              v-card-actions(class="white")
-                v-btn(flat) Share
-                v-btn(flat color="purple") Explore
-                v-spacer
-                v-btn(icon)
-                  v-icon favorite
-                v-btn(icon)
-                  v-icon bookmark
-                v-btn(icon)
-                  v-icon share
-                v-btn(icon @click.native="switchFull(world.id)")
-                  v-icon {{ (selectedId !== world.id) ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
-              v-card-text(v-show="selectedId === world.id")
-                p {{ world }}
-                p I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
 </template>
 
 <script>

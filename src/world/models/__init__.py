@@ -28,7 +28,7 @@ class World(db.Model):
 
     @property
     def dummy_img(self):
-        url = "https://lorempixel.com/400/300/"
+        url = "https://loremflickr.com/400/300/"
         return "{}?{}".format(url, random.random())
 
     def img_path(self, path="/static/images/world"):
