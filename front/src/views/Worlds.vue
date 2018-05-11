@@ -1,59 +1,109 @@
 <template lang="pug">
-// .container(class="content-section")
-b-container
-  b-row
-    b-col
-      flashed-messages
-  b-row(v-if="worlds.length")
-    b-col
-      b-card
-        b-row(slot="header")
-          h6.col-sm-10 Миры
-          b-col(sm="2")
-            b-button(icon)
-              i(class="fa fa-search")
-            b-button(icon @click="loadWorlds(true)")
-              i(class="fa fa-random")
-        div(slot="footer") Footer Slot
-        b-container
-          b-row
-            div(v-for="world, id in worlds" :class="'col-sm-' + world.flex" :key="world.id")
-              b-card(
-                class="world-card"
+v-container(fluid)
+  v-layout(row wrap v-if="worlds.length")
+    v-flex(sm2)
+      div {{ worlds }}
+    v-flex(sm10)
+      v-toolbar(color="indigo" dark)
+        v-toolbar-side-icon
+        v-toolbar-title Миры
+        v-spacer
+        v-btn(icon)
+          v-icon search
+        v-btn(icon @click="loadWorlds(true)")
+          v-icon casino
+      v-container(fluid grid-list-md class="grey lighten-4")
+        v-layout(row wrap)
+          v-flex(xs6)
+            v-card
+              img(src="@/assets/logo.png" alt="Vuetify.js" class="mb-5")
+              blockquote
+                | &#8220;First, solve the problem. Then, write the code.&#8221;
+                footer
+                  small
+                    em &mdash;John Johnson
+          v-flex(
+            v-for="world in worlds"
+            v-bind="{ [`xs${world.flex}`]: true }"
+            :key="world.id"
+          )
+            v-card(
+              class="world-card"
+            )
+              v-card-media(
+                :src="world.img"
+                height="200px"
               )
-                div(slot="header")
-                  h6 {{ world.title }}
-                b-card(
-                  overlay
-                  :img-src="world.img"
-                  :img-alt="world.title"
-                )
-                div(class="card-text" v-show="selectedId === id")
+              v-card-title(primary-title)
+                div
+                  .headline {{ world.title }}
+                  span(class="grey--text") {{ world.subtitle }}
+              v-card-actions(class="white")
+                v-btn(flat) Share
+                v-btn(flat color="purple") Explore
+                v-spacer
+                v-btn(icon)
+                  v-icon favorite
+                v-btn(icon)
+                  v-icon bookmark
+                v-btn(icon)
+                  v-icon share
+                v-btn(icon @click.native="switchFull(world.id)")
+                  v-icon {{ (selectedId !== world.id) ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
+              v-slide-y-transition
+                v-card-text(v-show="selectedId === world.id")
                   p {{ world }}
-                div(slot="footer")
-                  b-button(icon '@click'="switchFull(id)")
-                    i(:class="'fa ' + (selectedId === id ? 'fa-angle-up' : 'fa-angle-down')")
-  v-container(fluid)
-    v-slide-y-transition(mode="out-in")
-      v-layout(column align-center)
-        img(src="@/assets/logo.png" alt="Vuetify.js" class="mb-5")
-        blockquote
-          | &#8220;First, solve the problem. Then, write the code.&#8221;
-          footer
-            small
-              em &mdash;John Johnson
+                  p I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
+  v-layout(column)
+    v-flex(xs12 v-if="worlds.length")
+      v-toolbar(color="indigo" dark)
+        v-toolbar-side-icon
+        v-toolbar-title Миры
+        v-spacer
+        v-btn(icon)
+          v-icon search
+        v-btn(icon @click="loadWorlds(true)")
+          v-icon casino
+      v-container(fluid grid-list-md class="grey lighten-4")
+        v-layout(row wrap)
+          v-flex(
+            v-for="world in worlds"
+            v-bind="{ [`xs${world.flex}`]: true }"
+            :key="world.id"
+          )
+            v-card
+              v-card-media(
+                :src="world.img"
+                height="200px"
+              )
+                v-container(fill-height fluid)
+                  v-layout(fill-height)
+                    v-flex(xs12 align-end flexbox)
+                      span(class="headline white--text" v-text="world.title")
+              v-card-title(primary-title)
+                div
+                  .headline {{ world.title }}
+                  span(class="grey--text") {{ world.subtitle }}
+              v-card-actions(class="white")
+                v-btn(flat) Share
+                v-btn(flat color="purple") Explore
+                v-spacer
+                v-btn(icon)
+                  v-icon favorite
+                v-btn(icon)
+                  v-icon bookmark
+                v-btn(icon)
+                  v-icon share
+                v-btn(icon @click.native="switchFull(world.id)")
+                  v-icon {{ (selectedId !== world.id) ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
+              v-card-text(v-show="selectedId === world.id")
+                p {{ world }}
+                p I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
 </template>
 
 <script>
-import {
-  FlashedMessages
-} from '@/components/'
-
 export default {
-  name: 'login',
-  components: {
-    FlashedMessages
-  },
+  name: 'worlds',
   computed: {
     worlds () { return this.$store.state.worlds.worlds }
   },
