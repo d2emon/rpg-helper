@@ -8,29 +8,25 @@
   .center
     h1 {{ msg }}
     br
-    b-form(@submit="onSubmit")
-      b-form-group(
-        id="usernameInputGroup"
-        label="Username:"
-        label-for="usernameInput"
+    v-form(
+      ref="loginForm"
+      v-model="valid"
+      @submit="onSubmit"
+    )
+      v-text-field(
+        v-model="form.username"
+        :rules="usernameRules"
+        label="Username"
+        required
       )
-        b-form-input(
-          id="usernameInput"
-          v-model="form.username"
-          required
-        )
-      b-form-group(
-        id="passwordInputGroup"
-        label="Password:"
-        label-for="passwordInput"
+      v-text-field(
+        type="password"
+        v-model="form.password"
+        :rules="passwordRules"
+        label="Password"
+        required
       )
-        b-form-input(
-          id="passwordInput"
-          type="password"
-          v-model="form.password"
-          required
-        )
-      b-button(type="submit" variant="outline-primary") Login
+      v-btn(type="submit" outline color="primary") Login
 </template>
 
 <script>
@@ -49,23 +45,26 @@ export default {
     // {% import "bootstrap/utils.html" as utils %}
     // {% import "bootstrap/wtf.html" as wtf %}
     return {
+      valid: true,
       msg: 'Login to your account',
       form: {
         username: '',
         password: ''
-      }
+      },
+      usernameRules: [
+        v => !!v || 'Username is required'
+      ],
+      passwordRules: [
+        v => !!v || 'Password is required'
+      ]
     }
   },
   methods: {
     onSubmit () {
+      if (!this.$refs.loginForm.validate()) { return }
       this.$store.dispatch('user/login', this.form).then(response => {
         this.form.password = ''
       })
-      // this.$store.dispatch('user/login', {
-      //   username: this.form.username,
-      //   password: this.form.password
-      // })
-      // this.form = {}
     }
   },
   mounted () {
