@@ -12,40 +12,42 @@ v-navigation-drawer(
     template(v-if="isAuthenticated")
       template(v-for="(link, id) in userLinks")
         template(v-if="!link.admin || user.is_admin")
-          b-nav-item-dropdown(
-            right
+          v-list-group(
             v-if="link.items"
+            v-model="link.model"
             :key="id"
+            :append-icon="link.model ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+            :prepend-icon="link.icon"
           )
-            template(slot="button-content") {{ link.title }}
-            b-dropdown-item(
+            v-list-tile(slot="activator")
+              v-list-tile-content
+                v-list-tile-title {{ link.title }}
+            v-list-tile(
               v-for="(item, itemId) in link.items"
-              :key="itemId"
+              :key="id + '-' + itemId"
               :to="item.to"
-            ) {{item.title}}
-
+            )
+              v-list-tile-action(v-if="item.icon")
+                v-icon(v-html="item.icon")
+              v-list-tile-content
+                v-list-tile-title(v-text="item.title")
           v-list-tile(
             v-else
             value="true"
             :key="id"
             :to="link.to"
           )
-            v-list-tile-action
+            v-list-tile-action(v-if="link.icon")
               v-icon(v-html="link.icon")
             v-list-tile-content
               v-list-tile-title(v-text="link.title")
-
-          v-list-tile(
-            v-else
-            value="true"
-            :key="id"
-            :to="link.to"
-          )
-            v-list-tile-action
-              v-icon user
-              v-list-tile-content
-                v-list-tile-title Hi, {{ user.username }}!
-
+      v-list-tile(
+        value="true"
+      )
+        v-list-tile-action
+          v-icon person
+        v-list-tile-content
+          v-list-tile-title Hi, {{ user.username }}!
     template(v-else)
       template(v-for="(link, id) in guestLinks")
         v-list-tile(
@@ -53,7 +55,7 @@ v-navigation-drawer(
           :key="id"
           :to="link.to"
         )
-          v-list-tile-action
+          v-list-tile-action(v-if="link.icon")
             v-icon(v-html="link.icon")
           v-list-tile-content
             v-list-tile-title(v-text="link.title")
@@ -77,26 +79,28 @@ export default {
 
       userLinks: [
         { title: 'Dashboard', icon: 'web', to: '/' },
-        { title: 'RPG', to: '/rpg/index' },
+        { title: 'RPG', icon: 'casino', to: '/rpg/index' },
         {
           title: 'Systems',
+          icon: 'pages',
           items: [
-            { title: 'Pathfinder', to: '/pathfinder/index' },
-            { title: 'GURPS', to: '/gurps/index' },
-            { title: 'Tunels & Trolls', to: '/tnt/index' }
+            { title: 'Pathfinder', icon: 'business_center', to: '/pathfinder/index' },
+            { title: 'GURPS', icon: 'business_center', to: '/gurps/index' },
+            { title: 'Tunnels & Trolls', icon: 'business_center', to: '/tnt/index' }
           ]
         },
-        { title: 'Worlds', to: '/worlds/list' },
+        { title: 'Worlds', icon: 'public', to: '/worlds/list' },
         {
           admin: true,
           title: 'Admin',
+          icon: 'supervisor_account',
           items: [
-            { title: 'Departments', to: '/admin/list_departments' },
-            { title: 'Roles', to: '/admin/list_roles' },
-            { title: 'Employees', to: '/admin/list_employees' }
+            { title: 'Departments', icon: 'business', to: '/admin/list_departments' },
+            { title: 'Roles', icon: 'business', to: '/admin/list_roles' },
+            { title: 'Employees', icon: 'business', to: '/admin/list_employees' }
           ]
         },
-        { title: 'Logout', to: '/auth/logout' }
+        { title: 'Logout', icon: 'exit_to_app', to: '/auth/logout' }
       ],
       guestLinks: [
         { title: 'Home', icon: 'home', to: '/' },
