@@ -1,10 +1,7 @@
 <template lang="pug">
 .container(class="content-section")
-  br
+  // flashed-messages
 
-  flashed-messages
-
-  br
   .center
     h1 {{ msg }}
     br
@@ -62,12 +59,11 @@ export default {
   methods: {
     onSubmit () {
       if (!this.$refs.loginForm.validate()) { return }
-      this.$store.dispatch('user/login', this.form).then(response => {
-        this.form.password = ''
-      })
+      this.$store.dispatch('user/login', this.form)
     }
   },
   mounted () {
+    this.form.password = ''
     // this.$store.dispatch('flash/load')
     MessageBus.$on('authenticated', isAuthenticated => {
       if (isAuthenticated) {

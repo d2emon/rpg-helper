@@ -7,7 +7,7 @@ v-app
     // confirm-del
     // messages
     div(class="row wrapper")
-      // flashed-messages
+      flashed-messages
 
       // include _panel.pug
       router-view
@@ -41,3 +41,11 @@ export default {
   name: 'full'
 }
 </script>
+
+<style scoped>
+.wrapper {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+}
+</style>

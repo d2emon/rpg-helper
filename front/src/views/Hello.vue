@@ -42,8 +42,8 @@ h3 {
 
 .intro-bg {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: -64px;
+  // left: 0px;
   width: 100%;
 }
 

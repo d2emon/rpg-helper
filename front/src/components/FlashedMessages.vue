@@ -1,14 +1,17 @@
 <template lang="pug">
 .flashed-messages
-  b-container(
+  v-container(
     v-if="messages.length"
+    class="my-3"
   )
-    b-row(v-for="message, id in messages" :key="'msg' + id")
-      b-col(md="12")
-        b-alert(
-          :variant="message.category"
-          show
-        ) {{ message.message }}
+    template(
+      v-for="message, id in messages"
+    )
+      v-alert(
+        :key="'msg_' + id"
+        :type="message.category"
+        :value="true"
+      ) {{ message.message }}
 
 </template>
 
@@ -33,7 +36,7 @@ export default {
     MessageBus.$on('newError', msg => {
       console.error(msg)
       this.$store.commit('flash/addMessage', {
-        category: 'danger',
+        category: 'error',
         message: msg
       })
     })
@@ -46,7 +49,7 @@ export default {
 </script>
 
 <style>
-.flashed-messages {
+.flashed-messages.container {
   padding-top: 1rem;
   width: 100%;
 }
