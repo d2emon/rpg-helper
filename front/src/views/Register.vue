@@ -1,63 +1,55 @@
 <template lang="pug">
 .container(class="content-section")
-  br
-
-  flashed-messages
-
-  br
   .center
-    h1 {{ msg }}
-    br
-    b-form(@submit="onSubmit")
-      b-form-group(
-        id="usernameInputGroup"
-        label="Username:"
-        label-for="usernameInput"
+    h1.pb-3 {{ msg }}
+    v-form(
+      ref="regForm"
+      v-model="valid"
+      @submit="onSubmit"
+    )
+      v-text-field(
+        v-model="form.username"
+        :rules="usernameRules"
+        label="Username"
+        required
       )
-        b-form-input(
-          id="usernameInput"
-          v-model="form.username"
-          required
-        )
-      b-form-group(
-        id="passwordInputGroup"
-        label="Password:"
-        label-for="passwordInput"
+      v-text-field(
+        type="password"
+        v-model="form.password"
+        :rules="passwordRules"
+        label="Password"
+        required
       )
-        b-form-input(
-          id="passwordInput"
-          type="password"
-          v-model="form.password"
-          required
-        )
-      b-button(type="submit" variant="outline-primary") Register
+      v-btn(type="submit" outline color="primary") Regiister
 </template>
 
 <script>
-import {
-  FlashedMessages
-} from '@/components/'
-
 export default {
-  name: 'login',
-  components: {
-    FlashedMessages
-  },
+  name: 'register',
   data () {
     // {% import "bootstrap/utils.html" as utils %}
     // {% import "bootstrap/wtf.html" as wtf %}
     return {
+      valid: true,
       msg: 'Register for an account',
       form: {
         username: '',
         password: ''
-      }
+      },
+      usernameRules: [
+        v => !!v || 'Username is required'
+      ],
+      passwordRules: [
+        v => !!v || 'Password is required'
+      ]
     }
   },
   methods: {
     onSubmit () {
-      this.$store.dispatch('user/register', this.form)
-      this.$store.dispatch('flash/load')
+      if (!this.$refs.regForm.validate()) { return }
+      this.$store.dispatch('user/register', this.form).then(response => {
+        this.$store.dispatch('flash/load')
+      })
     }
   }
 }

@@ -3,8 +3,7 @@
   // flashed-messages
 
   .center
-    h1 {{ msg }}
-    br
+    h1.pb-3 {{ msg }}
     v-form(
       ref="loginForm"
       v-model="valid"
