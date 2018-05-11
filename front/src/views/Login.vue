@@ -1,5 +1,6 @@
 <template lang="pug">
-.container(class="content-section")
+v-container
+  // .content-section
   // flashed-messages
 
   .center

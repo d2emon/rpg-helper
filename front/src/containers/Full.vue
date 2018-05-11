@@ -44,8 +44,8 @@ export default {
 
 <style scoped>
 .wrapper {
-  position: absolute;
-  left: 0px;
-  width: 100%;
+  // position: absolute;
+  // left: 0px;
+  // width: 100%;
 }
 </style>

@@ -1,5 +1,5 @@
 <template lang="pug">
-.intro-bg
+.content-section
   .intro-header
     v-container
       v-layout(row)
@@ -40,16 +40,9 @@ h3 {
   padding-bottom: 10px;
 }
 
-.intro-bg {
-  position: absolute;
-  top: -64px;
-  // left: 0px;
-  width: 100%;
-}
-
 .intro-header {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  // padding-top: 50px;
+  // padding-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -67,9 +60,9 @@ h3 {
 }
 
 .intro-message > h1 {
-    margin: 0;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-    font-size: 5em;
+  margin: 0;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+  font-size: 5em;
 }
 
 .intro-message > h3 {

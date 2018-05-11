@@ -1,5 +1,5 @@
 <template lang="pug">
-.container(class="content-section")
+.container
   .center
     h1.pb-3 {{ msg }}
     v-form(
@@ -20,7 +20,7 @@
         label="Password"
         required
       )
-      v-btn(type="submit" outline color="primary") Regiister
+      v-btn(type="submit" outline color="primary") Register
 </template>
 
 <script>

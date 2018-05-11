@@ -44,8 +44,16 @@ h3 {
 }
 
 .content-section {
-    // padding: 50px 0;
-    border-top: 1px solid #e7e7e7;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  .center {
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 20%;
+  }
 }
 
 .footer, .push {
