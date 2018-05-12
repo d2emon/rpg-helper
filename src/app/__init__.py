@@ -6,7 +6,7 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
-from temporary.flask_utils import FlaskUtils
+from flask_utils import FlaskUtils
 from config import app_config
 # from .flask_vue import FlaskVue
 
