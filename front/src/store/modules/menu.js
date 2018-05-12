@@ -1,7 +1,7 @@
 const state = {
   miniVariant: false,
   clipped: true,
-  fixed: true,
+  fixed: false,
   navDrawer: true,
   utilityDrawer: false
 }

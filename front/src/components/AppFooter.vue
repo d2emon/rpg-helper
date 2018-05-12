@@ -1,5 +1,5 @@
 <template lang="pug">
-v-footer(:fixed="fixed" app)
+v-footer(:fixed="fixed" height="64px")
   v-layout(row wrap justify-center)
     v-btn(flat small color="primary" to="/") Home
     template(v-if="isAuthenticated")
@@ -8,7 +8,7 @@ v-footer(:fixed="fixed" app)
       v-btn(flat small color="primary" to="/auth/register") Register
       v-btn(flat small color="primary" to="/auth/login") Login
     v-flex(xs12 pd-3 text-xs-center class="caption copyright grey--text text--darken-1")
-      | Copyright {{user}} ({{ token }}) &copy; {{year}}/ All Rights Reserved
+      | Copyright {{user}} ({{ token }}) &copy; {{fixed}} {{year}}/ All Rights Reserved
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
 @import "./scss/_colors.scss";
 
 footer {
-  padding: 50px 0;
+  //  padding: 50px 0;
   background-color: $footerColor;
 }
 
