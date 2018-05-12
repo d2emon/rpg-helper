@@ -66,15 +66,11 @@ def names():
     """
     Render names list
     """
-    img_path = "{}static/images/world".format(request.url_root)
-
     sex = get_int('sex')
-    models, items, pagination = list_models(World.query)
-    # generated.push(names.generate(sex))
-    models['names'] = []
-    for m in items:
-        c = GameCharacter.generate(sex=sex)
-        models['names'].append(c.toDict())
+    models, items, p = list_models(GameCharacter.query.filter(
+        GameCharacter.gender_id == sex
+    ))
+    models['names'] = [i.toDict() for i in items]
     return jsonify(models)
 
 
@@ -103,12 +99,11 @@ def characters():
     sex = get_int('sex', None)
     models, items, pagination = list_models(World.query)
     # generated.push(aliens.generate())
-    models['characters'] = [w.toDict(img_path) for w in items]
-    for m in models.get('characters', []):
+    models['characters'] = []
+    for i in items:
         c = GameCharacter.generate(sex=sex)
+        m = c.toDict()
         m['count'] = models.get('count')
-        m['sex'] = str(c.sex)
-        m['name'] = "names.generate(charSex)"
         m['clothing'] = "clothing.generate(charSex)"
-        m['char'] = c.toDict()
+        models['characters'].append(m)
     return jsonify(models)

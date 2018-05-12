@@ -97,7 +97,8 @@ class GameCharacter(db.Model):
         sex = kwargs.get('sex')
 
         # p = PlanetGenerator.generate(near, earth)
-        sex = Gender.query.get(sex)
+        if sex is not None:
+            sex = Gender.query.get(sex)
         if not sex:
             sex = Gender.query.order_by(func.random()).first()
 
