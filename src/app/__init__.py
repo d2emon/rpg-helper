@@ -112,5 +112,7 @@ rpg_manager = RpgManager(app)
 # Adding commands from managers
 from blueprints.auth.commands import manager as auth_manager
 from admin.commands import manager as admin_manager
+from blueprints.generate.commands import manager as generate_manager
 manager.add_command("user", auth_manager)
 manager.add_command("admin", admin_manager)
+manager.add_command("generate", generate_manager)

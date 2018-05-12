@@ -16,7 +16,7 @@ Flask-Migrate==2.1.1
 Flask-Script==2.0.6
 Flask-SQLAlchemy==2.2
 Flask-WTF==0.14.2
-generator-pack==0.1.0
+generator-pack==0.1.2
 idna==2.6
 infinity==1.4
 intervals==0.8.0
