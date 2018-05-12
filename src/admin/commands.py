@@ -11,19 +11,13 @@ from blueprints.world.planet.models import PlanetType, Atmosphere, Environment, 
 from npc.default import titles, names
 from npc.models import Title, Name
 
+from fixtures.utils import filldata
+
+from clothing.dress import generateDress
+
 
 manager = Manager(usage="Admin utils")
 
-
-def filldata(c, data=[]):
-    for fixture in data:
-        if fixture is None:
-            continue
-        g = c.load_fixture(fixture)
-        db.session.add(g)
-    db.session.commit()
-    print("Filled")
-    return
 
 # Menu Items
 @manager.command
@@ -90,5 +84,13 @@ def fillsurfacemaps():
 def fillpcnames():
     filldata(Title, titles)
     filldata(Name, names)
+    print("Filled")
+    return
+
+
+@manager.command
+def gendress():
+    d = generateDress()
+    print(d)
     print("Filled")
     return
