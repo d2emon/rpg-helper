@@ -94,6 +94,7 @@ from rpg import *
 from campaign import *
 from gamesession import *
 from world import *
+from npc import *
 
 app.register_blueprint(rpg_blueprint, url_prefix='/rpg')
 app.register_blueprint(campaign_blueprint, url_prefix='/campaign')
