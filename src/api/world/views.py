@@ -94,16 +94,18 @@ def characters():
     """
     Render characters list
     """
-    img_path = "{}static/images/world".format(request.url_root)
-
+    count = get_int('count', None)
     sex = get_int('sex', None)
-    models, items, pagination = list_models(World.query)
+    # models, items, pagination = list_models(World.query)
     # generated.push(aliens.generate())
-    models['characters'] = []
-    for i in items:
-        c = GameCharacter.generate(sex=sex)
-        m = c.toDict()
-        m['count'] = models.get('count')
-        m['clothing'] = "clothing.generate(charSex)"
-        models['characters'].append(m)
+    characters = []
+    for i in range(count):
+        npc = GameCharacter.generate(sex=sex)
+        model = npc.toDict()
+        model['clothing'] = "clothing.generate({})".format(sex)
+        characters.append(model)
+    models = {
+        'characters': characters,
+        'count': count,
+    }
     return jsonify(models)
