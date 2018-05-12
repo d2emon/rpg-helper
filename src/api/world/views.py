@@ -10,7 +10,6 @@ from world.models import World
 # from .star.forms import StarForm
 # from .planet.models import Planet
 # from .planet.forms import PlanetForm
-from .models.worlds import World as World1, list_worlds
 
 import random
 
@@ -24,45 +23,96 @@ def get_int(argname, default=0):
     except (ValueError, TypeError):
         return default
 
+
+def list_models(query):
+    count = get_int('count', None)
+    shuffle = get_int('random', False)
+
+    if shuffle:
+        query = query.order_by(func.random())
+
+    pagination = query.paged(count=count)
+    return {
+        'count': count,
+        'shuffle': shuffle,
+        'page': pagination.page,
+        'pages': pagination.pages,
+        'total': pagination.total,
+    }, pagination.items, pagination
+
+
 @world_api.route("/", methods=['GET'])
 def world_list():
     """
     Render world list
     """
-    count = get_int('count', None)
-    shuffle = get_int('random', False)
-
     img_path = "{}static/images/world".format(request.url_root)
 
-    query = World.query
-    if shuffle:
-        query = query.order_by(func.random())
-    worlds = query.paged(count=count)
-
-    return jsonify(
-        shuffle=shuffle,
-        worlds=[w.toDict(img_path) for w in worlds.items],
-        page=worlds.page,
-        pages=worlds.pages,
-        count=count,
-        total=worlds.total,
-    )
+    models, items, pagination = list_models(World.query)
+    models['worlds'] = [w.toDict(img_path) for w in items]
+    return jsonify(models)
 
 
-@world_api.route("/list", methods=['GET'])
-def world_random():
+@world_api.route("/aliens", methods=['GET'])
+def aliens():
     """
-    Render random worlds
+    Render alien races
     """
-    count = get_int('count', None)
-    shuffle = get_int('random', False)
+    img_path = "{}static/images/world".format(request.url_root)
 
-    img_path = "{}/world".format(app.config.get('IMG_URL'))
+    models, items, pagination = list_models(World.query)
+    # generated.push(aliens.generate())
+    models['aliens'] = [w.toDict(img_path) for w in items]
+    return jsonify(models)
 
-    worlds = list_worlds()
-    if shuffle:
-        random.shuffle(worlds)
 
-    return jsonify(
-        worlds=[world.as_dict(img_path) for world  in worlds[:count]],
-    )
+@world_api.route("/names", methods=['GET'])
+def names():
+    """
+    Render names list
+    """
+    img_path = "{}static/images/world".format(request.url_root)
+
+    sex = get_int('sex')
+    models, items, pagination = list_models(World.query)
+    # generated.push(names.generate(sex))
+    models['names'] = [w.toDict(img_path) for w in items]
+    return jsonify(models)
+
+
+@world_api.route("/clothing", methods=['GET'])
+def clothing():
+    """
+    Render characters clothing
+    """
+    img_path = "{}static/images/world".format(request.url_root)
+
+    sex = get_int('sex')
+    models, items, pagination = list_models(World.query)
+    # generated.push(clothing.generate(sex))
+    models['sex'] = sex
+    models['clothing'] = [w.toDict(img_path) for w in items]
+    return jsonify(models)
+
+
+@world_api.route("/characters", methods=['GET'])
+def characters():
+    """
+    Render characters list
+    """
+    img_path = "{}static/images/world".format(request.url_root)
+
+    sex = get_int('sex', None)
+    models, items, pagination = list_models(World.query)
+    # generated.push(aliens.generate())
+    models['characters'] = [w.toDict(img_path) for w in items]
+    for m in models.get('characters', []):
+        if sex is None:
+            charSex = random.randrange(2)
+        else:
+            charSex = sex
+        m['count'] = models.get('count')
+        m['sex'] = charSex
+        m['name'] = "names.generate(charSex)"
+        m['clothing'] = "clothing.generate(charSex)"
+    return jsonify(models)
