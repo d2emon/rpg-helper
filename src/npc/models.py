@@ -31,6 +31,13 @@ class Title(db.Model):
     def __repr__(self):
         return self.title
 
+    @classmethod
+    def load_fixture(cls, fixture):
+        model = cls(title=str(fixture))
+        model.title = str(fixture)
+        model.gender_id = fixture.gender
+        return model
+
 
 class Name(db.Model):
     """
@@ -46,6 +53,13 @@ class Name(db.Model):
 
     def __repr__(self):
         return self.name
+
+    @classmethod
+    def load_fixture(cls, fixture):
+        model = cls(name=str(fixture))
+        model.name = str(fixture)
+        model.gender_id = fixture.gender
+        return model
 
 
 class GameCharacter(db.Model):

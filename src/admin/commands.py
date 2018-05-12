@@ -8,6 +8,9 @@ from world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyT
 from world.star.models import StarType
 from world.planet.models import PlanetType, Atmosphere, Environment, SurfaceMap
 
+from npc.default import titles, names
+from npc.models import Title, Name
+
 
 manager = Manager(usage="Admin utils")
 
@@ -80,4 +83,12 @@ def fillenvironments():
 @manager.command
 def fillsurfacemaps():
     filldata(SurfaceMap, maps)
+    return
+
+
+@manager.command
+def fillpcnames():
+    filldata(Title, titles)
+    filldata(Name, names)
+    print("Filled")
     return
