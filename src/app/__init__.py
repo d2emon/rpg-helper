@@ -79,7 +79,8 @@ from app.views import *
 # Importing blueprints
 from api import *
 app.register_blueprint(api_blueprint, url_prefix='/api')
-app.register_blueprint(world_api_blueprint, url_prefix='/api/world-api')
+app.register_blueprint(world_api_blueprint, url_prefix='/api/world')
+app.register_blueprint(npc_api_blueprint, url_prefix='/api/npc')
 
 
 from home import *

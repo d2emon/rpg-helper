@@ -4,7 +4,7 @@ from sqlalchemy import func
 from app import app # , db
 
 from world.models import World
-from npc.models import GameCharacter
+# from npc.models import GameCharacter
 
 import random
 
@@ -58,54 +58,4 @@ def aliens():
     models, items, pagination = list_models(World.query)
     # generated.push(aliens.generate())
     models['aliens'] = [w.toDict(img_path) for w in items]
-    return jsonify(models)
-
-
-@world_api.route("/names", methods=['GET'])
-def names():
-    """
-    Render names list
-    """
-    sex = get_int('sex')
-    models, items, p = list_models(GameCharacter.query.filter(
-        GameCharacter.gender_id == sex
-    ))
-    models['names'] = [i.toDict() for i in items]
-    return jsonify(models)
-
-
-@world_api.route("/clothing", methods=['GET'])
-def clothing():
-    """
-    Render characters clothing
-    """
-    img_path = "{}static/images/world".format(request.url_root)
-
-    sex = get_int('sex')
-    models, items, pagination = list_models(World.query)
-    # generated.push(clothing.generate(sex))
-    models['sex'] = sex
-    models['clothing'] = [w.toDict(img_path) for w in items]
-    return jsonify(models)
-
-
-@world_api.route("/characters", methods=['GET'])
-def characters():
-    """
-    Render characters list
-    """
-    count = get_int('count', None)
-    sex = get_int('sex', None)
-    # models, items, pagination = list_models(World.query)
-    # generated.push(aliens.generate())
-    characters = []
-    for i in range(count):
-        npc = GameCharacter.generate(sex=sex)
-        model = npc.toDict()
-        model['clothing'] = "clothing.generate({})".format(sex)
-        characters.append(model)
-    models = {
-        'characters': characters,
-        'count': count,
-    }
     return jsonify(models)
