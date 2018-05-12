@@ -2,16 +2,16 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 
 from app import app, db
 
-from world.models import World
+from blueprints.world.models import World
 
-from world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType
-from world.galaxy.forms import GalaxyNameForm, GalaxyPlacementForm, GalaxyFormForm, GalaxyTypeForm
-from world.star.models import StarType
-from world.star.forms import StarTypeForm
-from world.planet.models import Atmosphere
-from world.planet.forms import AtmosphereForm
-from world.planet.models import PlanetType
-from world.planet.forms import PlanetTypeForm
+from blueprints.world.galaxy.models import GalaxyName, GalaxyPlacement, GalaxyForm, GalaxyType
+from blueprints.world.galaxy.forms import GalaxyNameForm, GalaxyPlacementForm, GalaxyFormForm, GalaxyTypeForm
+from blueprints.world.star.models import StarType
+from blueprints.world.star.forms import StarTypeForm
+from blueprints.world.planet.models import Atmosphere
+from blueprints.world.planet.forms import AtmosphereForm
+from blueprints.world.planet.models import PlanetType
+from blueprints.world.planet.forms import PlanetTypeForm
 
 
 admin = Blueprint('admin', __name__)
@@ -26,14 +26,14 @@ def index():
         'admin/index.html',
         title="Admin",
     )
-    
+
 
 def list_model(modelclass, **kwargs):
     try:
         page = int(request.args.get('page'))
     except (ValueError, TypeError):
         page = 1
-    
+
     pagination = modelclass.query.paginate(page, app.config.get('RECORDS_ON_PAGE'))
     return render_template(
         'admin/list_galaxy.html',

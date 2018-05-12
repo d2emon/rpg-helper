@@ -3,7 +3,7 @@ from sqlalchemy import func
 
 from app import app # , db
 
-from world.models import World
+from blueprints.world.models import World
 # from npc.models import GameCharacter
 
 import random

@@ -5,7 +5,7 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from app.forms import ModelForm
 
 
-from world.models import World
+from blueprints.world.models import World
 from .models import Galaxy, GalaxyName, GalaxyPlacement, GalaxyForm as GalaxyFormModel, GalaxyType
 
 
@@ -36,15 +36,15 @@ class GalaxyPlacementForm(ModelForm):
 
     class Meta:
         model = GalaxyPlacement
-        
+
 
 class GalaxyFormForm(ModelForm):
     title = StringField()
     submit = SubmitField('Submit')
 
     class Meta:
-        model = GalaxyFormModel        
-        
+        model = GalaxyFormModel
+
 
 class GalaxyTypeForm(ModelForm):
     title = StringField()

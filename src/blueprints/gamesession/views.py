@@ -3,8 +3,8 @@ from datetime import datetime
 
 from app import db
 
-from campaign.views import campaign
-from campaign.models import Campaign
+from blueprints.campaign.views import campaign
+from blueprints.campaign.models import Campaign
 
 from .models import GameSession
 from .forms import GameSessionForm

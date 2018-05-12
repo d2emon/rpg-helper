@@ -83,18 +83,18 @@ app.register_blueprint(world_api_blueprint, url_prefix='/api/world')
 app.register_blueprint(npc_api_blueprint, url_prefix='/api/npc')
 
 
-from home import *
-from auth import *
+from blueprints.home import *
+from blueprints.auth import *
 from admin import *
 
 app.register_blueprint(home_blueprint, url_prefix='/main')
 app.register_blueprint(auth_blueprint)
 app.register_blueprint(admin_blueprint, url_prefix='/admin')
 
-from rpg import *
-from campaign import *
-from gamesession import *
-from world import *
+from blueprints.rpg import *
+from blueprints.campaign import *
+from blueprints.gamesession import *
+from blueprints.world import *
 from npc import *
 
 app.register_blueprint(rpg_blueprint, url_prefix='/rpg')
@@ -102,16 +102,15 @@ app.register_blueprint(campaign_blueprint, url_prefix='/campaign')
 app.register_blueprint(session_blueprint, url_prefix='/session')
 app.register_blueprint(world_blueprint, url_prefix='/world')
 
-from vue import *
-
-app.register_blueprint(vue_blueprint, url_prefix='/vue')
+# from temporary.vue import *
+# app.register_blueprint(vue_blueprint, url_prefix='/vue')
 
 rpg_manager = RpgManager(app)
 
 # from app.views import *
 
 # Adding commands from managers
-from auth.commands import manager as auth_manager
+from blueprints.auth.commands import manager as auth_manager
 from admin.commands import manager as admin_manager
 manager.add_command("user", auth_manager)
 manager.add_command("admin", admin_manager)
