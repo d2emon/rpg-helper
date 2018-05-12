@@ -4,12 +4,7 @@ from sqlalchemy import func
 from app import app # , db
 
 from world.models import World
-# from .galaxy.models import Galaxy
-# from .galaxy.forms import GalaxyForm
-# from .star.models import Star
-# from .star.forms import StarForm
-# from .planet.models import Planet
-# from .planet.forms import PlanetForm
+from npc.models import GameCharacter
 
 import random
 
@@ -76,7 +71,10 @@ def names():
     sex = get_int('sex')
     models, items, pagination = list_models(World.query)
     # generated.push(names.generate(sex))
-    models['names'] = [w.toDict(img_path) for w in items]
+    models['names'] = []
+    for m in items:
+        c = GameCharacter.generate(sex=sex)
+        models['names'].append(c.toDict())
     return jsonify(models)
 
 
@@ -107,12 +105,10 @@ def characters():
     # generated.push(aliens.generate())
     models['characters'] = [w.toDict(img_path) for w in items]
     for m in models.get('characters', []):
-        if sex is None:
-            charSex = random.randrange(2)
-        else:
-            charSex = sex
+        c = GameCharacter.generate(sex=sex)
         m['count'] = models.get('count')
-        m['sex'] = charSex
+        m['sex'] = str(c.sex)
         m['name'] = "names.generate(charSex)"
         m['clothing'] = "clothing.generate(charSex)"
+        m['char'] = c.toDict()
     return jsonify(models)

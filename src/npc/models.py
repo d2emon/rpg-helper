@@ -1,6 +1,7 @@
 from app import db
 from app.models import PagedQuery
 
+from sqlalchemy import func
 # import random
 
 
@@ -78,3 +79,36 @@ class GameCharacter(db.Model):
 
     def __repr__(self):
         return "{} {}".format(self.title, self.name)
+
+    def toDict(self):
+        return {
+            'id': self.id,
+            'full_name': str(self),
+            'title': str(self.title),
+            'name': str(self.name),
+            'sex_id': str(self.gender_id),
+            'sex': str(self.sex),
+        }
+
+    @classmethod
+    def generate(cls, **kwargs):
+        title = kwargs.get('title')
+        name = kwargs.get('name')
+        sex = kwargs.get('sex')
+
+        # p = PlanetGenerator.generate(near, earth)
+        sex = Gender.query.get(sex)
+        if not sex:
+            sex = Gender.query.order_by(func.random()).first()
+
+        if not title:
+            title = Title.query.filter(Title.gender == sex).order_by(func.random()).first()
+        if not name:
+            name = Name.query.filter(Name.gender == sex).order_by(func.random()).first()
+        npc = GameCharacter(
+            title=title,
+            name=name,
+            gender_id=sex.id,
+            sex=sex
+        )
+        return npc
