@@ -1,6 +1,6 @@
 <template lang="pug">
 v-container(fluid)
-  v-layout(column v-if="worlds.length")
+  v-layout(column)
     v-flex(sm10)
       v-toolbar(color="primary" dark)
         v-toolbar-side-icon
@@ -8,10 +8,14 @@ v-container(fluid)
         v-spacer
         v-btn(icon)
           v-icon search
+        v-btn(icon href="/world/list")
+          v-icon list
+        v-btn(icon href="/world/add")
+          v-icon add
         v-btn(icon @click="loadWorlds(true)")
           v-icon casino
       v-container(fluid grid-list-md class="grey lighten-4")
-        v-layout(row wrap)
+        v-layout(row wrap v-if="worlds.length")
           v-flex(
             v-for="world in worlds"
             v-bind="{ [`xs${world.flex}`]: true }"
@@ -29,29 +33,21 @@ v-container(fluid)
                   .headline {{ world.title }}
                   span(class="grey--text") {{ world.subtitle }}
               v-card-actions(class="white")
-                v-btn(flat) Share
-                v-btn(flat color="purple") Explore
+                v-btn(flat small :href="'/world/' + world.id")
+                  v-icon search
+                  | Explore
                 v-spacer
+                v-btn(icon :href="'/world/' + world.id")
+                  v-icon search
+                v-btn(icon :href="'/world/' + world.id + '/edit'")
+                  v-icon edit
                 v-btn(icon)
-                  v-icon favorite
-                v-btn(icon)
-                  v-icon bookmark
-                v-btn(icon)
-                  v-icon share
+                  v-icon delete
                 v-btn(icon @click.native="switchFull(world.id)")
                   v-icon {{ (selectedId !== world.id) ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
               v-slide-y-transition
                 v-card-text(v-show="selectedId === world.id")
-                  p {{ world }}
-                  p I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.
-          v-flex(xs6)
-            v-card
-              img(src="@/assets/logo.png" alt="Vuetify.js" class="mb-5")
-              blockquote
-                | &#8220;First, solve the problem. Then, write the code.&#8221;
-                footer
-                  small
-                    em &mdash;John Johnson
+                  div {{ world }}
   v-layout(row)
     v-flex(sm6)
       | {{ worlds }}

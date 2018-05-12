@@ -29,7 +29,7 @@ const mutations = {
 const actions = {
   load: (context, shuffle) => {
     let count = -1
-    let url = api + '/world-api/'
+    let url = api + '/world/'
     return axios.get(url, {
       params: {
         count: count,
